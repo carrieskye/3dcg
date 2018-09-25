@@ -6,20 +6,20 @@
 
 namespace raytracer
 {
-	namespace raytracers
-	{
-		namespace _private_
-		{
-			class RayTracerV1 : public RayTracerImplementation
-			{
-			public:
-				TraceResult trace(const Scene&, const math::Ray&) const override;
-			};
-		}
+    namespace raytracers
+    {
+        namespace _private_
+        {
+            class RayTracerV1 : public RayTracerImplementation
+            {
+            public:
+                TraceResult trace(const Scene&, const math::Ray&) const override;
+            };
+        }
 
-		/// <summary>
-		/// Creates simplest ray tracer.
-		/// </summary>
-		RayTracer v1();
-	}
+        /// <summary>
+        /// Creates simplest ray tracer.
+        /// </summary>
+        RayTracer v1();
+    }
 }

@@ -289,6 +289,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -309,8 +310,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -327,6 +327,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -364,7 +365,9 @@
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
+    <ClCompile Include="math\functions\grid2d.cpp" />
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
+    <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
     <ClCompile Include="math\plane.cpp" />
     <ClCompile Include="math\quantize.cpp" />
     <ClCompile Include="math\transformation-matrices.cpp" />
@@ -421,6 +424,7 @@
     <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tasks\lambda-task.cpp" />
+    <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="util\base64.cpp" />
@@ -491,8 +495,10 @@
     <ClInclude Include="math\functions\easing-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\stretch-easing-function.h" />
+    <ClInclude Include="math\functions\grid2d.h" />
     <ClInclude Include="math\functions\horizontal-lines-pattern.h" />
     <ClInclude Include="math\functions\identity.h" />
+    <ClInclude Include="math\functions\vertical-lines-pattern.h" />
     <ClInclude Include="math\plane.h" />
     <ClInclude Include="math\quantize.h" />
     <ClInclude Include="math\transformation-matrices.h" />
@@ -583,6 +589,7 @@
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="tasks\lambda-task.h" />
+    <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
     <ClInclude Include="tasks\task-helpers.h" />
     <ClInclude Include="tasks\task-scheduler.h" />

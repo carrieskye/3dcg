@@ -252,10 +252,26 @@
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="raytracers\ray-tracer-v1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demos\basic-sample2.cpp">
+=======
+    <ClCompile Include="demos\basic-sample2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\vertical-lines-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\grid2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\parallel-task-scheduler.cpp">
+>>>>>>> afa09210d9e6df587db5cbcd6811f882af2a86b8
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -758,10 +774,26 @@
     <ClInclude Include="command-line-parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="raytracers\ray-tracer-v1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demos\basic-sample2.h">
+=======
+    <ClInclude Include="demos\basic-sample2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\vertical-lines-pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\grid2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\parallel-task-scheduler.h">
+>>>>>>> afa09210d9e6df587db5cbcd6811f882af2a86b8
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

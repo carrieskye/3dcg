@@ -98,5 +98,5 @@ namespace
 
 void demos::basic_sample(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-	MeshDemo(200, 1_s, 30, 1).render(output);
+    MeshDemo(50, 1_s, 30, 1).render(output);
 }

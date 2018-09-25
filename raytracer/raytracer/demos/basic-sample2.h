@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "pipeline/pipelines.h"
 #include "imaging/bitmap.h"
@@ -6,5 +6,5 @@
 
 namespace demos
 {
-	void basic_sample2(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>> output);
+    void basic_sample2(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>> output);
 }
