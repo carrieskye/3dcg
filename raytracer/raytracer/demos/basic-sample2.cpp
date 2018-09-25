@@ -1,4 +1,4 @@
-#include "demos/basic-sample.h"
+#include "demos/basic-sample2.h"
 #include "demos/demo.h"
 #include "util/lazy.h"
 #include "easylogging++.h"
@@ -42,18 +42,24 @@ namespace
 
             // Create an animation of a double going from -5.0 to 5.0 in 1 second
             // It is important to write 5.0 and not 5, otherwise it will create an animation of ints instead of doubles
-            auto x_position = animation::animate(-5.0, 5.0, 1_s);
+			auto x_position = animation::animate(5.0, -5.0, 1_s);
+			auto z_size = animation::animate(1.0, 5.0, 1_s);
 
             // Create a sphere. It has radius 1 and is centered at (0, 0, 0)
-            Primitive primitive = sphere();
+			Primitive primitive1 = sphere();
+			Primitive primitive2 = sphere();
 
             // Move the sphere. x_position(now) = asks the animation what x at this point in time
-            primitive = translate(Vector3D(x_position(now), 0, 0), primitive);
+			primitive1 = translate(Vector3D(x_position(now), x_position(now), 3), primitive1);
+			primitive2 = translate(Vector3D(-x_position(now), 0, 0), primitive2);
+			std::vector<Primitive> primitives = { primitive1, primitive2 };
+
+			auto root_union = make_union(primitives);
 
             // Assign a material to the sphere
-            primitive = decorate(material, primitive);
+            return decorate(material, root_union);
 
-            return primitive;
+            //return primitive;
         }
 
         /// <summary>
@@ -77,9 +83,9 @@ namespace
         raytracer::Camera create_camera(TimeStamp) override
         {
             return raytracer::cameras::perspective(
-                Point3D(0, 0, 10),         // position of eye
+                Point3D(0, 0, 5),         // position of eye
                 Point3D(0, 0, 0),          // point the camera looks at
-                Vector3D(0, 1, 0),         // up-vector: indicates camera is "standing up"
+                Vector3D(1, 0, 0),         // up-vector: indicates camera is "standing up"
                 1,                         // distance between eye and viewing plane
                 1                          // aspect ratio
             );
@@ -90,7 +96,7 @@ namespace
     };
 }
 
-void demos::basic_sample(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
+void demos::basic_sample2(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    MeshDemo(50, 1_s, 30, 1).render(output);
+    MeshDemo(200, 1_s, 5, 1).render(output);
 }
