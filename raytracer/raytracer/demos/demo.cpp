@@ -1,6 +1,7 @@
 #include "demos/demo.h"
 #include "tasks/task-schedulers.h"
 #include "math/functions.h"
+#include "raytracers/ray-tracer-v1.h"
 
 using namespace raytracer;
 using namespace animation;
@@ -27,7 +28,7 @@ void demos::Demo::render(std::shared_ptr<raytracer::pipeline::Consumer<std::shar
 
 RayTracer demos::Demo::create_ray_tracer()
 {
-    return raytracer::raytracers::v0();
+    return raytracer::raytracers::v1();
 }
 
 Renderer demos::Demo::create_renderer()
