@@ -13,5 +13,6 @@ namespace raytracer
 		Material horizontal_lines(double, Material, Material);
 		Material vertical_lines(double, Material, Material);
 		Material grid2d(double, Material, Material);
+		Material checkered2d(double, Material, Material);
 	}
 }

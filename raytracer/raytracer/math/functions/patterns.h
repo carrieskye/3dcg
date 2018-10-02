@@ -5,3 +5,4 @@
 #include "math/functions/horizontal-lines-pattern.h"
 #include "math/functions/vertical-lines-pattern.h"
 #include "math/functions/grid2d.h"
+#include "math/functions/checkered2d.h"
