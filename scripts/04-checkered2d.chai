@@ -26,7 +26,7 @@ def scene_at(now)
   var yellow = Materials.uniform( [ "ambient": Colors.yellow() * 1, "diffuse": Colors.yellow() * 1 ] )  
   
 
-  var plane_material = Materials.checkered2d( 0.2, black, white )
+  var plane_material = Materials.checkered2d( 1, black, white )
   
   var sphere1_material = Materials.grid2d( 0.01, green, yellow )
   //var plane_material = Materials.vertical_lines(0.1, black, white)

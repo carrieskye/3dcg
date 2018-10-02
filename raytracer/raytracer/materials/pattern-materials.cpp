@@ -36,7 +36,7 @@ Material raytracer::materials::grid2d(double thickness, Material m1, Material m2
 	return pattern2d(math::functions::grid2d(thickness), m1, m2);
 }
 
-Material raytracer::materials::checkered2d(double thickness, Material m1, Material m2)
+Material raytracer::materials::checkered2d(int size, Material m1, Material m2)
 {
-	return pattern2d(math::functions::checkered2d(thickness), m1, m2);
+	return pattern2d(math::functions::checkered2d(size), m1, m2);
 }
