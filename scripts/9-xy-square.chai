@@ -1,0 +1,70 @@
+// resolution
+var res = 170
+  
+
+def scene_at(now)
+{
+  // Create animation: x goes from -10 to +10 in 5 seconds
+  var x = Animations.animate(-10, 10, seconds(5))
+
+  // Create camera at (x[now], 0, 5).
+  // x[now] returns the value of x at the current time in the animation
+  // x[now]
+  var camera = Cameras.perspective( [ "eye": pos(x[now]+10,x[now]+10,7),
+                                      "look_at": pos(0,0,0),
+                                      "up": vec(0,1,0).normalized() ] )
+
+  // Create material
+  var material = Materials.uniform( [ "ambient": Colors.green(), 
+                                      "diffuse": Colors.white() ] )
+  
+  var white = Materials.uniform( [ "ambient": Colors.white() * 1, "diffuse": Colors.white() * 1 ] )
+  var black = Materials.uniform( [ "ambient": Colors.black() * 1, "diffuse": Colors.black() * 1 ] )
+  var red = Materials.uniform( [ "ambient": Colors.red() * 1, "diffuse": Colors.red() * 1 ] )
+  var blue = Materials.uniform( [ "ambient": Colors.blue() * 1, "diffuse": Colors.blue() * 1 ] )  
+  var green = Materials.uniform( [ "ambient": Colors.green() * 1, "diffuse": Colors.green() * 1 ] )
+  var yellow = Materials.uniform( [ "ambient": Colors.yellow() * 1, "diffuse": Colors.yellow() * 1 ] )  
+  var magenta = Materials.uniform( [ "ambient": Colors.magenta() * 1, "diffuse": Colors.magenta() * 1 ] )
+  var cyan = Materials.uniform( [ "ambient": Colors.cyan() * 1, "diffuse": Colors.cyan() * 1 ] )  
+
+  var plane_material = Materials.grid2d( 0.1, red, blue )
+  var plane2_material = Materials.grid2d( 0.1, magenta, cyan )
+  
+  var sphere1_material = Materials.grid2d( 0.01, green, yellow )
+
+  var xysquare = translate(vec(0,0,-2), decorate(plane_material, xy_square()))
+    
+  var yzplane = translate(vec(0,0,-2), decorate(plane2_material, yz_plane()))                
+  
+  var sphere1 = sphere()
+  var sphere2 = sphere()
+  
+  sphere1 = translate(vec(0,-2,0), sphere1)  
+  sphere2 = translate(vec(0, 2,0), sphere2)
+  
+  sphere1 = decorate(sphere1_material, sphere1)  
+  sphere2 = decorate(material, sphere2)
+  
+  var shapes = [ sphere1, sphere2, xysquare ]
+  
+  var root_union = union(shapes)
+  
+  // Create decorated sphere
+
+  // Create empty list of lights (we're rendering with v0, which ignores lights, so why bother)
+  var lights = [ ]
+
+  create_scene(camera, root_union, lights)
+}
+
+var renderer = Renderers.standard( [ "width": res,
+                                     "height": res,
+                                     "sampler": Samplers.single(),
+                                     "ray_tracer": Raytracers.v1() ] )
+
+pipeline( scene_animation(scene_at, seconds(3)),
+          [ Pipeline.animation(15),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )
