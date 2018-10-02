@@ -31,6 +31,7 @@ namespace
 		virtual void initialize_hit(Hit* hit, const Ray& ray, double t) const = 0;
 
 	public:
+
 		std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
 		{
 			std::vector<std::shared_ptr<Hit>> hits;
@@ -44,19 +45,16 @@ namespace
 				// Compute numerator
 				double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
 
-				if (true)
-				{
-					
+				// Compute t
+				double t = numer / denom;
 
-					// Compute t
-					double t = numer / denom;
+				// Create hit object
+				auto hit = std::make_shared<Hit>();
 
-					// Create hit object
-					auto hit = std::make_shared<Hit>();
+				// shared_ptr<T>::get() returns the T* inside the shared pointer
+				initialize_hit(hit.get(), ray, t);
 
-					// shared_ptr<T>::get() returns the T* inside the shared pointer
-					initialize_hit(hit.get(), ray, t);
-
+				if (bounding_box().contains(hit->position)) {
 					// Put hit in list
 					hits.push_back(hit);
 				}
@@ -77,7 +75,7 @@ namespace
 
 		math::Box bounding_box() const override
 		{
-			return Box(interval(-2.0,2.0), interval(-2.0, 2.0), interval(-0.01, 0.01));
+			return Box(interval(-2.0, 2.0), interval(-2.0, 2.0), interval(-0.01, 0.01));
 		}
 
 	protected:
