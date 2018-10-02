@@ -88,10 +88,40 @@ namespace
 			hit->normal = ray.origin.z() > 0 ? m_normal : -m_normal;
 		}
 	};
+
+	class SquareXZImplementation : public CoordinateSquareImplementation
+	{
+	public:
+		SquareXZImplementation()
+			: CoordinateSquareImplementation(Vector3D(0, 1, 0))
+		{
+			// NOP
+		}
+
+		math::Box bounding_box() const override
+		{
+			return Box(interval(-2.0, 2.0), interval(-0.01, 0.01), interval(-2.0, 2.0));
+		}
+
+	protected:
+		void initialize_hit(Hit* hit, const Ray& ray, double t) const override
+		{
+			hit->t = t;
+			hit->position = ray.at(hit->t);
+			hit->local_position.xyz = hit->position;
+			hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
+			hit->normal = ray.origin.y() > 0 ? m_normal : -m_normal;
+		}
+	};
 }
 
 Primitive raytracer::primitives::xy_square()
 {
 	return Primitive(std::make_shared<SquareXYImplementation>());
+}
+
+Primitive raytracer::primitives::xz_square()
+{
+	return Primitive(std::make_shared<SquareXZImplementation>());
 }
 
