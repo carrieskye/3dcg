@@ -62,6 +62,33 @@ namespace
 
 			return hits;
 		}
+
+		bool find_first_positive_hit(const math::Ray& ray, Hit* output_hit) const override
+		{
+			auto hits = find_all_hits(ray);
+
+			for (auto hit : hits)
+			{
+				// Find first positive hit
+				if (hit->t > 0)
+				{
+					if (hit->t < output_hit->t)
+					{
+						// Overwrite hit with new hit
+						*output_hit = *hit;
+						return true;
+
+					}
+					else
+					{
+						// First positive hit is farther away than already existing hit
+						return false;
+					}
+				}
+			}
+			// No positive hits were found
+			return false;
+		}
 	};
 
 	class SquareXYImplementation : public CoordinateSquareImplementation
@@ -137,6 +164,7 @@ namespace
 			hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
 			hit->normal = ray.origin.y() > 0 ? m_normal : -m_normal;
 		}
+
 	};
 }
 
