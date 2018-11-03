@@ -3,24 +3,26 @@
 #include "raytracers/ray-tracer.h"
 #include <memory>
 
+using namespace imaging;
+using namespace math;
 
 namespace raytracer
 {
-    namespace raytracers
-    {
-        namespace _private_
-        {
-            class RayTracerV1 : public RayTracerImplementation
-            {
-            public:
-                TraceResult trace(const Scene&, const math::Ray&) const override;
-	            imaging::Color compute_ambient(const MaterialProperties&) const;
-            };
-        }
+	namespace raytracers
+	{
+		namespace _private_
+		{
+			class RayTracerV1 : public RayTracerImplementation
+			{
+			public:
+				TraceResult trace(const Scene&, const Ray&) const override;
+				Color compute_ambient(const MaterialProperties&) const;
+			};
+		}
 
-        /// <summary>
-        /// Creates simplest ray tracer.
-        /// </summary>
-        RayTracer v1();
-    }
+		/// <summary>
+		/// Creates simplest ray tracer.
+		/// </summary>
+		RayTracer v1();
+	}
 }
