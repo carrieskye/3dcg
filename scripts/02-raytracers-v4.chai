@@ -21,8 +21,8 @@ def scene_at(now)
                                       "specular_exponent": 10
                                       ] )
   
-  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
-  var black = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 0.8, "specular": Colors.white() * 0.8, "specular_exponent": 1] )
+  var black = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.6, "specular": Colors.white() * 0.8, "specular_exponent": 1] )
  
 
   var plane_material = Materials.checkered2d( 1, black, white )

@@ -14,7 +14,7 @@ Color raytracers::_private_::RayTracerV4::process_light_ray(const Scene& scene, 
 	{
 		auto t = first_positive_hit.t;
 
-		if (0 <= t && t < 1)
+		if (0 <= t && t < 1 - pow(10, -10))
 		{
 			return result;
 		}
