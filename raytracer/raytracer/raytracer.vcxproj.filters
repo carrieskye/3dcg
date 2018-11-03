@@ -90,6 +90,7 @@
     <ClCompile Include="math\functions\checkered2d.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -266,5 +267,6 @@
     <ClInclude Include="math\functions\checkered2d.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v2.h" />
+    <ClInclude Include="raytracers\ray-tracer-v3.h" />
   </ItemGroup>
 </Project>

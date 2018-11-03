@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raytracers/ray-tracer.h"
-#include <memory>
+#include "ray-tracer-v1.h"
 
 using namespace imaging;
 using namespace math;
@@ -19,7 +19,7 @@ namespace raytracer
 				TraceResult trace(const Scene&, const Ray&) const override;
 				Color process_lights(const Scene&, const MaterialProperties&, const Hit&, const Ray&) const;
 				Color process_light_source(const Scene&, const MaterialProperties&, const Hit&, const Ray&, LightSource) const;
-				Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const Ray&, const LightRay&) const;
+				virtual Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const Ray&, const LightRay&) const;
 				Color compute_diffuse(const MaterialProperties&, const Hit&, const Ray&, const LightRay&) const;
 			};
 		}
