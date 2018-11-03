@@ -14,6 +14,7 @@ namespace raytracer
             {
             public:
                 TraceResult trace(const Scene&, const math::Ray&) const override;
+	            imaging::Color compute_ambient(const MaterialProperties&) const;
             };
         }
 
