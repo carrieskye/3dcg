@@ -7,60 +7,35 @@ def scene_at(now)
   // Create animation: x goes from -10 to +10 in 5 seconds
   var x = Animations.animate(-10, 10, seconds(5))
 
-  // Create camera at (x[now], 0, 5).
-  // x[now] returns the value of x at the current time in the animation
-  // x[now]
-  var camera = Cameras.perspective( [ "eye": pos(x[now]+10,x[now]+10,7),
-                                      "look_at": pos(0,0,0),
-                                      "up": vec(0,1,0).normalized() ] )
+  // Create camera
+  var camera = Cameras.perspective( [ "eye": pos(x[now]+10, x[now]+10, 7), "look_at": pos(0, 0, 0), "up": vec(0, 1, 0).normalized() ] )
 
   // Create material
-  var material = Materials.uniform( [ "ambient": 0.1 * Colors.blue(), 
-                                      "diffuse": 0.8 * Colors.blue(), 
-                                      "specular": Colors.white() * 0.8, 
-                                      "specular_exponent": 10
-                                      ] )
+  var white = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.9, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
+  var black = Materials.uniform( [ "ambient": Colors.black() * 0.2, "diffuse": Colors.white() * 0.3, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
   
-  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
-  var black = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
-  var red = Materials.uniform( [ "ambient": Colors.red() * 1, "diffuse": Colors.red() * 1, "specular": Colors.red() * 0.8, "specular_exponent": 10 ] )
-  var blue = Materials.uniform( [ "ambient": Colors.blue() * 1, "diffuse": Colors.blue() * 1, "specular": Colors.blue() * 0.8, "specular_exponent": 10 ] )  
-  var green = Materials.uniform( [ "ambient": Colors.green() * 1, "diffuse": Colors.green() * 1, "specular": Colors.green() * 0.8, "specular_exponent": 10 ] )
-  var yellow = Materials.uniform( [ "ambient": Colors.yellow() * 1, "diffuse": Colors.yellow() * 1, "specular": Colors.yellow() * 0.8, "specular_exponent": 10 ] )  
+  var xy_plane_material = Materials.checkered2d(1, black, white)
+  var yz_plane_material = Materials.checkered2d(1, white, black)
   
+  var sphere_material = Materials.uniform( [ "ambient": 0.1 * Colors.blue(), "diffuse": 0.8 * Colors.blue(), "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
 
-  var plane_material = Materials.checkered2d( 1, black, white )
+  // Create primitives
+  var xyplane = translate(vec(0, 0, -2), decorate(xy_plane_material, xy_plane()))
+  var yzplane = translate(vec(-2, 0, 0), decorate(yz_plane_material, yz_plane()))
   
-  var sphere1_material = Materials.grid2d( 0.01, green, yellow )
-  //var plane_material = Materials.vertical_lines(0.1, black, white)
-  //var plane_material = Materials.horizontal_lines(0.1, black, white)
-
-  var xyplane = translate(vec(0,0,-2), decorate(plane_material, xy_plane()))
-                  
-  var sphere1 = sphere()
-  var sphere2 = sphere()
+  var sphere = translate(vec(0, 2, 0), decorate(sphere_material, sphere())) 
   
-  sphere1 = translate(vec(0,-2,0), sphere1)  
-  sphere2 = translate(vec(0, 2,0), sphere2)
-  
-  sphere2 = decorate(material, sphere2)
-  
-  var shapes = [ sphere2, xyplane ]
-  
+  // Create root union 
+  var shapes = [ sphere, xyplane, yzplane ]
   var root_union = union(shapes)
-  
-  // Create decorated sphere
 
-  // Create empty list of lights (we're rendering with v0, which ignores lights, so why bother)
-  var lights = [ Lights.omnidirectional(pos(0,5,0), Colors.white() ) ]
+  // Create list of lights
+  var lights = [ Lights.omnidirectional(pos(1, 4, 0), Colors.white()) ]
 
   create_scene(camera, root_union, lights)
 }
 
-var renderer = Renderers.standard( [ "width": res,
-                                     "height": res,
-                                     "sampler": Samplers.single(),
-                                     "ray_tracer": Raytracers.v3() ] )
+var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.single(), "ray_tracer": Raytracers.v3() ] )
 
 pipeline( scene_animation(scene_at, seconds(3)),
           [ Pipeline.animation(15),
