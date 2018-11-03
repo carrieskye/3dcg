@@ -65,6 +65,8 @@ namespace
 
 		bool find_first_positive_hit(const math::Ray& ray, Hit* output_hit) const override
 		{
+			assert(hit != nullptr);
+
 			auto hits = find_all_hits(ray);
 
 			for (auto hit : hits)
@@ -79,11 +81,8 @@ namespace
 						return true;
 
 					}
-					else
-					{
-						// First positive hit is farther away than already existing hit
-						return false;
-					}
+					// First positive hit is farther away than already existing hit
+					return false;
 				}
 			}
 			// No positive hits were found
