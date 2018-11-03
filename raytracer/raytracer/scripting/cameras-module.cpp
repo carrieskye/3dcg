@@ -38,14 +38,14 @@ namespace
     };
 }
 
-ModulePtr raytracer::scripting::_private_::create_cameras_module()
+ModulePtr scripting::_private_::create_cameras_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     util::register_type<Camera>(*module, "Camera");
 
     auto camera_library = std::make_shared<CameraLibrary>();
-    module->add_global_const(chaiscript::const_var(camera_library), "Cameras");
+    module->add_global_const(const_var(camera_library), "Cameras");
 
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&CameraLibrary::INTERNAL), #EXTERNAL); module->add(fun(&CameraLibrary::INTERNAL ## _by_map), #EXTERNAL)
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)

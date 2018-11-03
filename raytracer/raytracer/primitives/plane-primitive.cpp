@@ -2,7 +2,7 @@
 #include "math/interval.h"
 
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 using namespace math;
 
 
@@ -11,7 +11,7 @@ namespace
 	/// <summary>
 	/// Superclass for planes. Contains common logic.
 	/// </summary>
-	class CoordinatePlaneImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+	class CoordinatePlaneImplementation : public primitives::_private_::PrimitiveImplementation
 	{
 	protected:
 		const Vector3D m_normal;
@@ -31,7 +31,7 @@ namespace
 		virtual void initialize_hit(Hit* hit, const Ray& ray, double t) const = 0;
 
 	public:
-		std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+		std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
 		{
 			std::vector<std::shared_ptr<Hit>> hits;
 
@@ -60,7 +60,7 @@ namespace
 			return hits;
 		}
 
-		bool find_first_positive_hit(const math::Ray& ray, Hit* output_hit)  const override
+		bool find_first_positive_hit(const Ray& ray, Hit* output_hit)  const override
 		{
 			// Collect all hits
 			auto hits = find_all_hits(ray);
@@ -99,7 +99,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(Interval<double>::infinite(), Interval<double>::infinite(), interval(-0.01, 0.01));
 		}
@@ -123,7 +123,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(Interval<double>::infinite(), Interval<double>::infinite(), interval(-0.01, 0.01));
 		}
@@ -147,7 +147,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(Interval<double>::infinite(), Interval<double>::infinite(), interval(-0.01, 0.01));
 		}
@@ -164,17 +164,17 @@ namespace
 	};
 }
 
-Primitive raytracer::primitives::xy_plane()
+Primitive primitives::xy_plane()
 {
 	return Primitive(std::make_shared<PlaneXYImplementation>());
 }
 
-Primitive raytracer::primitives::yz_plane()
+Primitive primitives::yz_plane()
 {
 	return Primitive(std::make_shared<PlaneYZImplementation>());
 }
 
-Primitive raytracer::primitives::xz_plane()
+Primitive primitives::xz_plane()
 {
 	return Primitive(std::make_shared<PlaneXZImplementation>());
 }

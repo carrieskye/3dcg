@@ -21,20 +21,20 @@ namespace
 }
 
 
-imaging::WIF::WIF(const std::string& path)
+WIF::WIF(const std::string& path)
     : out(path, std::ios::binary), m_frame_index(0)
 {
     // NOP
 }
 
-imaging::WIF::~WIF()
+WIF::~WIF()
 {
     uint32_t datum = 0;
 
     out.write(reinterpret_cast<char*>(&datum), sizeof(uint32_t));
 }
 
-void imaging::WIF::write_frame(const Bitmap& bitmap)
+void WIF::write_frame(const Bitmap& bitmap)
 {
     LOG(INFO) << "Writing WIF frame #" << m_frame_index;        
 
@@ -68,7 +68,7 @@ void write_to_buffer(const T& value, std::vector<uint8_t>& buffer)
     }
 }
 
-void imaging::wif::convert_frame(std::vector<uint8_t>& buffer, const Bitmap& bitmap)
+void wif::convert_frame(std::vector<uint8_t>& buffer, const Bitmap& bitmap)
 {
     uint32_t width = bitmap.width();
     uint32_t height = bitmap.height();
@@ -87,7 +87,7 @@ void imaging::wif::convert_frame(std::vector<uint8_t>& buffer, const Bitmap& bit
     }
 }
 
-void imaging::wif::mark_eof(std::vector<uint8_t>& buffer)
+void wif::mark_eof(std::vector<uint8_t>& buffer)
 {
     uint32_t marker = 0;
 

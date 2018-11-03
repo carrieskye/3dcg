@@ -2,7 +2,7 @@
 #include "imaging/wif-format.h"
 
 using namespace raytracer;
-using namespace raytracer::pipeline;
+using namespace pipeline;
 
 
 namespace
@@ -42,7 +42,7 @@ namespace
     };
 }
 
-std::shared_ptr<Processor<std::shared_ptr<imaging::Bitmap>, std::shared_ptr<std::vector<uint8_t>>>> raytracer::pipeline::wif()
+std::shared_ptr<Processor<std::shared_ptr<imaging::Bitmap>, std::shared_ptr<std::vector<uint8_t>>>> pipeline::wif()
 {
     return std::make_shared<WifProcessor>();
 }

@@ -28,9 +28,9 @@ namespace raytracer
         // Must be in raytracer::scripting for testing purposes
         ModulePtr create_modules()
         {
-            using namespace raytracer::scripting::_private_;
+            using namespace _private_;
 
-            auto module = std::make_shared<chaiscript::Module>();
+            auto module = std::make_shared<Module>();
 
             module->add(create_imaging_module());
             module->add(create_math_module());
@@ -60,7 +60,7 @@ namespace
         return chai;
     }
 
-    void report_error(const chaiscript::exception::eval_error& e)
+    void report_error(const exception::eval_error& e)
     {
         LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
 
@@ -100,7 +100,7 @@ void raytracer::scripting::run_script(const std::string& path)
     {
         chai->eval_file(path);
     }
-    catch (const chaiscript::exception::eval_error& e)
+    catch (const exception::eval_error& e)
     {
         report_error(e);
         abort();
@@ -115,7 +115,7 @@ void raytracer::scripting::run(const std::string& source)
     {
         chai->eval(source);
     }
-    catch (const chaiscript::exception::eval_error& e)
+    catch (const exception::eval_error& e)
     {
         report_error(e);
         abort();

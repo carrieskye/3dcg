@@ -17,7 +17,7 @@ namespace animation
     class Animation
     {
     public:
-        Animation(math::Function<T(TimeStamp)> function, animation::Duration duration)
+        Animation(math::Function<T(TimeStamp)> function, Duration duration)
             : m_function(function), m_duration(duration) { }
 
         static Animation<T> empty()
@@ -48,7 +48,7 @@ namespace animation
 
     private:
         math::Function<T(TimeStamp)> m_function;
-        animation::Duration m_duration;
+        Duration m_duration;
     };
 
     inline math::Function<TimeStamp(double)> seconds_to_timestamp()
@@ -70,7 +70,7 @@ namespace animation
     }
 
     template<typename T>
-    Animation<T> make_animation(math::Function<T(TimeStamp)> function, animation::Duration duration)
+    Animation<T> make_animation(math::Function<T(TimeStamp)> function, Duration duration)
     {
         return Animation<T>(function, duration);
     }

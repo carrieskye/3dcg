@@ -53,7 +53,7 @@ namespace chaiscript
         {
           static Boxed_Value handle(const std::function<Ret> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
+                chaiscript::make_shared<Proxy_Function_Base, Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
               );
           }
         };
@@ -63,7 +63,7 @@ namespace chaiscript
         {
           static Boxed_Value handle(const std::function<Ret> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
+                chaiscript::make_shared<Proxy_Function_Base, Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
               );
           }
         };
@@ -73,7 +73,7 @@ namespace chaiscript
         {
           static Boxed_Value handle(const std::shared_ptr<std::function<Ret>> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
+                chaiscript::make_shared<Proxy_Function_Base, Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
                 );
           }
         };
@@ -83,7 +83,7 @@ namespace chaiscript
         {
           static Boxed_Value handle(const std::shared_ptr<std::function<Ret>> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
+                chaiscript::make_shared<Proxy_Function_Base, Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
               );
           }
         };
@@ -93,7 +93,7 @@ namespace chaiscript
         {
           static Boxed_Value handle(const std::shared_ptr<std::function<Ret>> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
+                chaiscript::make_shared<Proxy_Function_Base, Assignable_Proxy_Function_Impl<Ret>>(std::ref(*f),f)
               );
           }
         };
@@ -103,14 +103,14 @@ namespace chaiscript
         {
           static Boxed_Value handle(std::function<Ret> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Assignable_Proxy_Function_Impl<Ret>>(std::ref(f),
+                chaiscript::make_shared<Proxy_Function_Base, Assignable_Proxy_Function_Impl<Ret>>(std::ref(f),
                   std::shared_ptr<std::function<Ret>>())
               );
           }
 
           static Boxed_Value handle(const std::function<Ret> &f) {
             return Boxed_Value(
-                chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
+                chaiscript::make_shared<Proxy_Function_Base, Proxy_Function_Callable_Impl<Ret, std::function<Ret>>>(f)
               );
           }
         };

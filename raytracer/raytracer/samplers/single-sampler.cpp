@@ -6,7 +6,7 @@ using namespace raytracer;
 
 namespace
 {
-    class SingleSampler : public raytracer::samplers::_private_::SamplerImplementation
+    class SingleSampler : public samplers::_private_::SamplerImplementation
     {
     public:
         void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
@@ -16,7 +16,7 @@ namespace
     };
 }
 
-Sampler raytracer::samplers::single()
+Sampler samplers::single()
 {
     return Sampler(std::make_shared<SingleSampler>());
 }

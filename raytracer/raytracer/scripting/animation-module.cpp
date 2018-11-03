@@ -46,15 +46,15 @@ namespace
     }
 }
 
-ModulePtr raytracer::scripting::_private_::create_animation_module()
+ModulePtr scripting::_private_::create_animation_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     util::register_to_string<Duration>(*module);
     util::register_to_string<TimeStamp>(*module);
 
     auto animation_library = std::make_shared<AnimationLibrary>();
-    module->add_global_const(chaiscript::const_var(animation_library), "Animations");
+    module->add_global_const(const_var(animation_library), "Animations");
 
 #define BIND_AS(INTERNAL, EXTERNAL)                 module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
 #define BIND(NAME)                                  BIND_AS(NAME, NAME)

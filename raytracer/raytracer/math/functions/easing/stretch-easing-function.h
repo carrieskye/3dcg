@@ -10,9 +10,9 @@ namespace math
     {
         namespace easing
         {
-            math::functions::EasingFunction stretch_in_time(EasingFunction function, const math::Interval<double>& x_range);
-            math::functions::EasingFunction stretch_in_space(EasingFunction function, const math::Interval<double>& y_range);
-            math::functions::EasingFunction stretch(EasingFunction function, const math::Interval<double>& x_range, const math::Interval<double>& y_range);
+            EasingFunction stretch_in_time(EasingFunction function, const Interval<double>& x_range);
+            EasingFunction stretch_in_space(EasingFunction function, const Interval<double>& y_range);
+            EasingFunction stretch(EasingFunction function, const Interval<double>& x_range, const Interval<double>& y_range);
         }
     }
 }

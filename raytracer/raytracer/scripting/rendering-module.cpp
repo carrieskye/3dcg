@@ -36,14 +36,14 @@ namespace
     };
 }
 
-ModulePtr raytracer::scripting::_private_::create_rendering_module()
+ModulePtr scripting::_private_::create_rendering_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     util::register_type<Renderer>(*module, "Renderer");
 
     auto renderer_library = std::make_shared<RendererLibrary>();
-    module->add_global_const(chaiscript::const_var(renderer_library), "Renderers");
+    module->add_global_const(const_var(renderer_library), "Renderers");
 
 #   define BIND_AS(INTERNAL, EXTERNAL) module->add(fun(&RendererLibrary::INTERNAL), #EXTERNAL)
     BIND_AS(standard, standard);

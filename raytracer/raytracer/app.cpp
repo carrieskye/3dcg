@@ -29,7 +29,7 @@ namespace
         {
             LOG(INFO) << "Rendering " << filename;
 
-            raytracer::scripting::run_script(filename);
+            scripting::run_script(filename);
         }
         else
         {
@@ -44,7 +44,7 @@ namespace
                 script += line + "\n";
             }
 
-            raytracer::scripting::run(script);
+            scripting::run(script);
         }
     }
 
@@ -60,7 +60,7 @@ namespace
 
     void emit_beep()
     {
-        ::beep();
+        beep();
     }
 
     void print_statistics()

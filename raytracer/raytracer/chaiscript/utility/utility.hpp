@@ -49,12 +49,12 @@ namespace chaiscript
     template<typename Class, typename ModuleType>
       void add_class(ModuleType &t_module,
           const std::string &t_class_name,
-          const std::vector<chaiscript::Proxy_Function> &t_constructors,
-          const std::vector<std::pair<chaiscript::Proxy_Function, std::string>> &t_funcs)
+          const std::vector<Proxy_Function> &t_constructors,
+          const std::vector<std::pair<Proxy_Function, std::string>> &t_funcs)
       {
         t_module.add(chaiscript::user_type<Class>(), t_class_name); 
 
-        for(const chaiscript::Proxy_Function &ctor: t_constructors)
+        for(const Proxy_Function &ctor: t_constructors)
         {
           t_module.add(ctor, t_class_name);
         }
@@ -81,7 +81,7 @@ namespace chaiscript
         t_module.add(chaiscript::constructor<Enum ()>(), t_class_name);
         t_module.add(chaiscript::constructor<Enum (const Enum &)>(), t_class_name);
 
-        using namespace chaiscript::bootstrap::operators;
+        using namespace bootstrap::operators;
         t_module.add([](){
               // add some comparison and assignment operators
               return assign<Enum>(not_equal<Enum>(equal<Enum>()));

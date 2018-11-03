@@ -111,17 +111,17 @@ namespace chaiscript
       std::vector<AST_NodePtr_Const> call_stack;
 
       eval_error(const std::string &t_why, const File_Position &t_where, const std::string &t_fname,
-          const std::vector<Boxed_Value> &t_parameters, const std::vector<chaiscript::Const_Proxy_Function> &t_functions,
+          const std::vector<Boxed_Value> &t_parameters, const std::vector<Const_Proxy_Function> &t_functions,
           bool t_dot_notation,
-          const chaiscript::detail::Dispatch_Engine &t_ss) CHAISCRIPT_NOEXCEPT :
+          const detail::Dispatch_Engine &t_ss) CHAISCRIPT_NOEXCEPT :
         std::runtime_error(format(t_why, t_where, t_fname, t_parameters, t_dot_notation, t_ss)),
         reason(t_why), start_position(t_where), filename(t_fname), detail(format_detail(t_functions, t_dot_notation, t_ss)) 
       {}
 
       eval_error(const std::string &t_why, 
-           const std::vector<Boxed_Value> &t_parameters, const std::vector<chaiscript::Const_Proxy_Function> &t_functions,
+           const std::vector<Boxed_Value> &t_parameters, const std::vector<Const_Proxy_Function> &t_functions,
            bool t_dot_notation,
-           const chaiscript::detail::Dispatch_Engine &t_ss) CHAISCRIPT_NOEXCEPT :
+           const detail::Dispatch_Engine &t_ss) CHAISCRIPT_NOEXCEPT :
         std::runtime_error(format(t_why, t_parameters, t_dot_notation, t_ss)),
         reason(t_why), detail(format_detail(t_functions, t_dot_notation, t_ss))
       {}
@@ -149,8 +149,8 @@ namespace chaiscript
           ss << '\n' << detail << '\n';
           ss << "  " << fname(call_stack[0]) << " (" << startpos(call_stack[0]) << ") '" << pretty(call_stack[0]) << "'";
           for (size_t j = 1; j < call_stack.size(); ++j) {
-            if (id(call_stack[j]) != chaiscript::AST_Node_Type::Block
-                && id(call_stack[j]) != chaiscript::AST_Node_Type::File)
+            if (id(call_stack[j]) != AST_Node_Type::Block
+                && id(call_stack[j]) != AST_Node_Type::File)
             {
               ss << '\n';
               ss << "  from " << fname(call_stack[j]) << " (" << startpos(call_stack[j]) << ") '" << pretty(call_stack[j]) << "'";
@@ -198,7 +198,7 @@ namespace chaiscript
 
       static std::string format_types(const Const_Proxy_Function &t_func,
           bool t_dot_notation,
-          const chaiscript::detail::Dispatch_Engine &t_ss)
+          const detail::Dispatch_Engine &t_ss)
       {
         int arity = t_func->get_arity();
         std::vector<Type_Info> types = t_func->get_param_types();
@@ -286,9 +286,9 @@ namespace chaiscript
 
         }
 
-      static std::string format_detail(const std::vector<chaiscript::Const_Proxy_Function> &t_functions,
+      static std::string format_detail(const std::vector<Const_Proxy_Function> &t_functions,
           bool t_dot_notation,
-          const chaiscript::detail::Dispatch_Engine &t_ss)
+          const detail::Dispatch_Engine &t_ss)
       {
         std::stringstream ss;
         if (t_functions.size() == 1)
@@ -310,7 +310,7 @@ namespace chaiscript
 
       static std::string format_parameters(const std::vector<Boxed_Value> &t_parameters,
           bool t_dot_notation,
-          const chaiscript::detail::Dispatch_Engine &t_ss)
+          const detail::Dispatch_Engine &t_ss)
       {
         std::stringstream ss;
         ss << "(";
@@ -367,7 +367,7 @@ namespace chaiscript
       }
 
       static std::string format(const std::string &t_why, const File_Position &t_where, const std::string &t_fname,
-          const std::vector<Boxed_Value> &t_parameters, bool t_dot_notation, const chaiscript::detail::Dispatch_Engine &t_ss)
+          const std::vector<Boxed_Value> &t_parameters, bool t_dot_notation, const detail::Dispatch_Engine &t_ss)
       {
         std::stringstream ss;
 
@@ -388,7 +388,7 @@ namespace chaiscript
       static std::string format(const std::string &t_why, 
           const std::vector<Boxed_Value> &t_parameters, 
           bool t_dot_notation,
-          const chaiscript::detail::Dispatch_Engine &t_ss)
+          const detail::Dispatch_Engine &t_ss)
       {
         std::stringstream ss;
 
@@ -479,7 +479,7 @@ namespace chaiscript
         return oss.str();
       }
 
-      Boxed_Value eval(const chaiscript::detail::Dispatch_State &t_e) const
+      Boxed_Value eval(const detail::Dispatch_State &t_e) const
       {
         try {
           return eval_internal(t_e);
@@ -515,7 +515,7 @@ namespace chaiscript
       {
       }
 
-      virtual Boxed_Value eval_internal(const chaiscript::detail::Dispatch_State &) const
+      virtual Boxed_Value eval_internal(const detail::Dispatch_State &) const
       {
         throw std::runtime_error("Undispatched ast_node (internal error)");
       }

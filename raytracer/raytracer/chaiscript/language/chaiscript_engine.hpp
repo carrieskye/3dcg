@@ -255,8 +255,8 @@ namespace chaiscript
   /// \brief The main object that the ChaiScript user will use.
   class ChaiScript {
 
-    mutable chaiscript::detail::threading::shared_mutex m_mutex;
-    mutable chaiscript::detail::threading::recursive_mutex m_use_mutex;
+    mutable detail::threading::shared_mutex m_mutex;
+    mutable detail::threading::recursive_mutex m_use_mutex;
 
     std::set<std::string> m_used_files;
     std::map<std::string, detail::Loadable_Module_Ptr> m_loaded_modules;
@@ -265,7 +265,7 @@ namespace chaiscript
     std::vector<std::string> m_module_paths;
     std::vector<std::string> m_use_paths;
 
-    chaiscript::detail::Dispatch_Engine m_engine;
+    detail::Dispatch_Engine m_engine;
 
     /// Evaluates the given string in by parsing it and running the results through the evaluator
     Boxed_Value do_eval(const std::string &t_input, const std::string &t_filename = "__EVAL__", bool /* t_internal*/  = false) 
@@ -279,7 +279,7 @@ namespace chaiscript
           return Boxed_Value();
         }
       }
-      catch (chaiscript::eval::detail::Return_Value &rv) {
+      catch (eval::detail::Return_Value &rv) {
         return rv.retval;
       }
     }
@@ -319,7 +319,7 @@ namespace chaiscript
     }
 
     /// Returns the current evaluation m_engine
-    chaiscript::detail::Dispatch_Engine &get_eval_engine() {
+    detail::Dispatch_Engine &get_eval_engine() {
       return m_engine;
     }
 
@@ -384,7 +384,7 @@ namespace chaiscript
 
       m_engine.add(fun(
             [=](const Type_Info &t_from, const Type_Info &t_to, const std::function<Boxed_Value (const Boxed_Value &)> &t_func) {
-              m_engine.add(chaiscript::type_conversion(t_from, t_to, t_func));
+              m_engine.add(type_conversion(t_from, t_to, t_func));
             }
           ), "add_type_conversion");
 
@@ -419,7 +419,7 @@ namespace chaiscript
       std::ifstream infile(t_filename.c_str(), std::ios::in | std::ios::ate | std::ios::binary );
 
       if (!infile.is_open()) {
-        throw chaiscript::exception::file_not_found_error(t_filename);
+        throw exception::file_not_found_error(t_filename);
       }
 
       const auto size = infile.tellg();
@@ -539,7 +539,7 @@ namespace chaiscript
         //parser.show_match_stack();
         return parser.optimized_ast();
       } else {
-        throw chaiscript::exception::eval_error("Unknown error while parsing");
+        throw exception::eval_error("Unknown error while parsing");
       }
     }
 
@@ -615,8 +615,8 @@ namespace chaiscript
         try {
           const auto appendedpath = path + t_filename;
 
-          chaiscript::detail::threading::unique_lock<chaiscript::detail::threading::recursive_mutex> l(m_use_mutex);
-          chaiscript::detail::threading::unique_lock<chaiscript::detail::threading::shared_mutex> l2(m_mutex);
+          detail::threading::unique_lock<detail::threading::recursive_mutex> l(m_use_mutex);
+          detail::threading::unique_lock<detail::threading::shared_mutex> l2(m_mutex);
 
           Boxed_Value retval;
 
@@ -674,7 +674,7 @@ namespace chaiscript
     struct State
     {
       std::set<std::string> used_files;
-      chaiscript::detail::Dispatch_Engine::State engine_state;
+      detail::Dispatch_Engine::State engine_state;
       std::set<std::string> active_loaded_modules;
     };
 
@@ -693,8 +693,8 @@ namespace chaiscript
     /// \endcode
     State get_state() const
     {
-      chaiscript::detail::threading::lock_guard<chaiscript::detail::threading::recursive_mutex> l(m_use_mutex);
-      chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l2(m_mutex);
+      detail::threading::lock_guard<detail::threading::recursive_mutex> l(m_use_mutex);
+      detail::threading::shared_lock<detail::threading::shared_mutex> l2(m_mutex);
 
       State s;
       s.used_files = m_used_files;
@@ -719,8 +719,8 @@ namespace chaiscript
     /// \endcode
     void set_state(const State &t_state)
     {
-      chaiscript::detail::threading::lock_guard<chaiscript::detail::threading::recursive_mutex> l(m_use_mutex);
-      chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l2(m_mutex);
+      detail::threading::lock_guard<detail::threading::recursive_mutex> l(m_use_mutex);
+      detail::threading::shared_lock<detail::threading::shared_mutex> l2(m_mutex);
 
       m_used_files = t_state.used_files;
       m_active_loaded_modules = t_state.active_loaded_modules;
@@ -826,7 +826,7 @@ namespace chaiscript
               // std::cerr << "trying location: " << name << '\n';
               load_module(version_stripped_name, name);
               return name;
-            } catch (const chaiscript::exception::load_module_error &e) {
+            } catch (const exception::load_module_error &e) {
               // std::cerr << "error: " << e.what() << '\n';
               errors.push_back(e);
               // Try next set
@@ -849,7 +849,7 @@ namespace chaiscript
         errstring += itr->what();
       }
 
-      throw chaiscript::exception::load_module_error("Unable to find module: " + t_module_name + " Errors: " + errstring);
+      throw exception::load_module_error("Unable to find module: " + t_module_name + " Errors: " + errstring);
     }
 
     /// \brief Load a binary module from a dynamic library. Works on platforms that support
@@ -861,7 +861,7 @@ namespace chaiscript
     /// \sa ChaiScript::load_module(const std::string &t_module_name)
     void load_module(const std::string &t_module_name, const std::string &t_filename)
     {
-      chaiscript::detail::threading::lock_guard<chaiscript::detail::threading::recursive_mutex> l(m_use_mutex);
+      detail::threading::lock_guard<detail::threading::recursive_mutex> l(m_use_mutex);
 
       if (m_loaded_modules.count(t_module_name) == 0)
       {

@@ -3,7 +3,7 @@
 using namespace math;
 
 
-std::vector<Point2D> raytracer::samplers::_private_::SamplerImplementation::sample(const math::Rectangle2D& rectangle) const
+std::vector<Point2D> raytracer::samplers::_private_::SamplerImplementation::sample(const Rectangle2D& rectangle) const
 {
     std::vector<Point2D> result;
 
@@ -14,7 +14,7 @@ std::vector<Point2D> raytracer::samplers::_private_::SamplerImplementation::samp
     return result;
 }
 
-void raytracer::samplers::_private_::SamplerImplementation::sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> callback) const
+void raytracer::samplers::_private_::SamplerImplementation::sample(const Rectangle2D& rectangle, std::function<void(const Point2D&)> callback) const
 {
     auto points = sample(rectangle);
 

@@ -42,7 +42,7 @@ namespace chaiscript
             auto p = throw_if_null(ob.get_const_ptr());
             return *static_cast<const Result *>(p);
           } else {
-            throw chaiscript::detail::exception::bad_any_cast();
+            throw exception::bad_any_cast();
           }
         }
       };
@@ -64,7 +64,7 @@ namespace chaiscript
           {
             return static_cast<const Result *>(ob.get_const_ptr());
           } else {
-            throw chaiscript::detail::exception::bad_any_cast();
+            throw exception::bad_any_cast();
           }
         }
       };
@@ -80,7 +80,7 @@ namespace chaiscript
           {
             return static_cast<Result *>(ob.get_ptr());
           } else {
-            throw chaiscript::detail::exception::bad_any_cast();
+            throw exception::bad_any_cast();
           }
         }
       };
@@ -109,7 +109,7 @@ namespace chaiscript
             auto p = throw_if_null(ob.get_const_ptr());
             return *static_cast<const Result *>(p);
           } else {
-            throw chaiscript::detail::exception::bad_any_cast();
+            throw exception::bad_any_cast();
           }
         }
       };
@@ -128,7 +128,7 @@ namespace chaiscript
           {
             return *(static_cast<Result *>(throw_if_null(ob.get_ptr())));
           } else {
-            throw chaiscript::detail::exception::bad_any_cast();
+            throw exception::bad_any_cast();
           }
         }
       };

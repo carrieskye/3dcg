@@ -42,10 +42,10 @@ namespace performance
 
 namespace
 {
-    std::vector<performance::_private_::CounterImplementation*> counters;
+    std::vector<_private_::CounterImplementation*> counters;
 }
 
-Counter& performance::Counter::operator++()
+Counter& Counter::operator++()
 {
     m_impl->increment();
 
@@ -54,7 +54,7 @@ Counter& performance::Counter::operator++()
 
 Counter performance::create_counter(const std::string& name)
 {
-    performance::_private_::CounterImplementation* p = new performance::_private_::CounterImplementation(name);
+    _private_::CounterImplementation* p = new _private_::CounterImplementation(name);
 
     counters.push_back(p);
 

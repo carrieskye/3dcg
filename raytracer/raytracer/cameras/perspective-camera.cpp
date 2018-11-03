@@ -3,30 +3,30 @@
 #include <assert.h>
 
 using namespace raytracer;
-using namespace raytracer::cameras;
+using namespace cameras;
 using namespace math;
 
 
-raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::Matrix4x4 transformation, const Rectangle3D& view_window)
+cameras::_private_::PerspectiveCamera::PerspectiveCamera(const Matrix4x4 transformation, const Rectangle3D& view_window)
     : DisplaceableCamera(transformation), m_view_window(view_window)
 {
     // NOP
 }
 
-void raytracer::cameras::_private_::PerspectiveCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
+void cameras::_private_::PerspectiveCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const Ray&)> callback) const
 {
     assert(interval(0.0, 1.0).contains(point.x()));
     assert(interval(0.0, 1.0).contains(point.y()));
 
     Point3D p = m_view_window.project(point);
 
-    callback(Ray(math::Point3D(0,0,0), p));
+    callback(Ray(Point3D(0,0,0), p));
 }
 
-Camera raytracer::cameras::perspective(
-    const math::Point3D& eye,
-    const math::Point3D& look_at,
-    const math::Vector3D& up,
+Camera cameras::perspective(
+    const Point3D& eye,
+    const Point3D& look_at,
+    const Vector3D& up,
     double distance,
     double aspect_ratio)
 {

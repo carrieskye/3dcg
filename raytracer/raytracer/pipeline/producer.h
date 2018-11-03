@@ -19,7 +19,7 @@ namespace raytracer
         template<typename T>
         struct is_producer
         {
-            static constexpr bool value = std::is_base_of<pipeline::_private_::ProducerTag, T>();
+            static constexpr bool value = std::is_base_of<_private_::ProducerTag, T>();
         };
 
         template<typename OUTPUT>

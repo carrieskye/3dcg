@@ -16,7 +16,7 @@ namespace math
     struct Polar
     {
         double radius;
-        math::Angle theta;
+        Angle theta;
     };
 
     struct Cartesian3D
@@ -27,27 +27,27 @@ namespace math
     struct Spherical
     {
         double radius;
-        math::Angle azimuth, elevation;
+        Angle azimuth, elevation;
     };
 
     struct CylindricalX
     {
         double radius;
-        math::Angle azimuth;
+        Angle azimuth;
         double x;
     };
 
     struct CylindricalY
     {
         double radius;
-        math::Angle azimuth;
+        Angle azimuth;
         double y;
     };
 
     struct CylindricalZ
     {
         double radius;
-        math::Angle azimuth;
+        Angle azimuth;
         double z;
     };
 

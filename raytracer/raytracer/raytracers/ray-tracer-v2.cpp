@@ -6,7 +6,7 @@ using namespace math;
 using namespace raytracer;
 
 
-TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& scene, const Ray& ray) const
+TraceResult raytracers::_private_::RayTracerV2::trace(const Scene& scene, const Ray& ray) const
 {
 	Hit hit;
 
@@ -39,7 +39,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
 	}
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray& ray) const
+Color raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray) const
 {
 	Color result = colors::black();
 	for (auto light_source : scene.light_sources)
@@ -49,7 +49,7 @@ Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene&
 	return result;
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, LightSource light_source) const
+Color raytracers::_private_::RayTracerV2::process_light_source(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, LightSource light_source) const
 {
 	Color result = colors::black();
 	for (auto light_ray : light_source->lightrays_to(hit.position))
@@ -59,14 +59,14 @@ Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(const 
 	return result;
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
+Color raytracers::_private_::RayTracerV2::process_light_ray(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
 {
 	Color result = colors::black();
 	result = compute_diffuse(properties, hit, ray, light_ray);
 	return result;
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
+Color raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
 {
 	auto l = light_ray.ray.origin;
 	auto p = hit.position;
@@ -78,7 +78,7 @@ Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const Mater
 
 }
 
-raytracer::RayTracer raytracer::raytracers::v2()
+RayTracer raytracers::v2()
 {
-	return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV2>());
+	return RayTracer(std::make_shared<_private_::RayTracerV2>());
 }

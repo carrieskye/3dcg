@@ -15,7 +15,7 @@ demos::Demo::Demo(unsigned bitmap_size, Duration duration, unsigned fps, unsigne
     // NOP
 }
 
-void demos::Demo::render(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>> consumer)
+void demos::Demo::render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> consumer)
 {
     auto scene_animation = create_scene_animation();
     auto renderer = create_renderer();
@@ -28,17 +28,17 @@ void demos::Demo::render(std::shared_ptr<raytracer::pipeline::Consumer<std::shar
 
 RayTracer demos::Demo::create_ray_tracer()
 {
-    return raytracer::raytracers::v1();
+    return raytracers::v1();
 }
 
 Renderer demos::Demo::create_renderer()
 {
-    return raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_scheduler());
+    return renderers::standard(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_scheduler());
 }
 
 Sampler demos::Demo::create_sampler()
 {
-    return raytracer::samplers::single();
+    return samplers::single();
 }
 
 tasks::TaskScheduler demos::Demo::create_scheduler()

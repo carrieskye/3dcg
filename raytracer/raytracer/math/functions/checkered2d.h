@@ -7,6 +7,6 @@ namespace math
 {
 	namespace functions
 	{
-		math::Function<bool(const Point2D&)> checkered2d(int size = 1);
+		Function<bool(const Point2D&)> checkered2d(int size = 1);
 	}
 }

@@ -134,7 +134,7 @@ namespace chaiscript {
             {
               return *static_cast<ToType *>(m_data->data());
             } else {
-              throw chaiscript::detail::exception::bad_any_cast();
+              throw exception::bad_any_cast();
             }
           }
 

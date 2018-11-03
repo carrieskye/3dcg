@@ -9,14 +9,14 @@ namespace raytracer
 {
     struct Scene
     {
-        Scene(raytracer::Camera camera, raytracer::Primitive root, const std::vector<LightSource>& light_sources)
+        Scene(Camera camera, Primitive root, const std::vector<LightSource>& light_sources)
             : camera(camera), root(root), light_sources(light_sources) { }
 
-        Scene(raytracer::Camera camera, raytracer::Primitive root)
+        Scene(Camera camera, Primitive root)
             : camera(camera), root(root), light_sources() { }
 
-        raytracer::Camera camera;
-        raytracer::Primitive root;
+        Camera camera;
+        Primitive root;
         std::vector<LightSource> light_sources;
     };
 }

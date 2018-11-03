@@ -26,15 +26,15 @@ namespace tasks
     class TaskScheduler
     {
     public:
-        explicit TaskScheduler(std::shared_ptr<tasks::schedulers::_private_::TaskSchedulerImplementation> implementation = nullptr)
+        explicit TaskScheduler(std::shared_ptr<schedulers::_private_::TaskSchedulerImplementation> implementation = nullptr)
             : m_implementation(implementation) { }
 
-        tasks::schedulers::_private_::TaskSchedulerImplementation* operator ->() const
+        schedulers::_private_::TaskSchedulerImplementation* operator ->() const
         {
             return m_implementation.get();
         }
 
     private:
-        std::shared_ptr<tasks::schedulers::_private_::TaskSchedulerImplementation> m_implementation;
+        std::shared_ptr<schedulers::_private_::TaskSchedulerImplementation> m_implementation;
     };
 }

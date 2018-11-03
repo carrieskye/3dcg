@@ -10,33 +10,33 @@
 
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::materials;
+using namespace materials;
 using namespace imaging;
 
 
-Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pattern, Material m1, Material m2)
+Material materials::pattern2d(Function<bool(const Point2D&)> pattern, Material m1, Material m2)
 {
-    auto bool_mapper = math::functions::bool_mapper(m1, m2);
+    auto bool_mapper = functions::bool_mapper(m1, m2);
 
     return composite(pattern >> bool_mapper);
 }
 
-Material raytracer::materials::horizontal_lines(double thickness, Material m1, Material m2)
+Material materials::horizontal_lines(double thickness, Material m1, Material m2)
 {
-    return pattern2d(math::functions::horizontal_lines(thickness), m1, m2);
+    return pattern2d(functions::horizontal_lines(thickness), m1, m2);
 }
 
-Material raytracer::materials::vertical_lines(double thickness, Material m1, Material m2)
+Material materials::vertical_lines(double thickness, Material m1, Material m2)
 {
-	return pattern2d(math::functions::vertical_lines(thickness), m1, m2);
+	return pattern2d(functions::vertical_lines(thickness), m1, m2);
 }
 
-Material raytracer::materials::grid2d(double thickness, Material m1, Material m2)
+Material materials::grid2d(double thickness, Material m1, Material m2)
 {
-	return pattern2d(math::functions::grid2d(thickness), m1, m2);
+	return pattern2d(functions::grid2d(thickness), m1, m2);
 }
 
-Material raytracer::materials::checkered2d(int size, Material m1, Material m2)
+Material materials::checkered2d(int size, Material m1, Material m2)
 {
-	return pattern2d(math::functions::checkered2d(size), m1, m2);
+	return pattern2d(functions::checkered2d(size), m1, m2);
 }

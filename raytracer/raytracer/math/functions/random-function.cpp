@@ -5,7 +5,7 @@
 using namespace math;
 
 
-math::Function<unsigned(unsigned)> math::functions::random_function(unsigned parameter)
+math::Function<unsigned(unsigned)> functions::random_function(unsigned parameter)
 {
     std::function<unsigned(unsigned)> lambda = [parameter](unsigned x) -> unsigned
     {
@@ -48,7 +48,7 @@ math::Function<unsigned(unsigned)> math::functions::random_function(unsigned par
     return from_lambda<unsigned, unsigned>(lambda);
 }
 
-math::Function<double(unsigned)> math::functions::random::unsigned_to_double(unsigned seed)
+math::Function<double(unsigned)> functions::random::unsigned_to_double(unsigned seed)
 {
     constexpr unsigned size = 1024;
     std::mt19937_64 generator(seed);
@@ -67,7 +67,7 @@ math::Function<double(unsigned)> math::functions::random::unsigned_to_double(uns
     return from_lambda(lambda);
 }
 
-math::Function<Vector2D(const Position2D&)> math::functions::random::position_to_vector2d(unsigned seed)
+math::Function<Vector2D(const Position2D&)> functions::random::position_to_vector2d(unsigned seed)
 {
     auto helper = unsigned_to_double(seed);
 
@@ -80,7 +80,7 @@ math::Function<Vector2D(const Position2D&)> math::functions::random::position_to
     return from_lambda(lambda);
 }
 
-math::Function<Vector3D(const Position3D&)> math::functions::random::position3d_to_vector3d(unsigned seed)
+math::Function<Vector3D(const Position3D&)> functions::random::position3d_to_vector3d(unsigned seed)
 {
     auto helper = unsigned_to_double(seed);
 

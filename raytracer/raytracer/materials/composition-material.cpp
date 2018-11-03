@@ -6,7 +6,7 @@ using namespace math;
 
 namespace
 {
-    class CompositionMaterial2D : public raytracer::materials::_private_::MaterialImplementation
+    class CompositionMaterial2D : public materials::_private_::MaterialImplementation
     {
     public:
         CompositionMaterial2D(math::Function<Material(const Point2D&)> function)
@@ -21,7 +21,7 @@ namespace
         math::Function<Material(const Point2D&)> m_function;
     };
 
-    class CompositionMaterial3D : public raytracer::materials::_private_::MaterialImplementation
+    class CompositionMaterial3D : public materials::_private_::MaterialImplementation
     {
     public:
         CompositionMaterial3D(math::Function<Material(const Point3D&)> function)
@@ -37,12 +37,12 @@ namespace
     };
 }
 
-Material raytracer::materials::composite(math::Function<Material(const math::Point2D&)> function)
+Material materials::composite(math::Function<Material(const math::Point2D&)> function)
 {
     return Material(std::make_shared<CompositionMaterial2D>(function));
 }
 
-Material raytracer::materials::composite(math::Function<Material(const math::Point3D&)> function)
+Material materials::composite(math::Function<Material(const math::Point3D&)> function)
 {
     return Material(std::make_shared<CompositionMaterial3D>(function));
 }

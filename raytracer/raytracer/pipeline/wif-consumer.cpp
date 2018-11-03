@@ -7,13 +7,13 @@ using namespace imaging;
 
 namespace
 {
-    class Wif : public Consumer<std::shared_ptr<imaging::Bitmap>>
+    class Wif : public Consumer<std::shared_ptr<Bitmap>>
     {
     public:
         Wif(const std::string& path)
             : m_wif(path) { }
 
-        void consume(std::shared_ptr<imaging::Bitmap> bitmap) override
+        void consume(std::shared_ptr<Bitmap> bitmap) override
         {
             m_wif.write_frame(*bitmap);
         }
@@ -23,7 +23,7 @@ namespace
     };
 }
 
-std::shared_ptr<Consumer<std::shared_ptr<imaging::Bitmap>>> raytracer::pipeline::wif(const std::string& path)
+std::shared_ptr<Consumer<std::shared_ptr<Bitmap>>> raytracer::pipeline::wif(const std::string& path)
 {
     return std::make_shared<Wif>(path);
 }

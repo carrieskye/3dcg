@@ -22,8 +22,8 @@ namespace math
 
         bool is_infinite() const;
 
-        bool is_hit_positively_by(const math::Ray&) const;
-        bool is_hit_by(const math::Ray&) const;
+        bool is_hit_positively_by(const Ray&) const;
+        bool is_hit_by(const Ray&) const;
 
         Box merge(const Box&) const;
         Box intersect(const Box&) const;

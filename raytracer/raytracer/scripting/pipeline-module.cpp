@@ -18,7 +18,7 @@
 
 using namespace chaiscript;
 using namespace raytracer;
-using namespace raytracer::pipeline;
+using namespace pipeline;
 using namespace math;
 using namespace imaging;
 
@@ -151,12 +151,12 @@ namespace
     {
         std::shared_ptr<Wrapper> wif_to_file(const std::string& path) const
         {
-            return wrap(raytracer::pipeline::wif(path));
+            return wrap(pipeline::wif(path));
         }
 
         std::shared_ptr<Wrapper> renderer(Renderer renderer) const
         {
-            return wrap(raytracer::pipeline::renderer(renderer));
+            return wrap(pipeline::renderer(renderer));
         }
 
         std::shared_ptr<Wrapper> animation(double fps) const
@@ -181,7 +181,7 @@ namespace
 
         std::shared_ptr<Wrapper> stdout() const
         {
-            return wrap(pipeline::text_writer(std::cout));
+            return wrap(text_writer(std::cout));
         }
     };
 
@@ -214,12 +214,12 @@ namespace
     }
 }
 
-ModulePtr raytracer::scripting::_private_::create_pipeline_module()
+ModulePtr scripting::_private_::create_pipeline_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     auto pipeline_library = std::make_shared<PipelineLibrary>();
-    module->add_global_const(chaiscript::const_var(pipeline_library), "Pipeline");
+    module->add_global_const(const_var(pipeline_library), "Pipeline");
 
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)

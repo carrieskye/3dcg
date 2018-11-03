@@ -22,7 +22,7 @@ namespace math
                 return T(x, y);
             }
 
-            static T polar(double radius, math::Angle theta)
+            static T polar(double radius, Angle theta)
             {
                 Polar polar{ radius, theta };
                 Cartesian2D cartesian = convert_coordinates<Cartesian2D>(polar);
@@ -55,28 +55,28 @@ namespace math
                 return DimensionSpecificMembers<3, T>::cartesian(cartesian.x, cartesian.y, cartesian.z);
             }
 
-            static T spherical(double radius, math::Angle azimuth, math::Angle elevation)
+            static T spherical(double radius, Angle azimuth, Angle elevation)
             {
                 Spherical spherical{ radius,azimuth,elevation };
 
                 return cartesian(convert_coordinates<Cartesian3D>(spherical));
             }
 
-            static T cylindrical_x(double radius, math::Angle azimuth, double x)
+            static T cylindrical_x(double radius, Angle azimuth, double x)
             {
                 CylindricalX cyl{ radius, azimuth, x };
 
                 return cartesian(convert_coordinates<Cartesian3D>(cyl));
             }
 
-            static T cylindrical_y(double radius, math::Angle azimuth, double y)
+            static T cylindrical_y(double radius, Angle azimuth, double y)
             {
                 CylindricalY cyl{ radius, azimuth, y };
 
                 return cartesian(convert_coordinates<Cartesian3D>(cyl));
             }
 
-            static T cylindrical_z(double radius, math::Angle azimuth, double z)
+            static T cylindrical_z(double radius, Angle azimuth, double z)
             {
                 CylindricalZ cyl{ radius, azimuth, z };
 

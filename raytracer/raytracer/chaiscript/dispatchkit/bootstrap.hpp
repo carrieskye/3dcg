@@ -374,15 +374,15 @@ namespace chaiscript
         }
 
 
-      static bool has_parse_tree(const chaiscript::Const_Proxy_Function &t_pf)
+      static bool has_parse_tree(const Const_Proxy_Function &t_pf)
       {
-        const auto pf = std::dynamic_pointer_cast<const chaiscript::dispatch::Dynamic_Proxy_Function>(t_pf);
+        const auto pf = std::dynamic_pointer_cast<const dispatch::Dynamic_Proxy_Function>(t_pf);
         return pf && pf->get_parse_tree();
       }
 
-      static chaiscript::AST_NodePtr get_parse_tree(const chaiscript::Const_Proxy_Function &t_pf)
+      static AST_NodePtr get_parse_tree(const Const_Proxy_Function &t_pf)
       {
-        const auto pf = std::dynamic_pointer_cast<const chaiscript::dispatch::Dynamic_Proxy_Function>(t_pf);
+        const auto pf = std::dynamic_pointer_cast<const dispatch::Dynamic_Proxy_Function>(t_pf);
         if (pf && pf->get_parse_tree())
         {
           return pf->get_parse_tree();
@@ -554,34 +554,34 @@ namespace chaiscript
         m->add(fun(&Boxed_Value::type_match), "type_match");
 
 
-        m->add(chaiscript::fun(&has_parse_tree), "has_parse_tree");
-        m->add(chaiscript::fun(&get_parse_tree), "get_parse_tree");
+        m->add(fun(&has_parse_tree), "has_parse_tree");
+        m->add(fun(&get_parse_tree), "get_parse_tree");
 
-        m->add(chaiscript::base_class<std::runtime_error, chaiscript::exception::eval_error>());
+        m->add(chaiscript::base_class<std::runtime_error, exception::eval_error>());
 
-        m->add(chaiscript::user_type<chaiscript::exception::arithmetic_error>(), "arithmetic_error");
-        m->add(chaiscript::base_class<std::runtime_error, chaiscript::exception::arithmetic_error>());
+        m->add(chaiscript::user_type<exception::arithmetic_error>(), "arithmetic_error");
+        m->add(chaiscript::base_class<std::runtime_error, exception::arithmetic_error>());
 
 
 //        chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<chaiscript::AST_Node> > >("AST_NodeVector", m);
 
 
-        chaiscript::utility::add_class<chaiscript::exception::eval_error>(*m,
+        chaiscript::utility::add_class<exception::eval_error>(*m,
             "eval_error",
             { },
-            { {fun(&chaiscript::exception::eval_error::reason), "reason"},
-              {fun(&chaiscript::exception::eval_error::pretty_print), "pretty_print"},
-              {fun(std::function<std::vector<Boxed_Value> (const chaiscript::exception::eval_error &t_eval_error)>([](const chaiscript::exception::eval_error &t_eval_error) -> std::vector<Boxed_Value> { 
+            { {fun(&exception::eval_error::reason), "reason"},
+              {fun(&exception::eval_error::pretty_print), "pretty_print"},
+              {fun(std::function<std::vector<Boxed_Value> (const exception::eval_error &t_eval_error)>([](const exception::eval_error &t_eval_error) -> std::vector<Boxed_Value> { 
                   std::vector<Boxed_Value> retval;
                   std::transform(t_eval_error.call_stack.begin(), t_eval_error.call_stack.end(),
                                  std::back_inserter(retval),
-                                 &chaiscript::var<const std::shared_ptr<const chaiscript::AST_Node> &>);
+                                 &chaiscript::var<const std::shared_ptr<const AST_Node> &>);
                   return retval;
                 })), "call_stack"} }
             );
 
 
-        chaiscript::utility::add_class<chaiscript::File_Position>(*m,
+        chaiscript::utility::add_class<File_Position>(*m,
             "File_Position",
             { constructor<File_Position()>(),
               constructor<File_Position(int, int)>() },
@@ -599,11 +599,11 @@ namespace chaiscript
               {fun(&AST_Node::start), "start"},
               {fun(&AST_Node::end), "end"},
               {fun(&AST_Node::to_string), "to_string"},
-              {fun(std::function<std::vector<Boxed_Value> (const chaiscript::AST_Node &t_node)>([](const chaiscript::AST_Node &t_node) -> std::vector<Boxed_Value> { 
+              {fun(std::function<std::vector<Boxed_Value> (const AST_Node &t_node)>([](const AST_Node &t_node) -> std::vector<Boxed_Value> { 
                 std::vector<Boxed_Value> retval;
                 std::transform(t_node.children.begin(), t_node.children.end(),
                                std::back_inserter(retval),
-                               &chaiscript::var<const std::shared_ptr<chaiscript::AST_Node> &>);
+                               &chaiscript::var<const std::shared_ptr<AST_Node> &>);
                 return retval;
               })), "children"},
               {fun(&AST_Node::replace_child), "replace_child"}

@@ -19,13 +19,13 @@ namespace performance
     class Counter
     {
     public:
-        Counter(performance::_private_::CounterImplementation* impl)
+        Counter(_private_::CounterImplementation* impl)
             : m_impl(impl) { }
 
         Counter& operator++();
 
     private:
-        performance::_private_::CounterImplementation* m_impl;
+        _private_::CounterImplementation* m_impl;
     };
 
     Counter create_counter(const std::string& name);

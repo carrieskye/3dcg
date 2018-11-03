@@ -5,15 +5,15 @@
 
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 
 
 namespace
 {
-    class TransformerImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+    class TransformerImplementation : public primitives::_private_::PrimitiveImplementation
     {
     public:
-        TransformerImplementation(const math::Transformation3D& transformer, Primitive transformee)
+        TransformerImplementation(const Transformation3D& transformer, Primitive transformee)
             : transformer(transformer), transformee(transformee) { }
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -33,7 +33,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
             Ray transformed_ray = ray.transform(this->transformer.inverse_transformation_matrix);
 
@@ -48,7 +48,7 @@ namespace
             return hits;
         }
 
-        math::Box bounding_box() const override
+        Box bounding_box() const override
         {
             auto box = transformee->bounding_box();
 
@@ -65,14 +65,14 @@ namespace
             AUX(1, 1, 1);
 #undef AUX
 
-            double min_x = math::minimum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
-            double max_x = math::maximum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
+            double min_x = minimum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
+            double max_x = maximum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
 
-            double min_y = math::minimum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
-            double max_y = math::maximum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
+            double min_y = minimum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
+            double max_y = maximum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
 
-            double min_z = math::minimum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
-            double max_z = math::maximum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
+            double min_z = minimum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
+            double max_z = maximum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
 
             Point3D lower_corner(min_x, min_y, min_z);
             Point3D upper_corner(max_x, max_y, max_z);
@@ -81,17 +81,17 @@ namespace
         }
 
     private:
-        math::Transformation3D transformer;
+        Transformation3D transformer;
         Primitive transformee;
     };
 }
 
-Primitive raytracer::primitives::transform(const math::Transformation3D& transformation, Primitive transformee)
+Primitive primitives::transform(const Transformation3D& transformation, Primitive transformee)
 {
     return Primitive(std::make_shared<TransformerImplementation>(transformation, transformee));
 }
 
-Primitive raytracer::primitives::translate(const Vector3D& v, Primitive transformee)
+Primitive primitives::translate(const Vector3D& v, Primitive transformee)
 {
-    return transform(math::transformations::translation(v), transformee);
+    return transform(transformations::translation(v), transformee);
 }

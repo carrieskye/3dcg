@@ -8,16 +8,16 @@
 
 using namespace chaiscript;
 using namespace raytracer;
-using namespace raytracer::scripting;
+using namespace scripting;
 
 
 namespace
 {
     struct RaytracerLibrary
     {
-        RayTracer v0() const { return raytracer::raytracers::v0(); }
-		RayTracer v1() const { return raytracer::raytracers::v1(); }
-		RayTracer v2() const { return raytracer::raytracers::v2(); }
+        RayTracer v0() const { return raytracers::v0(); }
+		RayTracer v1() const { return raytracers::v1(); }
+		RayTracer v2() const { return raytracers::v2(); }
 
         RayTracer v(int version) const
         {
@@ -42,19 +42,19 @@ namespace
     }
 }
 
-ModulePtr raytracer::scripting::_private_::create_raytracing_module()
+ModulePtr scripting::_private_::create_raytracing_module()
 {
     // Create new chaiscript module
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     // Tell chaiscript about the RayTracer type
-    raytracer::scripting::util::register_type<raytracer::RayTracer>(*module, "RayTracer");
+    raytracer::scripting::util::register_type<RayTracer>(*module, "RayTracer");
 
     // Create library
     auto raytracer_library = std::make_shared<RaytracerLibrary>();
 
     // Expose library under the given name (member functions need to be exposed separately)
-    module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");
+    module->add_global_const(const_var(raytracer_library), "Raytracers");
 
     // Expose each member of the library
 #   define BIND(NAME)   module->add(fun(&RaytracerLibrary::NAME), #NAME)

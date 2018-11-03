@@ -4,21 +4,21 @@
 using namespace imaging;
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::renderers;
+using namespace renderers;
 
 
 namespace
 {
-    class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
+    class StandardRenderer : public renderers::_private_::RendererImplementation
     {
     public:
-        StandardRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
+        StandardRenderer(unsigned horizontal_size, unsigned vertical_size, Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
             : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
         {
             // NOP
         }
 
-        std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const override
+        std::shared_ptr<Bitmap> render(const Scene& scene) const override
         {
             TIMED_FUNC(timer);
 
@@ -60,13 +60,13 @@ namespace
         /// <returns>
         /// Color of the pixel.
         /// <returns>
-        Color render_pixel(const math::Rasterizer& window_rasterizer, const Position2D& position, const Scene& scene) const
+        Color render_pixel(const Rasterizer& window_rasterizer, const Position2D& position, const Scene& scene) const
         {
             // Find which part of the [0, 1] x [0, 1] corresponds to the pixel at the given position
-            math::Rectangle2D pixel_rectangle = window_rasterizer[position];
+            Rectangle2D pixel_rectangle = window_rasterizer[position];
 
             // Initialize color to black
-            imaging::Color c = imaging::colors::black();
+            Color c = colors::black();
 
             // Count number of samples taken
             int sample_count = 0;
@@ -88,7 +88,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::standard(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
+Renderer renderers::standard(unsigned horizontal_size, unsigned vertical_size, Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
 {
     return Renderer(std::make_shared<StandardRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler));
 }

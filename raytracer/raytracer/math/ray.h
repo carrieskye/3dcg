@@ -49,16 +49,16 @@ namespace math
     template<>
     struct approximately<Ray>
     {
-        math::Ray value;
+        Ray value;
         double epsilon;
 
-        explicit approximately(const math::Ray& value, double epsilon = 0.00001)
+        explicit approximately(const Ray& value, double epsilon = 0.00001)
             :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
-        bool close_enough(const math::Ray& other) const
+        bool close_enough(const Ray& other) const
         {
             return value.origin == approx(other.origin, epsilon) && value.direction == approx(other.direction, epsilon);
         }

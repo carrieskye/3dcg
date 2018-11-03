@@ -6,7 +6,7 @@ using namespace imaging;
 
 namespace
 {
-    class UniformMaterial : public raytracer::materials::_private_::MaterialImplementation
+    class UniformMaterial : public materials::_private_::MaterialImplementation
     {
     public:
         UniformMaterial(const MaterialProperties& properties)
@@ -25,7 +25,7 @@ namespace
     };
 }
 
-Material raytracer::materials::uniform(const MaterialProperties& properties)
+Material materials::uniform(const MaterialProperties& properties)
 {
     return Material(std::make_shared<UniformMaterial>(properties));
 }

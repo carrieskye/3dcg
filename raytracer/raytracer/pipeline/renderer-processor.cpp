@@ -2,7 +2,7 @@
 #include "easylogging++.h"
 
 using namespace raytracer;
-using namespace raytracer::pipeline;
+using namespace pipeline;
 using namespace imaging;
 
 
@@ -27,7 +27,7 @@ namespace
     };
 }
 
-std::shared_ptr<Processor<std::shared_ptr<Scene>, std::shared_ptr<imaging::Bitmap>>> raytracer::pipeline::renderer(Renderer renderer)
+std::shared_ptr<Processor<std::shared_ptr<Scene>, std::shared_ptr<Bitmap>>> pipeline::renderer(Renderer renderer)
 {
     return std::make_shared<RendererProcessor>(renderer);
 }

@@ -2,7 +2,7 @@
 #include "math/interval.h"
 
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 using namespace math;
 
 
@@ -11,7 +11,7 @@ namespace
 	/// <summary>
 	/// Superclass for squares. Contains common logic.
 	/// </summary>
-	class CoordinateSquareImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+	class CoordinateSquareImplementation : public primitives::_private_::PrimitiveImplementation
 	{
 	protected:
 		const Vector3D m_normal;
@@ -32,7 +32,7 @@ namespace
 
 	public:
 
-		std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+		std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
 		{
 			std::vector<std::shared_ptr<Hit>> hits;
 
@@ -63,7 +63,7 @@ namespace
 			return hits;
 		}
 
-		bool find_first_positive_hit(const math::Ray& ray, Hit* output_hit) const override
+		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
 			assert(hit != nullptr);
 
@@ -99,7 +99,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(interval(-2.0, 2.0), interval(-2.0, 2.0), interval(-0.01, 0.01));
 		}
@@ -124,7 +124,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(interval(-0.01, 0.01), interval(-2.0, 2.0), interval(-2.0, 2.0));
 		}
@@ -149,7 +149,7 @@ namespace
 			// NOP
 		}
 
-		math::Box bounding_box() const override
+		Box bounding_box() const override
 		{
 			return Box(interval(-2.0, 2.0), interval(-0.01, 0.01), interval(-2.0, 2.0));
 		}
@@ -167,17 +167,17 @@ namespace
 	};
 }
 
-Primitive raytracer::primitives::xy_square()
+Primitive primitives::xy_square()
 {
 	return Primitive(std::make_shared<SquareXYImplementation>());
 }
 
-Primitive raytracer::primitives::yz_square()
+Primitive primitives::yz_square()
 {
 	return Primitive(std::make_shared<SquareYZImplementation>());
 }
 
-Primitive raytracer::primitives::xz_square()
+Primitive primitives::xz_square()
 {
 	return Primitive(std::make_shared<SquareXZImplementation>());
 }

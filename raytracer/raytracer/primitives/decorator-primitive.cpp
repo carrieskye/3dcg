@@ -2,13 +2,13 @@
 #include <assert.h>
 
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 using namespace math;
 
 
 namespace
 {
-    class DecoratorImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+    class DecoratorImplementation : public primitives::_private_::PrimitiveImplementation
     {
     public:
         DecoratorImplementation(Material material, Primitive child)
@@ -42,7 +42,7 @@ namespace
             return result;
         }
 
-        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
             // Ask child primitive for all of its hits
             auto hits = this->m_child->find_all_hits(ray);
@@ -62,7 +62,7 @@ namespace
             return hits;
         }
 
-        math::Box bounding_box() const override
+        Box bounding_box() const override
         {
             return m_child->bounding_box();
         }
@@ -73,7 +73,7 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::decorate(Material material, Primitive child)
+Primitive primitives::decorate(Material material, Primitive child)
 {
     return Primitive(std::make_shared<DecoratorImplementation>(material, child));
 }

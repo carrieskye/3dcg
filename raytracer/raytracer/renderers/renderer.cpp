@@ -4,7 +4,7 @@
 using namespace math;
 using namespace tasks;
 
-raytracer::renderers::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
+raytracer::renderers::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_size, unsigned vertical_size, Sampler sampler, RayTracer ray_tracer, TaskScheduler scheduler)
     : m_horizontal_size(horizontal_size), m_vertical_size(vertical_size), m_sampler(sampler), m_ray_tracer(ray_tracer), m_scheduler(scheduler)
 {
     // NOP

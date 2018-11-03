@@ -4,38 +4,38 @@
 using namespace animation;
 
 
-Duration animation::Duration::from_milliseconds(double ms)
+Duration Duration::from_milliseconds(double ms)
 {
     return Duration(ms);
 }
 
-Duration animation::Duration::from_seconds(double s)
+Duration Duration::from_seconds(double s)
 {
     return Duration(s * 1000.0);
 }
 
-Duration animation::Duration::zero()
+Duration Duration::zero()
 {
-    return Duration::from_milliseconds(0);
+    return from_milliseconds(0);
 }
 
-Duration animation::Duration::infinite()
+Duration Duration::infinite()
 {
-    return Duration::from_milliseconds(std::numeric_limits<double>::infinity());
+    return from_milliseconds(std::numeric_limits<double>::infinity());
 }
 
-animation::Duration::Duration(double ms)
+Duration::Duration(double ms)
     : m_milliseconds(ms)
 {
     // NOP
 }
 
-double animation::Duration::milliseconds() const
+double Duration::milliseconds() const
 {
     return m_milliseconds;
 }
 
-double animation::Duration::seconds() const
+double Duration::seconds() const
 {
     return m_milliseconds / 1000.0;
 }

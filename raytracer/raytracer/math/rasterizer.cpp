@@ -3,17 +3,17 @@
 using namespace math;
 
 
-unsigned math::Rasterizer::horizontal_subdivisions() const
+unsigned Rasterizer::horizontal_subdivisions() const
 {
     return m_horizontal_subdivisions;
 }
 
-unsigned math::Rasterizer::vertical_subdivisions() const
+unsigned Rasterizer::vertical_subdivisions() const
 {
     return m_vertical_subdivisions;
 }
 
-Rectangle2D math::Rasterizer::operator [](const Position2D& position) const
+Rectangle2D Rasterizer::operator [](const Position2D& position) const
 {
     Vector2D x_axis = this->rect.x_axis / this->m_horizontal_subdivisions;
     Vector2D y_axis = this->rect.y_axis / this->m_vertical_subdivisions;

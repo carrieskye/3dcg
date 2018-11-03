@@ -13,11 +13,11 @@ using namespace math;
 
 namespace
 {
-    Primitive make_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    Primitive make_union(const std::vector<Boxed_Value>& boxed_children)
     {
         std::vector<Primitive> children(boxed_children.size());
 
-        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](Boxed_Value boxed) {
             return chaiscript::boxed_cast<Primitive>(boxed);
         });
 
@@ -25,9 +25,9 @@ namespace
     }
 }
 
-ModulePtr raytracer::scripting::_private_::create_primitives_module()
+ModulePtr scripting::_private_::create_primitives_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     util::register_type<Primitive>(*module, "Primitive");
     util::register_assignment<Primitive>(*module);

@@ -6,13 +6,13 @@
 #include <assert.h>
 
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 using namespace math;
 
 
 namespace
 {
-    class SphereImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+    class SphereImplementation : public primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -94,7 +94,7 @@ namespace
             }
         }
 
-        math::Box bounding_box() const override
+        Box bounding_box() const override
         {
             // Create a [-1, 1] x [-1, 1] x [-1, 1] box.
             auto range = interval(-1.0, 1.0);
@@ -151,7 +151,7 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::sphere()
+Primitive primitives::sphere()
 {
     return Primitive(std::make_shared<SphereImplementation>());
 }

@@ -48,8 +48,8 @@ namespace chaiscript
         lib->add(standard_library::pair_type<std::pair<Boxed_Value, Boxed_Value > >("Pair"));
 
 #ifndef CHAISCRIPT_NO_THREADS
-        lib->add(standard_library::future_type<std::future<chaiscript::Boxed_Value>>("future"));
-        lib->add(chaiscript::fun([](const std::function<chaiscript::Boxed_Value ()> &t_func){ return std::async(std::launch::async, t_func);}), "async");
+        lib->add(standard_library::future_type<std::future<Boxed_Value>>("future"));
+        lib->add(fun([](const std::function<Boxed_Value ()> &t_func){ return std::async(std::launch::async, t_func);}), "async");
 #endif
 
         lib->add(json_wrap::library());

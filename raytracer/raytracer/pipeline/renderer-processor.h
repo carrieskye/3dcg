@@ -9,6 +9,6 @@ namespace raytracer
 {
     namespace pipeline
     {
-        std::shared_ptr<Processor<std::shared_ptr<Scene>, std::shared_ptr<imaging::Bitmap>>> renderer(raytracer::Renderer);
+        std::shared_ptr<Processor<std::shared_ptr<Scene>, std::shared_ptr<imaging::Bitmap>>> renderer(Renderer);
     }
 }

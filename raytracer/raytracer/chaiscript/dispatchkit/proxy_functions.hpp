@@ -147,7 +147,7 @@ namespace chaiscript
       public:
         virtual ~Proxy_Function_Base() {}
 
-        Boxed_Value operator()(const std::vector<Boxed_Value> &params, const chaiscript::Type_Conversions_State &t_conversions) const
+        Boxed_Value operator()(const std::vector<Boxed_Value> &params, const Type_Conversions_State &t_conversions) const
         {
           if (m_arity < 0 || size_t(m_arity) == params.size()) {
             return do_call(params, t_conversions);
@@ -437,7 +437,7 @@ namespace chaiscript
     template<typename Callable, typename ... Arg>
     Proxy_Function make_dynamic_proxy_function(Callable &&c, Arg&& ... a)
     {
-      return chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Dynamic_Proxy_Function_Impl<Callable>>(
+      return chaiscript::make_shared<Proxy_Function_Base, Dynamic_Proxy_Function_Impl<Callable>>(
           std::forward<Callable>(c), std::forward<Arg>(a)...);
     }
 

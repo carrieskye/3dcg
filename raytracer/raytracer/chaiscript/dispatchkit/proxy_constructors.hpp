@@ -20,10 +20,10 @@ namespace chaiscript
       template<typename Class, typename ... Params  >
         Proxy_Function build_constructor_(Class (*)(Params...))
         {
-          auto call = dispatch::detail::Constructor<Class, Params...>();
+          auto call = detail::Constructor<Class, Params...>();
 
           return Proxy_Function(
-            chaiscript::make_shared<dispatch::Proxy_Function_Base, dispatch::Proxy_Function_Callable_Impl<std::shared_ptr<Class> (Params...), decltype(call)>>(call));
+            chaiscript::make_shared<Proxy_Function_Base, Proxy_Function_Callable_Impl<std::shared_ptr<Class> (Params...), decltype(call)>>(call));
         }
     }
   }

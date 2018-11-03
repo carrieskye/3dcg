@@ -23,11 +23,11 @@ namespace
         /// Creates the root. This method will be called for several values of <paramref name="now" />,
         /// thus creating an animation.
         /// </summary>
-        raytracer::Primitive create_root(TimeStamp now) override
+        Primitive create_root(TimeStamp now) override
         {
             // Local imports. Allows us to write sphere() instead of raytracer::primitives::sphere()
-            using namespace raytracer::primitives;
-            using namespace raytracer::materials;
+            using namespace primitives;
+            using namespace materials;
 
             // Define material properties
             MaterialProperties material_properties(
@@ -65,10 +65,10 @@ namespace
         /// <summary>
         /// Creates light sources.
         /// </summary>
-        std::vector<raytracer::LightSource> create_light_sources(TimeStamp now) override
+        std::vector<LightSource> create_light_sources(TimeStamp now) override
         {
             // Local import
-            using namespace raytracer::lights;
+            using namespace lights;
 
             std::vector<LightSource> light_sources;
 
@@ -80,9 +80,9 @@ namespace
         /// <summary>
         /// Creates camera.
         /// </summary>
-        raytracer::Camera create_camera(TimeStamp) override
+        Camera create_camera(TimeStamp) override
         {
-            return raytracer::cameras::perspective(
+            return cameras::perspective(
                 Point3D(0, 0, 5),         // position of eye
                 Point3D(0, 0, 0),          // point the camera looks at
                 Vector3D(1, 0, 0),         // up-vector: indicates camera is "standing up"

@@ -5,7 +5,7 @@ using namespace math;
 using namespace raytracer;
 
 
-TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& scene, const Ray& ray) const
+TraceResult raytracers::_private_::RayTracerV1::trace(const Scene& scene, const Ray& ray) const
 {
 	Hit hit;
 
@@ -37,12 +37,12 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 	}
 }
 
-Color raytracer::raytracers::_private_::RayTracerV1::compute_ambient(const MaterialProperties &properties) const
+Color raytracers::_private_::RayTracerV1::compute_ambient(const MaterialProperties &properties) const
 {
 	return properties.ambient;
 }
 
-raytracer::RayTracer raytracer::raytracers::v1()
+RayTracer raytracers::v1()
 {
-	return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV1>());
+	return RayTracer(std::make_shared<_private_::RayTracerV1>());
 }

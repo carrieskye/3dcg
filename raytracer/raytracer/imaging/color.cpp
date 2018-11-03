@@ -15,14 +15,14 @@ namespace
     }
 }
 
-void imaging::Color::clamp()
+void Color::clamp()
 {
     r = ::clamp(r);
     g = ::clamp(g);
     b = ::clamp(b);
 }
 
-Color imaging::Color::clamped() const
+Color Color::clamped() const
 {
     Color copy = *this;
     copy.clamp();
@@ -94,14 +94,14 @@ std::ostream& imaging::operator <<(std::ostream& out, const Color& c)
     return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
 }
 
-void imaging::Color::quantize(unsigned levels)
+void Color::quantize(unsigned levels)
 {
     r = math::quantize(r, levels);
     g = math::quantize(g, levels);
     b = math::quantize(b, levels);
 }
 
-Color imaging::Color::quantized(unsigned levels) const
+Color Color::quantized(unsigned levels) const
 {
     Color copy = *this;
 
@@ -110,14 +110,14 @@ Color imaging::Color::quantized(unsigned levels) const
     return copy;
 }
 
-void imaging::Color::invert()
+void Color::invert()
 {
     r = 1 - r;
     g = 1 - g;
     b = 1 - b;
 }
 
-Color imaging::Color::inverted() const
+Color Color::inverted() const
 {
     Color copy = *this;
     copy.invert();

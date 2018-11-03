@@ -3,12 +3,12 @@
 #include <algorithm>
 
 using namespace raytracer;
-using namespace raytracer::primitives;
+using namespace primitives;
 using namespace math;
 
 namespace
 {
-    class BinaryUnionImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+    class BinaryUnionImplementation : public primitives::_private_::PrimitiveImplementation
     {
     public:
         BinaryUnionImplementation(Primitive child1, Primitive child2)
@@ -32,7 +32,7 @@ namespace
             return found_hit1 || found_hit2;
         }
 
-        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
             std::vector<std::shared_ptr<Hit>> result;
 
@@ -114,7 +114,7 @@ namespace
             return result;
         }
 
-        math::Box bounding_box() const override
+        Box bounding_box() const override
         {
             return m_child1->bounding_box().merge(m_child2->bounding_box());
         }
@@ -125,7 +125,7 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::make_union(std::vector<Primitive>& children)
+Primitive primitives::make_union(std::vector<Primitive>& children)
 {
     if (children.size() == 0)
     {

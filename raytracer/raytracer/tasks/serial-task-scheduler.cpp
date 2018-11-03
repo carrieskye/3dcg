@@ -8,7 +8,7 @@ namespace
     /// <summary>
     /// Performs tasks one after the other (i.e. not in parallel).
     /// </summary>
-    class SerialTaskScheduler : public tasks::schedulers::_private_::TaskSchedulerImplementation
+    class SerialTaskScheduler : public schedulers::_private_::TaskSchedulerImplementation
     {
     public:
         void perform(std::vector<std::shared_ptr<Task>> tasks) const
@@ -21,7 +21,7 @@ namespace
     };
 }
 
-TaskScheduler tasks::schedulers::serial()
+TaskScheduler schedulers::serial()
 {
     return TaskScheduler(std::make_shared<SerialTaskScheduler>());
 }

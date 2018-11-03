@@ -4,7 +4,7 @@
 
 using namespace math;
 
-Function<bool(const Point2D&)> math::functions::checkered2d(int squareSize)
+Function<bool(const Point2D&)> functions::checkered2d(int squareSize)
 {
 	std::function<bool(const Point2D&)> function = [squareSize](const Point2D& p)
 	{

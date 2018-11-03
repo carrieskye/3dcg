@@ -127,7 +127,7 @@ namespace chaiscript
                 {
                   return Boxed_Value(
                       [&]()->std::shared_ptr<const To>{
-                        if (auto data = std::static_pointer_cast<const To>(detail::Cast_Helper<std::shared_ptr<const From> >::cast(t_from, nullptr)))
+                        if (auto data = std::static_pointer_cast<const To>(Cast_Helper<std::shared_ptr<const From> >::cast(t_from, nullptr)))
                         {
                           return data;
                         } else {
@@ -138,7 +138,7 @@ namespace chaiscript
                 } else {
                   return Boxed_Value(
                       [&]()->std::shared_ptr<To>{
-                        if (auto data = std::static_pointer_cast<To>(detail::Cast_Helper<std::shared_ptr<From> >::cast(t_from, nullptr)))
+                        if (auto data = std::static_pointer_cast<To>(Cast_Helper<std::shared_ptr<From> >::cast(t_from, nullptr)))
                         {
                           return data;
                         } else {
@@ -151,11 +151,11 @@ namespace chaiscript
                 // Pull the reference out of the contained boxed value, which we know is the type we want
                 if (t_from.is_const())
                 {
-                  const From &d = detail::Cast_Helper<const From &>::cast(t_from, nullptr);
+                  const From &d = Cast_Helper<const From &>::cast(t_from, nullptr);
                   const To &data = static_cast<const To &>(d);
                   return Boxed_Value(std::cref(data));
                 } else {
-                  From &d = detail::Cast_Helper<From &>::cast(t_from, nullptr);
+                  From &d = Cast_Helper<From &>::cast(t_from, nullptr);
                   To &data = static_cast<To &>(d);
                   return Boxed_Value(std::ref(data));
                 }
@@ -183,7 +183,7 @@ namespace chaiscript
                 {
                   return Boxed_Value(
                       [&]()->std::shared_ptr<const To>{
-                        if (auto data = std::dynamic_pointer_cast<const To>(detail::Cast_Helper<std::shared_ptr<const From> >::cast(t_from, nullptr)))
+                        if (auto data = std::dynamic_pointer_cast<const To>(Cast_Helper<std::shared_ptr<const From> >::cast(t_from, nullptr)))
                         {
                           return data;
                         } else {
@@ -194,7 +194,7 @@ namespace chaiscript
                 } else {
                   return Boxed_Value(
                       [&]()->std::shared_ptr<To>{
-                        if (auto data = std::dynamic_pointer_cast<To>(detail::Cast_Helper<std::shared_ptr<From> >::cast(t_from, nullptr)))
+                        if (auto data = std::dynamic_pointer_cast<To>(Cast_Helper<std::shared_ptr<From> >::cast(t_from, nullptr)))
                         {
                           return data;
                         } else {
@@ -216,11 +216,11 @@ namespace chaiscript
                 // Pull the reference out of the contained boxed value, which we know is the type we want
                 if (t_from.is_const())
                 {
-                  const From &d = detail::Cast_Helper<const From &>::cast(t_from, nullptr);
+                  const From &d = Cast_Helper<const From &>::cast(t_from, nullptr);
                   const To &data = dynamic_cast<const To &>(d);
                   return Boxed_Value(std::cref(data));
                 } else {
-                  From &d = detail::Cast_Helper<From &>::cast(t_from, nullptr);
+                  From &d = Cast_Helper<From &>::cast(t_from, nullptr);
                   To &data = dynamic_cast<To &>(d);
                   return Boxed_Value(std::ref(data));
                 }
@@ -359,7 +359,7 @@ namespace chaiscript
         auto &cache = *m_thread_cache;
         if (cache.size() != m_num_types)
         {
-          chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l(m_mutex);
+          detail::threading::shared_lock<detail::threading::shared_mutex> l(m_mutex);
           cache = m_convertableTypes;
         }
 
@@ -368,7 +368,7 @@ namespace chaiscript
 
       void add_conversion(const std::shared_ptr<detail::Type_Conversion_Base> &conversion)
       {
-        chaiscript::detail::threading::unique_lock<chaiscript::detail::threading::shared_mutex> l(m_mutex);
+        detail::threading::unique_lock<detail::threading::shared_mutex> l(m_mutex);
         /// \todo error if a conversion already exists
         m_conversions.insert(conversion);
         m_convertableTypes.insert({conversion->to().bare_type_info(), conversion->from().bare_type_info()});
@@ -440,13 +440,13 @@ namespace chaiscript
 
       bool has_conversion(const Type_Info &to, const Type_Info &from) const
       {
-        chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l(m_mutex);
+        detail::threading::shared_lock<detail::threading::shared_mutex> l(m_mutex);
         return find_bidir(to, from) != m_conversions.end();
       }
 
       std::shared_ptr<detail::Type_Conversion_Base> get_conversion(const Type_Info &to, const Type_Info &from) const
       {
-        chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l(m_mutex);
+        detail::threading::shared_lock<detail::threading::shared_mutex> l(m_mutex);
 
         auto itr = find(to, from);
 
@@ -488,19 +488,19 @@ namespace chaiscript
 
       std::set<std::shared_ptr<detail::Type_Conversion_Base>> get_conversions() const
       {
-        chaiscript::detail::threading::shared_lock<chaiscript::detail::threading::shared_mutex> l(m_mutex);
+        detail::threading::shared_lock<detail::threading::shared_mutex> l(m_mutex);
 
         return m_conversions;
       }
 
 
 
-      mutable chaiscript::detail::threading::shared_mutex m_mutex;
+      mutable detail::threading::shared_mutex m_mutex;
       std::set<std::shared_ptr<detail::Type_Conversion_Base>> m_conversions;
       std::set<const std::type_info *, Less_Than> m_convertableTypes;
       std::atomic_size_t m_num_types;
-      mutable chaiscript::detail::threading::Thread_Storage<std::set<const std::type_info *, Less_Than>> m_thread_cache;
-      mutable chaiscript::detail::threading::Thread_Storage<Conversion_Saves> m_conversion_saves;
+      mutable detail::threading::Thread_Storage<std::set<const std::type_info *, Less_Than>> m_thread_cache;
+      mutable detail::threading::Thread_Storage<Conversion_Saves> m_conversion_saves;
   };
 
   class Type_Conversions_State
@@ -530,7 +530,7 @@ namespace chaiscript
       std::reference_wrapper<Type_Conversions::Conversion_Saves> m_saves;
   };
 
-  typedef std::shared_ptr<chaiscript::detail::Type_Conversion_Base> Type_Conversion;
+  typedef std::shared_ptr<detail::Type_Conversion_Base> Type_Conversion;
 
   /// \brief Used to register a to / parent class relationship with ChaiScript. Necessary if you
   ///        want automatic conversions up your inheritance hierarchy.
@@ -586,7 +586,7 @@ namespace chaiscript
     {
       auto func = [t_function](const Boxed_Value &t_bv) -> Boxed_Value {
             // not even attempting to call boxed_cast so that we don't get caught in some call recursion
-            return chaiscript::Boxed_Value(t_function(detail::Cast_Helper<const From &>::cast(t_bv, nullptr)));
+            return Boxed_Value(t_function(detail::Cast_Helper<const From &>::cast(t_bv, nullptr)));
           };
 
       return chaiscript::make_shared<detail::Type_Conversion_Base, detail::Type_Conversion_Impl<decltype(func)>>(user_type<From>(), user_type<To>(), func);
@@ -598,7 +598,7 @@ namespace chaiscript
       static_assert(std::is_convertible<From, To>::value, "Types are not automatically convertible");
       auto func = [](const Boxed_Value &t_bv) -> Boxed_Value {
             // not even attempting to call boxed_cast so that we don't get caught in some call recursion
-            return chaiscript::Boxed_Value(To(detail::Cast_Helper<From>::cast(t_bv, nullptr)));
+            return Boxed_Value(To(detail::Cast_Helper<From>::cast(t_bv, nullptr)));
           };
 
       return chaiscript::make_shared<detail::Type_Conversion_Base, detail::Type_Conversion_Impl<decltype(func)>>(user_type<From>(), user_type<To>(), func);

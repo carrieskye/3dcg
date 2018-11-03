@@ -34,7 +34,7 @@ namespace chaiscript
       struct Data
       {
         Data(const Type_Info &ti,
-            chaiscript::detail::Any to,
+            detail::Any to,
             bool tr,
             const void *t_void_ptr,
             bool t_return_value)
@@ -69,7 +69,7 @@ namespace chaiscript
 
 
         Type_Info m_type_info;
-        chaiscript::detail::Any m_obj;
+        detail::Any m_obj;
         void *m_data_ptr;
         const void *m_const_data_ptr;
         std::unique_ptr<std::map<std::string, std::shared_ptr<Data>>> m_attrs;
@@ -79,11 +79,11 @@ namespace chaiscript
 
       struct Object_Data
       {
-        static std::shared_ptr<Data> get(Boxed_Value::Void_Type, bool t_return_value)
+        static std::shared_ptr<Data> get(Void_Type, bool t_return_value)
         {
           return std::make_shared<Data>(
                 detail::Get_Type_Info<void>::get(),
-                chaiscript::detail::Any(), 
+                detail::Any(), 
                 false,
                 nullptr,
                 t_return_value)
@@ -101,7 +101,7 @@ namespace chaiscript
           {
             return std::make_shared<Data>(
                   detail::Get_Type_Info<T>::get(), 
-                  chaiscript::detail::Any(obj), 
+                  detail::Any(obj), 
                   false,
                   obj.get(),
                   t_return_value
@@ -114,7 +114,7 @@ namespace chaiscript
             auto ptr = obj.get();
             return std::make_shared<Data>(
                   detail::Get_Type_Info<T>::get(), 
-                  chaiscript::detail::Any(std::move(obj)), 
+                  detail::Any(std::move(obj)), 
                   false,
                   ptr,
                   t_return_value
@@ -140,7 +140,7 @@ namespace chaiscript
             auto p = &obj.get();
             return std::make_shared<Data>(
                   detail::Get_Type_Info<T>::get(),
-                  chaiscript::detail::Any(std::move(obj)),
+                  detail::Any(std::move(obj)),
                   true,
                   p,
                   t_return_value
@@ -154,7 +154,7 @@ namespace chaiscript
             auto ptr = p.get();
             return std::make_shared<Data>(
                   detail::Get_Type_Info<T>::get(), 
-                  chaiscript::detail::Any(std::move(p)),
+                  detail::Any(std::move(p)),
                   false,
                   ptr,
                   t_return_value
@@ -165,7 +165,7 @@ namespace chaiscript
         {
           return std::make_shared<Data>(
                 Type_Info(),
-                chaiscript::detail::Any(),
+                detail::Any(),
                 false,
                 nullptr,
                 false
@@ -236,7 +236,7 @@ namespace chaiscript
         return (m_data->m_data_ptr == nullptr && m_data->m_const_data_ptr == nullptr);
       }
 
-      const chaiscript::detail::Any & get() const CHAISCRIPT_NOEXCEPT
+      const detail::Any & get() const CHAISCRIPT_NOEXCEPT
       {
         return m_data->m_obj;
       }

@@ -9,10 +9,10 @@ namespace
 }
 
 
-math::Angle::Angle()
+Angle::Angle()
     : Angle(0) { }
 
-math::Angle::Angle(double x)
+Angle::Angle(double x)
     : m_radians(x) 
 {
 #   ifndef NDEBUG
@@ -21,22 +21,22 @@ math::Angle::Angle(double x)
 #   endif // NDEBUG
 }
 
-double math::Angle::radians() const 
+double Angle::radians() const 
 {
     return m_radians; 
 }
 
-double math::Angle::degrees() const
+double Angle::degrees() const
 {
     return m_radians * 180 / PI; 
 }
 
-Angle math::Angle::degrees(long double x)
+Angle Angle::degrees(long double x)
 {
     return Angle(double(x) / 180 * PI); 
 }
 
-Angle math::Angle::radians(long double x)
+Angle Angle::radians(long double x)
 {
     return Angle(double(x)); 
 }

@@ -27,10 +27,10 @@ namespace raytracer
                 virtual std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const = 0;
 
             protected:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler);
+                RendererImplementation(unsigned, unsigned, Sampler, RayTracer, tasks::TaskScheduler);
 
                 unsigned m_horizontal_size, m_vertical_size;
-                raytracer::Sampler m_sampler;
+                Sampler m_sampler;
                 RayTracer m_ray_tracer;
                 
                 /// <summary>

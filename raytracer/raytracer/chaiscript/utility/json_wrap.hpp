@@ -12,8 +12,8 @@ namespace chaiscript
       static ModulePtr library(ModulePtr m = std::make_shared<Module>())
       {
 
-        m->add(chaiscript::fun([](const std::string &t_str) { return from_json(t_str); }), "from_json");
-        m->add(chaiscript::fun(&json_wrap::to_json), "to_json");
+        m->add(fun([](const std::string &t_str) { return from_json(t_str); }), "from_json");
+        m->add(fun(&json_wrap::to_json), "to_json");
 
         return m;
 
@@ -82,7 +82,7 @@ namespace chaiscript
             obj[o.first] = to_json_object(o.second);
           }
           return obj;
-        } catch (const chaiscript::exception::bad_boxed_cast &) {
+        } catch (const exception::bad_boxed_cast &) {
           // not a map
         }
 
@@ -95,7 +95,7 @@ namespace chaiscript
             obj[i] = to_json_object(v[i]);
           }
           return obj;
-        } catch (const chaiscript::exception::bad_boxed_cast &) {
+        } catch (const exception::bad_boxed_cast &) {
           // not a vector
         }
 
@@ -110,7 +110,7 @@ namespace chaiscript
             obj = bn.get_as<long>();
           }
           return obj;
-        } catch (const chaiscript::detail::exception::bad_any_cast &) {
+        } catch (const detail::exception::bad_any_cast &) {
           // not a number
         }
 
@@ -119,7 +119,7 @@ namespace chaiscript
           json::JSON obj;
           obj = b;
           return obj;
-        } catch (const chaiscript::exception::bad_boxed_cast &) {
+        } catch (const exception::bad_boxed_cast &) {
           // not a bool
         }
 
@@ -128,13 +128,13 @@ namespace chaiscript
           json::JSON obj;
           obj = s;
           return obj;
-        } catch (const chaiscript::exception::bad_boxed_cast &) {
+        } catch (const exception::bad_boxed_cast &) {
           // not a string
         }
 
 
         try {
-          const chaiscript::dispatch::Dynamic_Object &o = boxed_cast<const dispatch::Dynamic_Object &>(t_bv);
+          const dispatch::Dynamic_Object &o = boxed_cast<const dispatch::Dynamic_Object &>(t_bv);
 
           json::JSON obj;
           for (const auto &attr : o.get_attrs())
@@ -142,7 +142,7 @@ namespace chaiscript
             obj[attr.first] = to_json_object(attr.second);
           }
           return obj;
-        } catch (const chaiscript::exception::bad_boxed_cast &) {
+        } catch (const exception::bad_boxed_cast &) {
           // not a dynamic object
         }
 

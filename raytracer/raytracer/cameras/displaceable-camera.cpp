@@ -10,7 +10,7 @@ raytracer::cameras::_private_::DisplaceableCamera::DisplaceableCamera(const Matr
     // NOP
 }
 
-void raytracer::cameras::_private_::DisplaceableCamera::enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const
+void raytracer::cameras::_private_::DisplaceableCamera::enumerate_rays(const Point2D& p, std::function<void(const Ray&)> callback) const
 {
     enumerate_untransformed_rays(p, [this, &callback](const Ray& untransformed_ray) {
         auto transformed_ray = untransformed_ray.transform(m_transformation);

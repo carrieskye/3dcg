@@ -4,7 +4,7 @@
 using namespace math;
 
 
-Matrix4x4 math::transformation_matrices::translation(const Vector3D& v)
+Matrix4x4 transformation_matrices::translation(const Vector3D& v)
 {
     std::array<double, 16> xs = {
         1, 0, 0, v.x(),
@@ -16,7 +16,7 @@ Matrix4x4 math::transformation_matrices::translation(const Vector3D& v)
     return Matrix4x4(xs);
 }
 
-Matrix4x4 math::transformation_matrices::scaling(double sx, double sy, double sz)
+Matrix4x4 transformation_matrices::scaling(double sx, double sy, double sz)
 {
     std::array<double, 16> xs = {
         sx, 0, 0, 0,
@@ -28,7 +28,7 @@ Matrix4x4 math::transformation_matrices::scaling(double sx, double sy, double sz
     return Matrix4x4(xs);
 }
 
-Matrix4x4 math::transformation_matrices::rotation_around_x(Angle angle)
+Matrix4x4 transformation_matrices::rotation_around_x(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -43,7 +43,7 @@ Matrix4x4 math::transformation_matrices::rotation_around_x(Angle angle)
     return Matrix4x4(xs);
 }
 
-Matrix4x4 math::transformation_matrices::rotation_around_y(Angle angle)
+Matrix4x4 transformation_matrices::rotation_around_y(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -58,7 +58,7 @@ Matrix4x4 math::transformation_matrices::rotation_around_y(Angle angle)
     return Matrix4x4(xs);
 }
 
-Matrix4x4 math::transformation_matrices::rotation_around_z(Angle angle)
+Matrix4x4 transformation_matrices::rotation_around_z(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -73,7 +73,7 @@ Matrix4x4 math::transformation_matrices::rotation_around_z(Angle angle)
     return Matrix4x4(xs);
 }
 
-Matrix4x4 math::transformation_matrices::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
+Matrix4x4 transformation_matrices::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
 {
     std::array<double, 16> xs = {
         x_axis.x(), y_axis.x(), z_axis.x(), origin.x(),
@@ -85,7 +85,7 @@ Matrix4x4 math::transformation_matrices::coordinate_system(const Point3D& origin
     return Matrix4x4(xs);
 }
 
-Matrix3x3 math::transformation_matrices::translation(const Vector2D& v)
+Matrix3x3 transformation_matrices::translation(const Vector2D& v)
 {
     std::array<double, 9> xs = {
         1, 0, v.x(),
@@ -96,7 +96,7 @@ Matrix3x3 math::transformation_matrices::translation(const Vector2D& v)
     return Matrix3x3(xs);
 }
 
-Matrix3x3 math::transformation_matrices::scaling(double sx, double sy)
+Matrix3x3 transformation_matrices::scaling(double sx, double sy)
 {
     std::array<double, 9> xs = {
         sx, 0, 0,
@@ -107,7 +107,7 @@ Matrix3x3 math::transformation_matrices::scaling(double sx, double sy)
     return Matrix3x3(xs);
 }
 
-Matrix3x3 math::transformation_matrices::rotation(Angle angle)
+Matrix3x3 transformation_matrices::rotation(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);

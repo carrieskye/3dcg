@@ -415,7 +415,7 @@ namespace chaiscript
 
         /// \todo fix the fact that a successful match that captured no ast_nodes doesn't have any real start position
         m_match_stack.push_back(
-            chaiscript::make_shared<chaiscript::AST_Node, NodeType>(
+            chaiscript::make_shared<AST_Node, NodeType>(
               std::move(t_text),
               std::move(filepos),
               std::move(new_children)));

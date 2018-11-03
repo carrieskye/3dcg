@@ -3,19 +3,19 @@
 using namespace animation;
 
 
-animation::TimeStamp::TimeStamp()
+TimeStamp::TimeStamp()
     : m_since_epoch(Duration::zero())
 {
     // NOP
 }
 
-animation::TimeStamp::TimeStamp(const Duration& since_epoch)
+TimeStamp::TimeStamp(const Duration& since_epoch)
     : m_since_epoch(since_epoch)
 {
     // NOP
 }
 
-double animation::TimeStamp::seconds() const
+double TimeStamp::seconds() const
 {
     return m_since_epoch.seconds();
 }
@@ -40,22 +40,22 @@ Duration animation::operator -(const TimeStamp& ts1, const TimeStamp& ts2)
     return Duration::from_seconds(ts1.seconds() - ts2.seconds());
 }
 
-bool animation::TimeStamp::operator <(const TimeStamp& ts) const
+bool TimeStamp::operator <(const TimeStamp& ts) const
 {
     return m_since_epoch < ts.m_since_epoch;
 }
 
-bool animation::TimeStamp::operator >(const TimeStamp& ts) const
+bool TimeStamp::operator >(const TimeStamp& ts) const
 {
     return m_since_epoch > ts.m_since_epoch;
 }
 
-bool animation::TimeStamp::operator <=(const TimeStamp& ts) const
+bool TimeStamp::operator <=(const TimeStamp& ts) const
 {
     return m_since_epoch <= ts.m_since_epoch;
 }
 
-bool animation::TimeStamp::operator >=(const TimeStamp& ts) const
+bool TimeStamp::operator >=(const TimeStamp& ts) const
 {
     return m_since_epoch >= ts.m_since_epoch;
 }
@@ -65,12 +65,12 @@ TimeStamp& animation::operator +=(TimeStamp& ts, const Duration& duration)
     return (ts = ts + duration);
 }
 
-bool animation::TimeStamp::operator ==(const TimeStamp& ts) const
+bool TimeStamp::operator ==(const TimeStamp& ts) const
 {
     return m_since_epoch == ts.m_since_epoch;
 }
 
-bool animation::TimeStamp::operator !=(const TimeStamp& ts) const
+bool TimeStamp::operator !=(const TimeStamp& ts) const
 {
     return !(*this == ts);
 }

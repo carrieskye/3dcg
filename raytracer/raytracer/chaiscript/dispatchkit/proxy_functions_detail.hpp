@@ -212,7 +212,7 @@ namespace chaiscript
 
 
       template<typename Callable, typename Ret, typename ... Params, size_t ... I>
-        Ret call_func(const chaiscript::dispatch::detail::Function_Signature<Ret (Params...)> &, Indexes<I...>, const Callable &f,
+        Ret call_func(const Function_Signature<Ret (Params...)> &, Indexes<I...>, const Callable &f,
             const std::vector<Boxed_Value> &params, const Type_Conversions_State &t_conversions)
         {
           (void)params; (void)t_conversions;
@@ -227,7 +227,7 @@ namespace chaiscript
        * the bad_boxed_cast is passed up to the caller.
        */
       template<typename Callable, typename Ret, typename ... Params>
-        Ret call_func(const chaiscript::dispatch::detail::Function_Signature<Ret (Params...)> &sig, const Callable &f,
+        Ret call_func(const Function_Signature<Ret (Params...)> &sig, const Callable &f,
             const std::vector<Boxed_Value> &params, const Type_Conversions_State &t_conversions)
         {
           typedef typename Make_Indexes<sizeof...(Params)>::indexes indexes;

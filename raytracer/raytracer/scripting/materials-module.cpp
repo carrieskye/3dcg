@@ -61,10 +61,10 @@ namespace
     };
 }
 
-ModulePtr raytracer::scripting::_private_::create_materials_module()
+ModulePtr scripting::_private_::create_materials_module()
 {
     // Create new module
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     // Tell chaiscript about Material type
     util::register_type<Material>(*module, "Material");
@@ -73,7 +73,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     auto material_library = std::make_shared<MaterialLibrary>();
 
     // Expose library (member functions still need to be exposed separately)
-    module->add_global_const(chaiscript::const_var(material_library), "Materials");
+    module->add_global_const(const_var(material_library), "Materials");
 
     // Exposes library function named INTERNAL as chaiscript function named EXTERNAL
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&MaterialLibrary::INTERNAL), #EXTERNAL)

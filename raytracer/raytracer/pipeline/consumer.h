@@ -16,7 +16,7 @@ namespace raytracer
         template<typename T>
         struct is_consumer
         {
-            static constexpr bool value = std::is_base_of<pipeline::_private_::ConsumerTag, T>();
+            static constexpr bool value = std::is_base_of<_private_::ConsumerTag, T>();
         };
 
         template<typename INPUT>

@@ -35,7 +35,7 @@ Matrix4x4 raytracer::cameras::_private_::create_transformation(const Point3D& ey
     assert(x_axis.is_perpendicular_on(z_axis));
     assert(y_axis.is_perpendicular_on(z_axis));
 
-    Matrix4x4 transformation = math::transformation_matrices::coordinate_system(origin, x_axis, y_axis, z_axis);
+    Matrix4x4 transformation = transformation_matrices::coordinate_system(origin, x_axis, y_axis, z_axis);
 
     assert(transformation * Vector3D(0, 1, 0) == approx(fixed_up));
     assert(transformation * Vector3D(0, 0, 1) == approx(look_direction));
@@ -43,7 +43,7 @@ Matrix4x4 raytracer::cameras::_private_::create_transformation(const Point3D& ey
     return transformation;
 }
 
-std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const math::Point2D& p) const
+std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const Point2D& p) const
 {
     std::vector<Ray> rays;
 
@@ -58,7 +58,7 @@ std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::enumerate_
     return rays;
 }
 
-void raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const
+void raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const Point2D& p, std::function<void(const Ray&)> callback) const
 {
     // Call other overload
     auto rays = enumerate_rays(p);

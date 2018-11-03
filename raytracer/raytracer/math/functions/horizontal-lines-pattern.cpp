@@ -5,7 +5,7 @@
 using namespace math;
 
 
-Function<bool(const Point2D&)> math::functions::horizontal_lines(double thickness)
+Function<bool(const Point2D&)> functions::horizontal_lines(double thickness)
 {
     std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
     {

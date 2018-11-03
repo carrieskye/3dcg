@@ -1364,7 +1364,7 @@ namespace Catch {
         void endExpression() {
             bool value = m_lhs ? true : false;
             m_rb
-                .setLhs(Catch::toString(value))
+                .setLhs(toString(value))
                 .setResultType(value)
                 .endExpression();
         }

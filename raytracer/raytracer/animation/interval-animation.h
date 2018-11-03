@@ -7,7 +7,7 @@
 namespace animation
 {
     template<typename T>
-    Animation<T> animate(const math::Interval<T>& animation_interval, animation::Duration duration)
+    Animation<T> animate(const math::Interval<T>& animation_interval, Duration duration)
     {
         // Create an animation for 0 to 1
         auto double_animation = basic(0, 1, duration);
@@ -33,7 +33,7 @@ namespace animation
     }
 
     template<typename T>
-    Animation<T> animate(T from, T to, animation::Duration duration)
+    Animation<T> animate(T from, T to, Duration duration)
     {
         return animate(math::interval(from, to), duration);
     }

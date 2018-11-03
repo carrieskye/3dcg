@@ -34,11 +34,11 @@ namespace chaiscript
               const std::vector<Boxed_Value> &params, const Type_Conversions_State *t_conversions)
           {
             if (t_conversions) {
-              return boxed_cast<Ret>(dispatch::dispatch(t_funcs, params, *t_conversions), t_conversions);
+              return boxed_cast<Ret>(dispatch(t_funcs, params, *t_conversions), t_conversions);
             } else {
               Type_Conversions conv;
               Type_Conversions_State state(conv, conv.conversion_saves());
-              return boxed_cast<Ret>(dispatch::dispatch(t_funcs, params, state), t_conversions);
+              return boxed_cast<Ret>(dispatch(t_funcs, params, state), t_conversions);
             }
           }
         };
@@ -53,11 +53,11 @@ namespace chaiscript
               const std::vector<Boxed_Value> &params, const Type_Conversions_State *t_conversions)
           {
             if (t_conversions) {
-              return Boxed_Number(dispatch::dispatch(t_funcs, params, *t_conversions)).get_as<Ret>();
+              return Boxed_Number(dispatch(t_funcs, params, *t_conversions)).get_as<Ret>();
             } else {
               Type_Conversions conv;
               Type_Conversions_State state(conv, conv.conversion_saves());
-              return Boxed_Number(dispatch::dispatch(t_funcs, params, state)).get_as<Ret>();
+              return Boxed_Number(dispatch(t_funcs, params, state)).get_as<Ret>();
             }
           }
         };
@@ -73,11 +73,11 @@ namespace chaiscript
               const std::vector<Boxed_Value> &params, const Type_Conversions_State *t_conversions)
           {
             if (t_conversions) {
-              dispatch::dispatch(t_funcs, params, *t_conversions);
+              dispatch(t_funcs, params, *t_conversions);
             } else {
               Type_Conversions conv;
               Type_Conversions_State state(conv, conv.conversion_saves());
-              dispatch::dispatch(t_funcs, params, state);
+              dispatch(t_funcs, params, state);
             }
           }
         };
@@ -113,13 +113,13 @@ namespace chaiscript
           }
 
           template<typename P, typename Q>
-          static auto box(Q&& q) -> typename std::enable_if<std::is_reference<P>::value&&!std::is_same<chaiscript::Boxed_Value, typename std::remove_const<typename std::remove_reference<P>::type>::type>::value, Boxed_Value>::type
+          static auto box(Q&& q) -> typename std::enable_if<std::is_reference<P>::value&&!std::is_same<Boxed_Value, typename std::remove_const<typename std::remove_reference<P>::type>::type>::value, Boxed_Value>::type
           {
             return Boxed_Value(std::ref(std::forward<Q>(q)));
           }
 
           template<typename P, typename Q>
-          static auto box(Q&& q) -> typename std::enable_if<!std::is_reference<P>::value&&!std::is_same<chaiscript::Boxed_Value, typename std::remove_const<typename std::remove_reference<P>::type>::type>::value, Boxed_Value>::type
+          static auto box(Q&& q) -> typename std::enable_if<!std::is_reference<P>::value&&!std::is_same<Boxed_Value, typename std::remove_const<typename std::remove_reference<P>::type>::type>::value, Boxed_Value>::type
           {
             return Boxed_Value(std::forward<Q>(q));
           }

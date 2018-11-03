@@ -2,18 +2,18 @@
 
 using namespace animation;
 using namespace raytracer;
-using namespace raytracer::pipeline;
+using namespace pipeline;
 
 
 namespace
 {
-    class AnimationProducer : public Processor<animation::Animation<std::shared_ptr<Scene>>, std::shared_ptr<Scene>>
+    class AnimationProducer : public Processor<Animation<std::shared_ptr<Scene>>, std::shared_ptr<Scene>>
     {
     public:
         AnimationProducer(double fps)
             : m_fps(fps) { }
 
-        void consume(animation::Animation<std::shared_ptr<Scene>> animation) override
+        void consume(Animation<std::shared_ptr<Scene>> animation) override
         {
             LOG(INFO) << "Received animation of duration " << animation.duration();
             Duration frame_duration = Duration::from_seconds(1.0 / m_fps);
@@ -36,7 +36,7 @@ namespace
     };
 }
 
-std::shared_ptr<Processor<animation::Animation<std::shared_ptr<Scene>>, std::shared_ptr<Scene>>> raytracer::pipeline::animation(double fps)
+std::shared_ptr<Processor<Animation<std::shared_ptr<Scene>>, std::shared_ptr<Scene>>> pipeline::animation(double fps)
 {
     return std::make_shared<AnimationProducer>(fps);
 }

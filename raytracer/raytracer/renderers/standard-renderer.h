@@ -27,6 +27,6 @@ namespace raytracer
         /// <param name="scheduler">
         /// Task scheduler.
         /// </param>
-        Renderer standard(unsigned width, unsigned height, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler);
+        Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler);
     }
 }

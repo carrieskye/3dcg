@@ -12,7 +12,7 @@
 using namespace chaiscript;
 using namespace raytracer;
 using namespace math;
-using namespace math::functions;
+using namespace functions;
 
 
 namespace
@@ -76,20 +76,20 @@ namespace
 
     void add_points_and_vectors(Module& module)
     {
-        raytracer::scripting::util::register_type<math::Point2D>(module, "Point2D");
-        raytracer::scripting::util::register_type<math::Point3D>(module, "Point3D");
-        raytracer::scripting::util::register_type<math::Vector2D>(module, "Vector2D");
-        raytracer::scripting::util::register_type<math::Vector3D>(module, "Vector3D");
+        raytracer::scripting::util::register_type<Point2D>(module, "Point2D");
+        raytracer::scripting::util::register_type<Point3D>(module, "Point3D");
+        raytracer::scripting::util::register_type<Vector2D>(module, "Vector2D");
+        raytracer::scripting::util::register_type<Vector3D>(module, "Vector3D");
 
-        raytracer::scripting::util::register_to_string<math::Point2D>(module);
-        raytracer::scripting::util::register_to_string<math::Vector2D>(module);
-        raytracer::scripting::util::register_to_string<math::Point3D>(module);
-        raytracer::scripting::util::register_to_string<math::Vector3D>(module);
+        raytracer::scripting::util::register_to_string<Point2D>(module);
+        raytracer::scripting::util::register_to_string<Vector2D>(module);
+        raytracer::scripting::util::register_to_string<Point3D>(module);
+        raytracer::scripting::util::register_to_string<Vector3D>(module);
 
-        raytracer::scripting::util::register_assignment<math::Point2D>(module);
-        raytracer::scripting::util::register_assignment<math::Vector2D>(module);
-        raytracer::scripting::util::register_assignment<math::Point3D>(module);
-        raytracer::scripting::util::register_assignment<math::Vector3D>(module);
+        raytracer::scripting::util::register_assignment<Point2D>(module);
+        raytracer::scripting::util::register_assignment<Vector2D>(module);
+        raytracer::scripting::util::register_assignment<Point3D>(module);
+        raytracer::scripting::util::register_assignment<Vector3D>(module);
 
         module.add(fun(create_point3d), "pos");
         module.add(fun(create_point2d), "pos");
@@ -113,17 +113,17 @@ namespace
         module.add(fun(&Vector2D::norm), "norm");
         module.add(fun(&Vector2D::normalize), "normalize");
         module.add(fun(&Vector2D::normalized), "normalized");
-        module.add(fun([](const Point2D& p, const Point2D& q) -> double { return math::distance(p, q); }), "distance");
+        module.add(fun([](const Point2D& p, const Point2D& q) -> double { return distance(p, q); }), "distance");
 
         module.add(fun(&Vector3D::norm), "norm");
         module.add(fun(&Vector3D::normalize), "normalize");
         module.add(fun(&Vector3D::normalized), "normalized");
-        module.add(fun([](const Point3D& p, const Point3D& q) -> double { return math::distance(p, q); }), "distance");
+        module.add(fun([](const Point3D& p, const Point3D& q) -> double { return distance(p, q); }), "distance");
 
         auto point_factories = std::make_shared<PointFactories>();
-        module.add_global_const(chaiscript::const_var(point_factories), "Pos");
+        module.add_global_const(const_var(point_factories), "Pos");
         auto vector_factories = std::make_shared<VectorFactories>();
-        module.add_global_const(chaiscript::const_var(vector_factories), "Vec");
+        module.add_global_const(const_var(vector_factories), "Vec");
 
 #       define BIND(NAME)    module.add(fun(&PointFactories::NAME), #NAME); module.add(fun(&VectorFactories::NAME), #NAME)
         BIND(cartesian2d);
@@ -138,9 +138,9 @@ namespace
 
     void add_angle(Module& module)
     {
-        raytracer::scripting::util::register_type<math::Angle>(module, "Angle");
-        raytracer::scripting::util::register_to_string<math::Angle>(module);
-        raytracer::scripting::util::register_assignment<math::Angle>(module);
+        raytracer::scripting::util::register_type<Angle>(module, "Angle");
+        raytracer::scripting::util::register_to_string<Angle>(module);
+        raytracer::scripting::util::register_assignment<Angle>(module);
 
         module.add(fun([](double x) { return Angle::degrees(x); }), "degrees");
         module.add(fun([](double x) { return Angle::radians(x); }), "radians");
@@ -157,13 +157,13 @@ namespace
 
     void add_interval(Module& module)
     {
-        raytracer::scripting::util::register_type<math::Interval<double>>(module, "DoubleInterval");
-        raytracer::scripting::util::register_to_string<math::Interval<double>>(module);
-        raytracer::scripting::util::register_assignment<math::Interval<double>>(module);
+        raytracer::scripting::util::register_type<Interval<double>>(module, "DoubleInterval");
+        raytracer::scripting::util::register_to_string<Interval<double>>(module);
+        raytracer::scripting::util::register_assignment<Interval<double>>(module);
 
-        raytracer::scripting::util::register_type<math::Interval<Angle>>(module, "AngleInterval");
-        raytracer::scripting::util::register_to_string<math::Interval<Angle>>(module);
-        raytracer::scripting::util::register_assignment<math::Interval<Angle>>(module);
+        raytracer::scripting::util::register_type<Interval<Angle>>(module, "AngleInterval");
+        raytracer::scripting::util::register_to_string<Interval<Angle>>(module);
+        raytracer::scripting::util::register_assignment<Interval<Angle>>(module);
 
         module.add(fun(&scalar_interval), "interval");
         module.add(fun(&angle_interval), "interval");
@@ -175,9 +175,9 @@ namespace
     }
 }
 
-ModulePtr raytracer::scripting::_private_::create_math_module()
+ModulePtr scripting::_private_::create_math_module()
 {
-    auto module = std::make_shared<chaiscript::Module>();
+    auto module = std::make_shared<Module>();
 
     add_points_and_vectors(*module);
     add_rectangle3d(*module);
