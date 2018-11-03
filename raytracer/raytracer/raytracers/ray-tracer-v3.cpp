@@ -6,12 +6,11 @@ using namespace raytracer;
 
 Color raytracers::_private_::RayTracerV3::process_light_ray(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
 {
-	Color result = colors::black();
-	result = compute_spectacular(properties, hit, ray, light_ray);
+	const auto result = compute_specular(properties, hit, ray, light_ray);
 	return result;
 }
 
-Color raytracers::_private_::RayTracerV3::compute_spectacular(const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
+Color raytracers::_private_::RayTracerV3::compute_specular(const MaterialProperties& properties, const Hit& hit, const Ray& ray, const LightRay& light_ray) const
 {
 	auto l = light_ray.ray.origin;
 	auto p = hit.position;

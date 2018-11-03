@@ -1,7 +1,6 @@
 #pragma once
 
 #include "raytracers/ray-tracer.h"
-#include <memory>
 
 using namespace imaging;
 using namespace math;
@@ -20,9 +19,6 @@ namespace raytracer
 			};
 		}
 
-		/// <summary>
-		/// Creates simplest ray tracer.
-		/// </summary>
 		RayTracer v1();
 	}
 }
