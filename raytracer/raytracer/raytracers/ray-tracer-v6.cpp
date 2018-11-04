@@ -36,16 +36,16 @@ Color raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene,
 		auto i = (hit.position - ray.origin).normalized();
 		const auto n = hit.normal;
 
-		auto ox = (n1 / n2) * (i - (i.dot(n)* n));
-		const auto oy = -sqrt(1 - ox.dot(ox)) * n;
+		auto ox = (n1 / n2) * (i - i.dot(n)* n);
+		const auto oy = (-1 * sqrt(1 - ox.dot(ox))) * n;
 		const auto o = ox + oy;
 
-		if (1 - ox.dot(ox) >= 0)
+		if (1 - ox.dot(ox) < 0)
 		{
 			return result;
 		}
 
-		const auto p1_moved_slightly = hit.position + o * (pow(10, -100));
+		const auto p1_moved_slightly = hit.position + o * 0.0000001;
 		const auto p1_ray = Ray(p1_moved_slightly, o);
 
 		Hit exit_hit;
