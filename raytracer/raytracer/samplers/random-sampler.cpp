@@ -37,8 +37,6 @@ namespace
 	};
 }
 
-
-
 Sampler samplers::random(const int& sample_count)
 {
 	return Sampler(std::make_shared<RandomSampler>(sample_count));
