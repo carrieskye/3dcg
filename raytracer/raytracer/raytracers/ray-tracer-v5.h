@@ -17,7 +17,7 @@ namespace raytracer
 			{
 			public:
 				TraceResult trace(const Scene&, const Ray&) const override;
-				TraceResult trace(const Scene&, const Ray&, const double) const;
+				virtual TraceResult trace(const Scene&, const Ray&, const double) const;
 				Color compute_reflection(const Scene&, const MaterialProperties&, const Hit&, const Ray&, const double) const;
 			};
 		}
