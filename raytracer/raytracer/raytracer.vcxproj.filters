@@ -96,6 +96,7 @@
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="samplers\random-sampler.cpp" />
     <ClCompile Include="samplers\stratified-sampler.cpp" />
+    <ClCompile Include="samplers\jittered-sampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -278,5 +279,6 @@
     <ClInclude Include="raytracers\ray-tracer-v6.h" />
     <ClInclude Include="samplers\random-sampler.h" />
     <ClInclude Include="samplers\stratified-sampler.h" />
+    <ClInclude Include="samplers\jittered-sampler.h" />
   </ItemGroup>
 </Project>
