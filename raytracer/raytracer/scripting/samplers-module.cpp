@@ -29,6 +29,10 @@ namespace
 		{
 			return samplers::jittered(rows, cols);
 		}
+		Sampler halfjittered(const int& rows, const int& cols) const
+		{
+			return samplers::half_jittered(rows, cols);
+		}
 	};
 }
 
@@ -46,6 +50,7 @@ ModulePtr scripting::_private_::create_samplers_module()
 	BIND(random);
 	BIND(stratified);
 	BIND(jittered);
+	BIND(halfjittered);
 #   undef BIND
 
 	return module;
