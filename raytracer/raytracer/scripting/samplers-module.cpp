@@ -33,6 +33,10 @@ namespace
 		{
 			return samplers::half_jittered(rows, cols);
 		}
+		Sampler nrooks(const int& rooks) const
+		{
+			return samplers::n_rooks(rooks);
+		}
 	};
 }
 
@@ -51,6 +55,7 @@ ModulePtr scripting::_private_::create_samplers_module()
 	BIND(stratified);
 	BIND(jittered);
 	BIND(halfjittered);
+	BIND(nrooks);
 #   undef BIND
 
 	return module;
