@@ -96,10 +96,15 @@
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="samplers\random-sampler.cpp" />
     <ClCompile Include="samplers\stratified-sampler.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="samplers\jittered-sampler.cpp" />
     <ClCompile Include="samplers\half-jittered-sampler.cpp" />
     <ClCompile Include="samplers\n-rooks-sampler.cpp" />
     <ClCompile Include="samplers\multi-jittered-sampler.cpp" />
+=======
+    <ClCompile Include="primitives\cube-primitive.cpp" />
+    <ClCompile Include="primitives\cone-primitive.cpp" />
+>>>>>>> 09: beginnings of cone
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -286,5 +291,7 @@
     <ClInclude Include="samplers\half-jittered-sampler.h" />
     <ClInclude Include="samplers\n-rooks-sampler.h" />
     <ClInclude Include="samplers\multi-jittered-sampler.h" />
+    <ClInclude Include="primitives\cube-primitive.h" />
+    <ClInclude Include="primitives\cone-primitive.h" />
   </ItemGroup>
 </Project>

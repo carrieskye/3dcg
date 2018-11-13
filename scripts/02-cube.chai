@@ -26,19 +26,21 @@ def scene_at(now)
   var xyplane = translate(vec(0, 0, -2), decorate(xy_plane_material, xy_plane()))
   var xzplane = translate(vec(0, -2, 0), decorate(xz_plane_material, xz_plane()))
      
-  var sphere1 = translate(vec(0, 5, 3), decorate(sphere1_material, cube()))
-  var sphere2 = translate(vec(3, 2, 0), decorate(sphere2_material, sphere()))
-  var sphere3 = translate(vec(2, 3, 3), decorate(sphere3_material, sphere()))
-  var sphere4 = translate(vec(-1, 4, 2), decorate(sphere4_material, sphere()))
-  var sphere5 = translate(vec(-3, 5, 0), decorate(sphere5_material, sphere()))
+  var cube1 = translate(vec(0, 5, 3), decorate(sphere1_material, cube()))
+  //var sphere2 = translate(vec(3, 2, 0), decorate(sphere2_material, sphere()))
+  //var sphere3 = translate(vec(2, 3, 3), decorate(sphere3_material, sphere()))
+  //var sphere4 = translate(vec(-1, 4, 2), decorate(sphere4_material, sphere()))
+  //var sphere5 = translate(vec(-3, 5, 0), decorate(sphere5_material, sphere()))
   
   // Create root union
-  var shapes = [ sphere1, sphere2, sphere3, sphere4, sphere5, xyplane, xzplane ]
+  var shapes = [ cube1, 
+  //sphere2, sphere3, sphere4, sphere5,
+  xyplane, xzplane ]
   var root_union = union(shapes)
 
   // Create list of lights 
-  var lights = [ Lights.omnidirectional(pos(1, 7, 0), Colors.white())
-  , Lights.omnidirectional(pos(4, 10, 0), Colors.red() * 0.5) 
+  var lights = [ //Lights.omnidirectional(pos(1, 7, 0), Colors.white())
+  Lights.omnidirectional(pos(4, 10, 0), Colors.red() * 0.5) 
   ]
 
   create_scene(camera, root_union, lights)

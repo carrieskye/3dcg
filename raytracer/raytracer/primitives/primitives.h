@@ -6,3 +6,5 @@
 #include "primitives/union-primitive.h"
 #include "primitives/decorator-primitive.h"
 #include "primitives/transformer-primitive.h"
+#include "primitives/cube-primitive.h"
+#include "primitives/cone-primitive.h"
