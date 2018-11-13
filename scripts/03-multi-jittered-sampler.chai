@@ -26,7 +26,7 @@ var scene = create_scene(camera, root, lights)
 var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
-                                        "sampler": Samplers.stratified(4, 4),
+                                        "sampler": Samplers.multijittered(4),
                                         "ray_tracer": raytracer ] )
 
 pipeline(scene, [Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout()])

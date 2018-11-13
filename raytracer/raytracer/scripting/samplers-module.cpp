@@ -37,6 +37,10 @@ namespace
 		{
 			return samplers::n_rooks(rooks);
 		}
+		Sampler multijittered(const int& n) const
+		{
+			return samplers::multi_jittered(n);
+		}
 	};
 }
 
@@ -56,6 +60,7 @@ ModulePtr scripting::_private_::create_samplers_module()
 	BIND(jittered);
 	BIND(halfjittered);
 	BIND(nrooks);
+	BIND(multijittered);
 #   undef BIND
 
 	return module;

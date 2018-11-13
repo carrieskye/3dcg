@@ -1,31 +1,32 @@
-// resolution
-var res = 370
-  
-def scene_at(now)
-{
-  // Create animation: x goes from -10 to +10 in 5 seconds
-  var x = Animations.animate(-10, 10, seconds(5))
+var camera = Cameras.perspective( [ "eye": pos(5, 0.5, 5),
+                                    "look_at": pos(0, 0.5, 0),
+                                    "up": vec(0, 1, 0),
+                                    "distance": 1,
+                                    "aspect_ratio": 1 ] )
 
-  // Create camera
-  var camera = Cameras.perspective(["eye": pos(x[now], 3, 5), "look_at": pos(0, 0.5, 0), "up": vec(0, 1, 0), "distance": 1, "aspect_ratio": 1])
-  
-  // Create material
-  var white_material = Materials.uniform(["ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.4, "specular": Colors.white() * 0.8, "specular_exponent": 1])
-  var black_material = Materials.uniform(["ambient": Colors.black() * 0.2, "diffuse": Colors.black() * 0.4, "specular": Colors.white() * 0.8, "specular_exponent": 1])
-  var checkered_material = Materials.checkered2d(1, black_material, white_material)
+var white_material = Materials.uniform( [ "ambient": Colors.white(),
+                                          "diffuse": Colors.black(),
+                                          "specular": Colors.black(),
+                                          "specular_exponent": 0 ] )
 
-  // Create primitives 
-  var plane = decorate(checkered_material, xz_plane())
-  
-  // Create root union
-  var shapes = [plane]
-  var root_union = union(shapes)
-  
-  // Create list of lights
-  var lights = [Lights.omnidirectional(pos(2, 5, 2), Colors.white())]
+var black_material = Materials.uniform( [ "ambient": Colors.black(),
+                                          "diffuse": Colors.black(),
+                                          "specular": Colors.black(),
+                                          "specular_exponent": 0 ] )
 
-  create_scene(camera, root_union, lights)
-}
+var checkered_material = Materials.checkered2d(1, white_material, black_material)
 
-var renderer = Renderers.standard(["width": res, "height": res, "sampler": Samplers.jittered(4, 4), "ray_tracer": Raytracers.v6()])
-pipeline(scene_animation(scene_at, seconds(5)), [Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout()])
+var root        = decorate(checkered_material, xz_plane())
+
+var lights      = [ Lights.omnidirectional( pos(0, 10, 0), Colors.white() ) ]
+
+var scene = create_scene(camera, root, lights)
+
+
+var raytracer   = Raytracers.v6()
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.jittered(4, 4),
+                                        "ray_tracer": raytracer ] )
+
+pipeline(scene, [Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout()])
