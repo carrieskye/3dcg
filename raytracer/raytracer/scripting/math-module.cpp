@@ -173,6 +173,18 @@ namespace
     {
         module.add(fun(&create_rectangle3d), "rect3d");
     }
+
+	struct EasingLibrary
+	{
+
+	};
+	
+	void add_easing(Module& module)
+    {
+		auto easing_library = std::make_shared<EasingLibrary>();
+		module.add_global_const(const_var(easing_library), "Easing");
+	}
+
 }
 
 ModulePtr scripting::_private_::create_math_module()
@@ -183,6 +195,7 @@ ModulePtr scripting::_private_::create_math_module()
     add_rectangle3d(*module);
     add_angle(*module);
     add_interval(*module);
+	add_easing(*module);
 
     return module;
 }

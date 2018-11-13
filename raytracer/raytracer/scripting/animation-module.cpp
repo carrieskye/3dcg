@@ -33,6 +33,12 @@ namespace
         {
             return animation::animate(from, to, duration);
         }
+
+		template<typename T>
+		inline Animation<T> ease_animation(const Animation<T>& a, const functions::EasingFunction& function) const {
+			return animation::ease(a, function);
+		}
+
     };
 
     Duration seconds(double s)
@@ -60,6 +66,9 @@ ModulePtr scripting::_private_::create_animation_module()
 #define BIND(NAME)                                  BIND_AS(NAME, NAME)
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
+	BIND_AS(ease_animation<double>, ease);
+	BIND_AS(ease_animation<Angle>, ease);
+	BIND_AS(ease_animation<Point3D>, ease);
 #undef BIND
 #undef BIND_AS
 
