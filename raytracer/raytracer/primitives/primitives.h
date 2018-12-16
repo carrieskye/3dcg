@@ -8,3 +8,4 @@
 #include "primitives/transformer-primitive.h"
 #include "primitives/cube-primitive.h"
 #include "primitives/cone-primitive.h"
+#include "primitives/triangle-primitive.h"

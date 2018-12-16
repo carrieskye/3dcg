@@ -65,7 +65,7 @@ namespace
 
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
-			assert(hit != nullptr);
+			//assert(hit != nullptr);
 
 			auto hits = find_all_hits(ray);
 
