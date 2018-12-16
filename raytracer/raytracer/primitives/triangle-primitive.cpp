@@ -12,8 +12,7 @@ namespace
 		TriangleImplementation(const Point3D &v1, const Point3D &v2, const Point3D &v3) : v1(v1), v2(v2), v3(v3)
 		{
 			// compute the normal vector on the plane
-			auto v = (v2 - v1).cross(v3 - v1).normalized();
-			this->normal = Vector3D(v.x(), v.y(), v.z());
+			this->normal = (v2 - v1).cross(v3 - v1).normalized();
 		}
 
 
@@ -29,13 +28,13 @@ namespace
 			Point3D H = ray.origin + (ray.direction * t);
 
 			// check if H lies to the right if P1 P2
-			if (!((v2 - v1).cross(H - v1).dot(normal) >= 0)) return hits;
+			if ((v2 - v1).cross(H - v1).dot(normal) < 0) return hits;
 
 			// check if H lies to the right if P2 P3
-			if (!((v3 - v2).cross(H - v2).dot(normal) >= 0)) return hits;
+			if ((v3 - v2).cross(H - v2).dot(normal) < 0) return hits;
 
 			// check if H lies to the right if P3 P1
-			if (!((v1 - v3).cross(H - v3).dot(normal) >= 0)) return hits;
+			if ((v1 - v3).cross(H - v3).dot(normal) < 0) return hits;
 
 			auto hit = std::make_shared<Hit>();
 			initialize_hit(hit.get(), ray, t);
@@ -97,7 +96,6 @@ namespace
 		void initialize_hit(Hit* hit, const Ray& ray, double t) const
 		{
 			// Update Hit object
-
 
 			hit->t = t;
 			hit->position = ray.at(t);
