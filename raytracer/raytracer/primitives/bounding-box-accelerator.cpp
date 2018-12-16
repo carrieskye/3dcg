@@ -7,14 +7,13 @@ namespace
 {
 	class BoundingBoxAccelerator : public primitives::_private_::PrimitiveImplementation
 	{
-	protected:
+	public:
 		const Primitive primitive;
 		const Box bounding_box_child;
 
 		BoundingBoxAccelerator(const Primitive& primitive) :primitive(primitive), bounding_box_child(primitive->bounding_box()) {}
 
-	public:
-		std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
+	std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
 		{
 			// When we need to determine whether a ray intersects the mesh, we first check if it intersects the box.
 			if (!bounding_box_child.is_hit_positively_by(ray))

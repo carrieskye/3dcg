@@ -1,0 +1,40 @@
+// resolution
+var res = 370
+
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,5,10),
+                                      "look_at": pos(0,0,0) ] )
+
+  var material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                      "diffuse": Colors.white() * 0.8,
+                                      "specular": Colors.white(),
+                                      "specular_exponent": 100,
+                                      "reflectivity": 0,
+                                      "transparency": 0,
+                                      "refractive_index": 0 ] )
+
+  var root = decorate(material, union([ translate(vec(0,-1,0),xz_plane()), sphere() ]))
+
+  var animation = Animations.animate(-4, 4, seconds(5))
+  
+  var pos_red = pos(0, -1, (animation[now] * animation[now]) - 5)
+  var lights_red = Lights.spot(pos(-5,5,1), pos_red , degrees(30), Colors.red())
+  
+  var pos_green = pos((animation[now] * animation[now]) - 5, -1, -1)
+  var lights_green = Lights.spot( pos(5,5,1), pos_green, degrees(40), Colors.green() )
+  
+  var pos_yellow = pos((animation[now] * animation[now]) + 2, -1, animation[now])
+  var lights_yellow = Lights.spot( pos(5,5,1), pos_yellow, degrees(80), Colors.yellow() )
+  
+  var animation2 = Animations.animate(-8, 0, seconds(5))
+  var pos_blue = pos(0, -1, (animation2[now]*animation2[now]))
+  var lights_blue = Lights.spot( pos(-2,5,1), pos_blue, degrees(30), Colors.blue() )
+  
+  var lights = [ lights_red, lights_green, lights_yellow, lights_blue ]
+
+  create_scene(camera, root, lights)
+}
+
+var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.multijittered(3), "ray_tracer": Raytracers.v4() ] )
+pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )

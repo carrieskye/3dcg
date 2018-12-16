@@ -103,6 +103,10 @@
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
     <ClCompile Include="primitives\triangle-primitive.cpp" />
+    <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
+    <ClCompile Include="primitives\intersection-primitive.cpp" />
+    <ClCompile Include="cameras\fisheye-camera.cpp" />
+    <ClCompile Include="lights\spot-light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -292,5 +296,9 @@
     <ClInclude Include="math\rectangle2d.h" />
     <ClInclude Include="version.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
+    <ClInclude Include="primitives\bounding-box-accelerator.h" />
+    <ClInclude Include="primitives\intersection-primitive.h" />
+    <ClInclude Include="cameras\fisheye-camera.h" />
+    <ClInclude Include="lights\spot-light.h" />
   </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+#include "primitives/intersection-primitive.h"
 #ifndef EXCLUDE_SCRIPTING
 
 #include "scripting/primitives-module.h"
@@ -22,6 +23,18 @@ namespace
         });
 
         return primitives::make_union(children);
+    }
+
+	Primitive make_intersection(const std::vector<Boxed_Value>& boxed_children)
+    {
+		std::vector<Primitive> children(boxed_children.size());
+
+		std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](Boxed_Value boxed)
+		{
+			return chaiscript::boxed_cast<Primitive>(boxed);
+		});
+
+		return primitives::make_intersection(children);
     }
 }
 
@@ -52,6 +65,7 @@ ModulePtr scripting::_private_::create_primitives_module()
 	BIND_DIRECTLY(cone_along_y);
 	BIND_DIRECTLY(cone_along_z);
 	BIND_HELPER_FUNCTION_AS(make_union, union);
+	BIND_HELPER_FUNCTION_AS(make_intersection, intersection);
     BIND_DIRECTLY(decorate);
 	BIND_DIRECTLY(translate);
 	BIND_DIRECTLY(triangle);
