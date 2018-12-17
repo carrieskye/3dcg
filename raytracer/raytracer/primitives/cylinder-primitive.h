@@ -8,5 +8,6 @@ namespace raytracer
 	{
 		Primitive cylinder_along_x();
 		Primitive cylinder_along_y();
+		Primitive cylinder_along_z();
 	}
 }

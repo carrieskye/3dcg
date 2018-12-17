@@ -66,6 +66,7 @@ ModulePtr scripting::_private_::create_primitives_module()
 	BIND_DIRECTLY(cone_along_z);
 	BIND_DIRECTLY(cylinder_along_x);
 	BIND_DIRECTLY(cylinder_along_y);
+	BIND_DIRECTLY(cylinder_along_z);
 	BIND_HELPER_FUNCTION_AS(make_union, union);
 	BIND_HELPER_FUNCTION_AS(make_intersection, intersection);
     BIND_DIRECTLY(decorate);
