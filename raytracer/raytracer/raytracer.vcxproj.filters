@@ -107,6 +107,7 @@
     <ClCompile Include="primitives\intersection-primitive.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="lights\spot-light.cpp" />
+    <ClCompile Include="primitives\cylinder-primitive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -300,5 +301,6 @@
     <ClInclude Include="primitives\intersection-primitive.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
     <ClInclude Include="lights\spot-light.h" />
+    <ClInclude Include="primitives\cylinder-primitive.h" />
   </ItemGroup>
 </Project>

@@ -384,6 +384,7 @@
     <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
     <ClCompile Include="primitives\cone-primitive.cpp" />
     <ClCompile Include="primitives\cube-primitive.cpp" />
+    <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\intersection-primitive.cpp" />
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
@@ -544,6 +545,7 @@
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
     <ClInclude Include="primitives\cube-primitive.h" />
+    <ClInclude Include="primitives\cylinder-primitive.h" />
     <ClInclude Include="primitives\intersection-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
