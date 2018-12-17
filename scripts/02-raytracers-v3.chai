@@ -21,12 +21,10 @@ def scene_at(now)
   // Create primitives
   var xyplane = translate(vec(0, 0, -2), decorate(xy_plane_material, xy_plane()))
   var yzplane = translate(vec(-2, 0, 0), decorate(yz_plane_material, yz_plane()))
-  
-  // var sphere = translate(vec(0, 2, 0), decorate(sphere_material, sphere()))
-  var cube = translate(vec(1, 5, 1), decorate(sphere_material, cube())) 
+  var sphere = translate(vec(0, 2, 0), decorate(sphere_material, sphere()))
   
   // Create root union 
-  var shapes = [ cube, xyplane, yzplane ]
+  var shapes = [ sphere, xyplane, yzplane ]
   var root_union = union(shapes)
 
   // Create list of lights

@@ -14,12 +14,8 @@ def scene_at(now)
   var material = Materials.uniform( [ "ambient": Colors.white(), "diffuse": Colors.white() ] )
 
   // Create spheres
-  var sphere1 = sphere()
-  var sphere2 = sphere()
-  
-  // Positions of spheres
-  sphere1 = translate(vec(0, 1.5, 0), sphere1)
-  sphere2 = translate(vec(0, -1.5, 0), sphere2)
+  var sphere1 = translate(vec(0, 1.5, 0), decorate(material, sphere()))
+  var sphere2 = translate(vec(0, -1.5, 0), decorate(material, sphere()))
   
   // Combine spheres
   var union_spheres = union([sphere1, sphere2])
