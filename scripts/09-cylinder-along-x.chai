@@ -14,18 +14,20 @@ def scene_at(now)
   var black = Materials.uniform( [ "ambient": Colors.black() * 0.1, "diffuse": Colors.black() * 0.8, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
 
   var xz_plane_material = Materials.checkered2d(1, white, black)
-  var cylinder_material =  Materials.uniform( [ "ambient": Colors.red() * 0.1, "diffuse": Colors.red() * 0.8, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
+  var red_material =  Materials.uniform( [ "ambient": Colors.red() * 0.1, "diffuse": Colors.red() * 0.8, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
+  var blue_material =  Materials.uniform( [ "ambient": Colors.blue() * 0.1, "diffuse": Colors.blue() * 0.8, "specular": Colors.white() * 0.8, "specular_exponent": 10 ] )
 
   // Create primitives
   var xzplane = translate(vec(0, -2, 0), decorate(xz_plane_material, xz_plane()))
-  var cylinder = translate(vec(0, 2, 0), decorate(cylinder_material, cylinder_along_x()))
+  var cylinder_along_x = translate(vec(0, 0, 0), decorate(red_material, cylinder_along_x()))
+  var cylinder_along_y = translate(vec(0, 0, 0), decorate(blue_material, cylinder_along_y()))
   
   // Create root union
-  var shapes = [  xzplane, cylinder ]  
+  var shapes = [ cylinder_along_x, cylinder_along_y ]  
   var root_union = union(shapes)
 
   // Create list of lights
-  var lights = [ Lights.omnidirectional(pos(0, 5, 1.5), Colors.white()) ]
+  var lights = [ Lights.omnidirectional(pos(2, 10, 3), Colors.white()) ]
 
   create_scene(camera, root_union, lights)
 }
