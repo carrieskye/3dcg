@@ -1,5 +1,4 @@
 ﻿#include "triangle-primitive.h"
-#include "math/misc.h"
 
 using namespace raytracer;
 using namespace primitives;
@@ -14,7 +13,6 @@ namespace
 			// compute the normal vector on the plane
 			this->normal = (v2 - v1).cross(v3 - v1).normalized();
 		}
-
 
 		std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
 		{
@@ -45,28 +43,25 @@ namespace
 
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
-			//assert(hit != nullptr);
+			// compute the hit t
+			double t = (v1 - ray.origin).dot(normal) / ray.direction.dot(normal);
 
-			auto hits = find_all_hits(ray);
+			if (t < 0 || t >= output_hit->t) return false;
 
-			for (auto hit : hits)
-			{
-				// Find first positive hit
-				if (hit->t > 0)
-				{
-					if (hit->t < output_hit->t)
-					{
-						// Overwrite hit with new hit
-						*output_hit = *hit;
-						return true;
+			// compute the hit position H
+			Point3D H = ray.origin + (ray.direction * t);
 
-					}
-					// First positive hit is farther away than already existing hit
-					return false;
-				}
-			}
-			// No positive hits were found
-			return false;
+			// check if H lies to the right if P1 P2
+			if ((v2 - v1).cross(H - v1).dot(normal) < 0) return false;
+
+			// check if H lies to the right if P2 P3
+			if ((v3 - v2).cross(H - v2).dot(normal) < 0) return false;
+
+			// check if H lies to the right if P3 P1
+			if ((v1 - v3).cross(H - v3).dot(normal) < 0) return false;
+
+			initialize_hit(output_hit, ray, t);
+			return true;
 		}
 
 		Box bounding_box() const override
@@ -92,17 +87,12 @@ namespace
 		Point3D v3;
 		Vector3D normal;
 
-
 		void initialize_hit(Hit* hit, const Ray& ray, double t) const
 		{
-			// Update Hit object
-
 			hit->t = t;
 			hit->position = ray.at(t);
 			hit->local_position.xyz = hit->position;
-			hit->local_position.uv = Point2D(
-				hit->position.x(),
-				hit->position.y());
+			hit->local_position.uv = Point2D(hit->position.x(), hit->position.y());
 			hit->normal = normal;
 		}
 	};

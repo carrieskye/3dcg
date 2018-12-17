@@ -17,35 +17,22 @@ namespace
 		virtual std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const = 0;
 
 	public:
-		
-
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit)  const override
 		{
-			// Collect all hits
 			auto hits = find_all_hits(ray);
 
 			for (auto hit : hits)
 			{
-				// Find first positive hit
 				if (hit->t > 0)
 				{
-					// Is first positive hit closer than already existing hit?
 					if (hit->t < output_hit->t)
 					{
-						// Overwrite hit with new hit
 						*output_hit = *hit;
 						return true;
-
 					}
-					else
-					{
-						// First positive hit is farther away than already existing hit
-						return false;
-					}
+					return false;
 				}
 			}
-
-			// No positive hits were found
 			return false;
 		}
 	};
