@@ -95,3 +95,18 @@ Primitive primitives::translate(const Vector3D& v, Primitive transformee)
 {
     return transform(transformations::translation(v), transformee);
 }
+
+Primitive primitives::rotate_around_x(const Angle a, const Primitive transformee)
+{
+	return transform(transformations::rotate_around_x(a), transformee);
+}
+
+Primitive primitives::rotate_around_y(const Angle a, const Primitive transformee)
+{
+	return transform(transformations::rotate_around_y(a), transformee);
+}
+
+Primitive primitives::rotate_around_z(const Angle a, const Primitive transformee)
+{
+	return transform(transformations::rotate_around_z(a), transformee);
+}
