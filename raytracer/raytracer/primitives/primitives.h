@@ -5,6 +5,7 @@
 #include "primitives/cone-primitive.h"
 #include "primitives/cube-primitive.h"
 #include "primitives/decorator-primitive.h"
+#include "primitives/difference-primitive.h"
 #include "primitives/intersection-primitive.h"
 #include "primitives/plane-primitive.h"
 #include "primitives/sphere-primitive.h"
