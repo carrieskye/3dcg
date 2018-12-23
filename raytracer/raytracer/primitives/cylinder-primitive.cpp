@@ -61,8 +61,8 @@ namespace
 			auto delta = Vector2D(ray.direction.y(), ray.direction.z());
 			const auto a = delta.dot(delta);
 			const auto b = 2 * (O - Point2D(0, 0)).dot(delta);
-			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - (radius * radius);
-			const auto D = (b * b) - (4 * a * c);
+			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - pow(radius, 2);
+			const auto D = pow(b, 2) - (4 * a * c);
 
 			if (D > 0)
 			{
@@ -115,8 +115,8 @@ namespace
 			auto delta = Vector2D(ray.direction.x(), ray.direction.z());
 			const auto a = delta.dot(delta);
 			const auto b = 2 * (O - Point2D(0, 0)).dot(delta);
-			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - (radius * radius);
-			const auto D = (b * b) - (4 * a * c);
+			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - pow(radius, 2);
+			const auto D = pow(b, 2) - (4 * a * c);
 
 			if (D > 0)
 			{
@@ -151,7 +151,7 @@ namespace
 			: CoordinateCylinderImplementation()
 		{
 			// NOP
-		}		
+		}
 
 		Box bounding_box() const override
 		{
@@ -169,8 +169,8 @@ namespace
 			auto delta = Vector2D(ray.direction.x(), ray.direction.y());
 			const auto a = delta.dot(delta);
 			const auto b = 2 * (O - Point2D(0, 0)).dot(delta);
-			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - (radius * radius);
-			const auto D = (b * b) - (4 * a * c);
+			const auto c = (O - Point2D(0, 0)).dot(O - Point2D(0, 0)) - pow(radius, 2);
+			const auto D = pow(b, 2) - (4 * a * c);
 
 			if (D > 0)
 			{

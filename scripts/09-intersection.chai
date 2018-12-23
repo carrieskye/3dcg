@@ -1,5 +1,5 @@
 // resolution
-var res = 270
+var res = 370
 
 def scene_at(now)
 {
@@ -11,24 +11,22 @@ def scene_at(now)
 
   // Create material
   var white_material = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.8, "specular": Colors.white() * 0.5, "specular_exponent": 10, "reflectivity": 0.2 ] )
-  var red_material = Materials.uniform( [ "ambient": Colors.red() * 0.2, "diffuse": Colors.red() * 0.8, "specular": Colors.white() * 0.5, "specular_exponent": 100  ] ) 
-  var blue_material = Materials.uniform( [ "ambient": Colors.blue() * 0.2, "diffuse": Colors.blue() * 0.8, "specular": Colors.white() * 0.5, "specular_exponent": 100  ] ) 
-  var yellow_material = Materials.uniform( [ "ambient": Colors.yellow() * 0.2, "diffuse": Colors.yellow() * 0.8, "specular": Colors.white() * 0.5, "specular_exponent": 100  ] ) 
+  var red_material = Materials.uniform( [ "ambient": Colors.red() * 0.1, "diffuse": Colors.red() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 10, "transparency": 0.8, "refractive_index": 10 ] ) 
+  var blue_material = Materials.uniform( [ "ambient": Colors.blue() * 0.2, "diffuse": Colors.blue() * 0.8, "specular": Colors.white() * 0.5, "specular_exponent": 10  ] ) 
+
  
   // Create primitives
   var planexy = translate(vec(0, 0, -10), decorate(white_material, xy_plane()))
-  var planexz = translate(vec(0,-5, 0), decorate(white_material, xz_plane()))
-  var sphere1 = translate(vec(0, -2, -0.5), decorate(blue_material, sphere()))
-  var sphere2 = translate(vec(0, -2, 0.5), decorate(blue_material, sphere()))
-  var sphere3 = translate(vec(0, 0, -0.5), decorate(red_material, sphere()))
-  var sphere4 = translate(vec(0, 0.5, 0.5), decorate(red_material, sphere()))
-  var sphere5 = translate(vec(0, 2, -0.5), decorate(yellow_material, sphere()))
-  var sphere6 = translate(vec(0, 2, 0.5), decorate(yellow_material, sphere()))
+  var planexz = translate(vec(0, -6, 0), decorate(white_material, xz_plane()))
+  
+  var sphere1 = translate(vec(-1.5, -2, -2.5), decorate(blue_material, sphere()))
+  var sphere2 = translate(vec(-0.5, 0, -0.5), decorate(red_material, sphere()))
+  var sphere3 = translate(vec(0, 0.5, 0.5), decorate(red_material, sphere()))
   
   // Create root union
-  var shapes_intersection = [ sphere3, sphere4 ]  
+  var shapes_intersection = [ sphere2, sphere3 ]  
   var intersection = intersection(shapes_intersection)
-  var shapes_union = [ intersection, planexy, planexz ]
+  var shapes_union = [ intersection, planexy, planexz, sphere1 ]
   var root_union = union(shapes_union)
 
   // Create list of lights
@@ -37,5 +35,5 @@ def scene_at(now)
   create_scene(camera, root_union, lights)
 }
 
-var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.single(), "ray_tracer": Raytracers.v5() ] )
+var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.single(), "ray_tracer": Raytracers.v6() ] )
 pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )

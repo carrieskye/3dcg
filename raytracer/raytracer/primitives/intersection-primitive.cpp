@@ -17,19 +17,25 @@ namespace
 			// NOPs
 		}
 
-		bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
-			// Always assume hit already contains a hit
+			{
+				auto hits = find_all_hits(ray);
 
-			// Ask child1 for a "better" hit. If there is one, it will return true
-			// and overwrite hit with new data
-			bool found_hit1 = m_child1->find_first_positive_hit(ray, hit);
-
-			// Even if child1 found a hit, child2 might have a better one.
-			bool found_hit2 = m_child2->find_first_positive_hit(ray, hit);
-
-			// Return whether there has been a hit
-			return (found_hit1) && (found_hit2);
+				for (auto hit : hits)
+				{
+					if (hit->t > 0)
+					{
+						if (hit->t < output_hit->t)
+						{
+							*output_hit = *hit;
+							return true;
+						}
+						return false;
+					}
+				}
+				return false;
+			}
 		}
 
 		std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
