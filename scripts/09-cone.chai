@@ -20,7 +20,11 @@ def scene_at(now)
   var cone_along_z = translate(vec(0, 0, 0), decorate(yellow_material, cone_along_z()))
   
   // Create root union
-  var shapes = [ cone_along_x, cone_along_y, cone_along_z ]  
+  var shapes = [ 
+  cone_along_x,
+  //cone_along_y,
+  cone_along_z 
+  ]  
   var root_union = union(shapes)
 
   // Create list of lights
