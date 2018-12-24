@@ -1,16 +1,21 @@
 // resolution
-var res = 370
+var res = 170
 
 
 def scene_at(now)
 {
   var ambient_factor = 0.1
-  var x = Animations.animate(0, 10, seconds(5))
+  var y = Animations.animate(0, -360, seconds(1))
+  var x = Animations.animate(0, -360, seconds(15))
+  
   var camera = Cameras.perspective( [ "eye": pos(0,0,8),
                                       "look_at": pos(0,0,0) ] )
 
   var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
-  var black = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var black = Materials.uniform( [ "ambient": Colors.black() * 0.2, "diffuse": Colors.black() * 0.2, "specular": Colors.black() * 0.8, "specular_exponent": 2] )
+  
+  var red = Materials.uniform( [ "ambient": Colors.red() * ambient_factor, "diffuse": Colors.red() * 0.8 , "specular": Colors.white() * 0.8, "specular_exponent": 2 ] )
+  
   var checkered = Materials.checkered2d( 1, black, white )
 
 
@@ -18,9 +23,9 @@ def scene_at(now)
                                             "diffuse": Colors.white() * 0.8,
                                             "reflectivity": 0.5 ] )
 
-  var left_wall_material = Materials.uniform( [ "ambient": Colors.red() * ambient_factor,
-                                                "diffuse": Colors.red() * 0.8 ] )
 
+
+  var left_wall_material = red;
   var right_wall_material = Materials.uniform( [ "ambient": Colors.green() * ambient_factor,
                                                  "diffuse": Colors.green() * 0.8 ] )
 
@@ -42,33 +47,42 @@ def scene_at(now)
 
 
   var primitives = []
+  
+  var rotating_cube_x = rotate_around_x(degrees(x[now]), cube())
+  var rotating_cube_y = rotate_around_y(degrees(y[now]), rotating_cube_x)
+  //var rotating_cube_z = rotate_around_z(degrees(x[now]), cube())
+  
+  var rotating_cube = rotating_cube_y
+  
+  var cube1 = translate(vec(0, 0, 0), decorate(red, rotating_cube))
+
   //primitives.push_back( translate(vec(0,0,0), decorate(reflective_sphere_material, sphere())) )
   
   //primitives.push_back( translate(vec(0,0,6), decorate(transparent_sphere_material, sphere())) )
 
-  primitives.push_back( translate(vec(0,-2,0), decorate(floor_material, xz_plane())) )
-  primitives.push_back( translate(vec(0,2,0), decorate(ceiling_material, xz_plane())) )
-  primitives.push_back( translate(vec(-2,0,0), decorate(left_wall_material, yz_plane())) )
-  primitives.push_back( translate(vec(2,0,0), decorate(right_wall_material, yz_plane())) )
-  primitives.push_back( translate(vec(0,0,-2), decorate(back_wall_material, xy_plane())) )
+  primitives.push_back( cube1 )
+
+  primitives.push_back( translate(vec(0,-4,0), decorate(floor_material, xz_plane())) )
+  primitives.push_back( translate(vec(0,4,0), decorate(ceiling_material, xz_plane())) )
+  primitives.push_back( translate(vec(-4,0,0), decorate(left_wall_material, yz_plane())) )
+  primitives.push_back( translate(vec(4,0,0), decorate(right_wall_material, yz_plane())) )
+  primitives.push_back( translate(vec(0,0,-4), decorate(back_wall_material, xy_plane())) )
 
 
   var root = union(primitives)
 
-  var lights = [ Lights.omnidirectional( pos(0,1.9,0), Colors.white() ) ]
+  var lights = [ Lights.omnidirectional( pos(0,0,9), Colors.white() ) ]
   //var lights = [ Lights.omnidirectional( pos(0,0,5), Colors.white() ) ]
 
   create_scene(camera, root, lights)
 }
-
-            
-            var renderer = Renderers.standard( [ "width": res,
+var renderer = Renderers.standard( [ "width": res,
                                      "height": res,
                                      "sampler": Samplers.single(),
                                      "ray_tracer": Raytracers.v6() ] )
 
-pipeline( scene_animation(scene_at, seconds(3)),
-          [ Pipeline.animation(15),
+pipeline( scene_animation(scene_at, seconds(1)),
+          [ Pipeline.animation(300),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
             Pipeline.base64(),

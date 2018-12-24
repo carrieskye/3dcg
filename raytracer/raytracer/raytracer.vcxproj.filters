@@ -20,6 +20,7 @@
     <ClCompile Include="materials\composition-material.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\pattern-materials.cpp" />
+    <ClCompile Include="math\functions\checkered2d.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\grid2d.cpp" />
@@ -35,6 +36,8 @@
     <ClCompile Include="pipeline\text-writer-consumer.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
     <ClCompile Include="pipeline\wif-processor.cpp" />
+    <ClCompile Include="primitives\cone-primitive.cpp" />
+    <ClCompile Include="primitives\cube-primitive.cpp" />
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="lights\omnidirectional-point-light.cpp" />
@@ -58,15 +61,27 @@
     <ClCompile Include="primitives\decorator-primitive.cpp" />
     <ClCompile Include="primitives\sphere-primitive.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
+    <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="primitives\transformer-primitive.cpp" />
     <ClCompile Include="primitives\union-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v0.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v1.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="renderers\renderer.cpp" />
     <ClCompile Include="renderers\standard-renderer.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
+    <ClCompile Include="samplers\half-jittered-sampler.cpp" />
+    <ClCompile Include="samplers\jittered-sampler.cpp" />
+    <ClCompile Include="samplers\multi-jittered-sampler.cpp" />
+    <ClCompile Include="samplers\n-rooks-sampler.cpp" />
+    <ClCompile Include="samplers\random-sampler.cpp" />
     <ClCompile Include="samplers\sampler.cpp" />
     <ClCompile Include="samplers\single-sampler.cpp" />
+    <ClCompile Include="samplers\stratified-sampler.cpp" />
     <ClCompile Include="scripting\animation-module.cpp" />
     <ClCompile Include="scripting\cameras-module.cpp" />
     <ClCompile Include="scripting\imaging-module.cpp" />
@@ -87,24 +102,13 @@
     <ClCompile Include="util\base64.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
-    <ClCompile Include="math\functions\checkered2d.cpp" />
-    <ClCompile Include="primitives\square-primitive.cpp" />
-    <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
-    <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
-    <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
-    <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
-    <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
-    <ClCompile Include="samplers\random-sampler.cpp" />
-    <ClCompile Include="samplers\stratified-sampler.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="samplers\jittered-sampler.cpp" />
-    <ClCompile Include="samplers\half-jittered-sampler.cpp" />
-    <ClCompile Include="samplers\n-rooks-sampler.cpp" />
-    <ClCompile Include="samplers\multi-jittered-sampler.cpp" />
-=======
-    <ClCompile Include="primitives\cube-primitive.cpp" />
-    <ClCompile Include="primitives\cone-primitive.cpp" />
->>>>>>> 09: beginnings of cone
+    <ClCompile Include="primitives\triangle-primitive.cpp" />
+    <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
+    <ClCompile Include="primitives\intersection-primitive.cpp" />
+    <ClCompile Include="cameras\fisheye-camera.cpp" />
+    <ClCompile Include="lights\spot-light.cpp" />
+    <ClCompile Include="primitives\cylinder-primitive.cpp" />
+    <ClCompile Include="primitives\difference-primitive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -166,6 +170,7 @@
     <ClInclude Include="imaging\bmp-format.h" />
     <ClInclude Include="materials\pattern-materials.h" />
     <ClInclude Include="math\coordinate-systems.h" />
+    <ClInclude Include="math\functions\checkered2d.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
@@ -193,7 +198,15 @@
     <ClInclude Include="pipeline\text-writer-consumer.h" />
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="pipeline\wif-processor.h" />
+    <ClInclude Include="primitives\cone-primitive.h" />
+    <ClInclude Include="primitives\cube-primitive.h" />
+    <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v1.h" />
+    <ClInclude Include="raytracers\ray-tracer-v2.h" />
+    <ClInclude Include="raytracers\ray-tracer-v3.h" />
+    <ClInclude Include="raytracers\ray-tracer-v4.h" />
+    <ClInclude Include="raytracers\ray-tracer-v5.h" />
+    <ClInclude Include="raytracers\ray-tracer-v6.h" />
     <ClInclude Include="raytracers\trace-result.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
@@ -245,10 +258,16 @@
     <ClInclude Include="renderers\renderers.h" />
     <ClInclude Include="renderers\standard-renderer.h" />
     <ClInclude Include="lights\light-ray.h" />
+    <ClInclude Include="samplers\half-jittered-sampler.h" />
+    <ClInclude Include="samplers\jittered-sampler.h" />
+    <ClInclude Include="samplers\multi-jittered-sampler.h" />
+    <ClInclude Include="samplers\n-rooks-sampler.h" />
+    <ClInclude Include="samplers\random-sampler.h" />
     <ClInclude Include="samplers\sampler.h" />
     <ClInclude Include="samplers\samplers.h" />
     <ClInclude Include="samplers\single-sampler.h" />
     <ClInclude Include="data-structures\array.h" />
+    <ClInclude Include="samplers\stratified-sampler.h" />
     <ClInclude Include="scripting\animation-module.h" />
     <ClInclude Include="scripting\cameras-module.h" />
     <ClInclude Include="scripting\imaging-module.h" />
@@ -278,20 +297,12 @@
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />
     <ClInclude Include="version.h" />
-    <ClInclude Include="math\functions\checkered2d.h" />
-    <ClInclude Include="primitives\square-primitive.h" />
-    <ClInclude Include="raytracers\ray-tracer-v2.h" />
-    <ClInclude Include="raytracers\ray-tracer-v3.h" />
-    <ClInclude Include="raytracers\ray-tracer-v4.h" />
-    <ClInclude Include="raytracers\ray-tracer-v5.h" />
-    <ClInclude Include="raytracers\ray-tracer-v6.h" />
-    <ClInclude Include="samplers\random-sampler.h" />
-    <ClInclude Include="samplers\stratified-sampler.h" />
-    <ClInclude Include="samplers\jittered-sampler.h" />
-    <ClInclude Include="samplers\half-jittered-sampler.h" />
-    <ClInclude Include="samplers\n-rooks-sampler.h" />
-    <ClInclude Include="samplers\multi-jittered-sampler.h" />
-    <ClInclude Include="primitives\cube-primitive.h" />
-    <ClInclude Include="primitives\cone-primitive.h" />
+    <ClInclude Include="primitives\triangle-primitive.h" />
+    <ClInclude Include="primitives\bounding-box-accelerator.h" />
+    <ClInclude Include="primitives\intersection-primitive.h" />
+    <ClInclude Include="cameras\fisheye-camera.h" />
+    <ClInclude Include="lights\spot-light.h" />
+    <ClInclude Include="primitives\cylinder-primitive.h" />
+    <ClInclude Include="primitives\difference-primitive.h" />
   </ItemGroup>
 </Project>

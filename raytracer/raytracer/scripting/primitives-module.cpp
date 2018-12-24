@@ -1,3 +1,4 @@
+#include "primitives/intersection-primitive.h"
 #ifndef EXCLUDE_SCRIPTING
 
 #include "scripting/primitives-module.h"
@@ -23,6 +24,30 @@ namespace
 
         return primitives::make_union(children);
     }
+
+	Primitive make_intersection(const std::vector<Boxed_Value>& boxed_children)
+    {
+		std::vector<Primitive> children(boxed_children.size());
+
+		std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](Boxed_Value boxed)
+		{
+			return chaiscript::boxed_cast<Primitive>(boxed);
+		});
+
+		return primitives::make_intersection(children);
+    }
+
+	Primitive make_difference(const std::vector<Boxed_Value>& boxed_children)
+	{
+		std::vector<Primitive> children(boxed_children.size());
+
+		std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](Boxed_Value boxed)
+		{
+			return chaiscript::boxed_cast<Primitive>(boxed);
+		});
+
+		return primitives::make_difference(children);
+	}
 }
 
 ModulePtr scripting::_private_::create_primitives_module()
@@ -51,9 +76,19 @@ ModulePtr scripting::_private_::create_primitives_module()
 	BIND_DIRECTLY(cone_along_x);
 	BIND_DIRECTLY(cone_along_y);
 	BIND_DIRECTLY(cone_along_z);
+	BIND_DIRECTLY(cylinder_along_x);
+	BIND_DIRECTLY(cylinder_along_y);
+	BIND_DIRECTLY(cylinder_along_z);
 	BIND_HELPER_FUNCTION_AS(make_union, union);
+	BIND_HELPER_FUNCTION_AS(make_intersection, intersection);
+	BIND_HELPER_FUNCTION_AS(make_difference, difference);
     BIND_DIRECTLY(decorate);
-    BIND_DIRECTLY(translate);
+	BIND_DIRECTLY(translate);
+	BIND_DIRECTLY(triangle);
+	BIND_DIRECTLY(rotate_around_x);
+	BIND_DIRECTLY(rotate_around_y);
+	BIND_DIRECTLY(rotate_around_z);
+	BIND_DIRECTLY(scale);
 #   undef BIND_HELPER_FUNCTION_AS
 #   undef BIND_DIRECTLY
 #   undef BIND_HELPER_FUNCTION

@@ -1,0 +1,42 @@
+// resolution
+var res = 200
+
+def scene_at(now)
+{
+  // Create animation: z goes from -10 to 0 in 5 seconds
+  var y = Animations.animate(5, 0, seconds(5))
+  var z = Animations.animate(10, -20, seconds(5))
+
+  // Create camera 
+  var camera = Cameras.fisheye( [ "eye": pos(0, 0, z[now]), "look_at": pos(0, 0, z[now]-1), "up": vec(0, 1, 0), "horizontal_angle": degrees(270), "vertical_angle": degrees(180) ] )
+
+  // Create material
+  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 0.8, "specular": Colors.white(), "specular_exponent": 20 ] )
+  var black = Materials.uniform( [ "ambient": Colors.black(), "diffuse": Colors.white() * 0.1, "specular": Colors.white(), "specular_exponent": 20 ] )
+  var xz_plane_material = Materials.checkered2d(1, white, black)
+ 
+
+  // Create primitives
+  var xzplane = translate(vec(0, -2, 0), decorate(xz_plane_material, xz_plane()))
+                  
+   var spheres   = []
+
+  for_each([-2..9], bind(fun (i, spheres) {
+                     spheres.push_back(translate(vec(-2,0,-i*3), sphere()))
+                     spheres.push_back(translate(vec(2,0,-i*3), sphere()))
+                   }, _, spheres))
+
+  var spheres_union = decorate(white, union(spheres))
+  
+  // Create root union
+  var shapes = [  xzplane, spheres_union ]  
+  var root_union = union(shapes)
+
+  // Create list of lights
+  var lights = [ Lights.omnidirectional(pos(0, 5, 5), Colors.white()) ]
+
+  create_scene(camera, root_union, lights)
+}
+
+var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.multijittered(2), "ray_tracer": Raytracers.v4() ] )
+pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )

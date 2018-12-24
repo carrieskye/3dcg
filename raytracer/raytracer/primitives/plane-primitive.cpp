@@ -62,31 +62,25 @@ namespace
 
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit)  const override
 		{
-			// Collect all hits
-			auto hits = find_all_hits(ray);
+			// Compute denominator
+			double denom = ray.direction.dot(m_normal);
 
-			for (auto hit : hits)
+			// If denominator == 0, there is no intersection (ray runs parallel to plane)
+			if (denom != approx(0.0))
 			{
-				// Find first positive hit
-				if (hit->t > 0)
-				{
-					// Is first positive hit closer than already existing hit?
-					if (hit->t < output_hit->t)
-					{
-						// Overwrite hit with new hit
-						*output_hit = *hit;
-						return true;
+				// Compute numerator
+				double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
 
-					}
-					else
-					{
-						// First positive hit is farther away than already existing hit
-						return false;
-					}
-				}
+				// Compute t
+				double t = numer / denom;
+
+				if (t < 0 || t >= output_hit->t) return false;
+
+				// shared_ptr<T>::get() returns the T* inside the shared pointer
+				initialize_hit(output_hit, ray, t);
+				return true;
 			}
 
-			// No positive hits were found
 			return false;
 		}
 	};
