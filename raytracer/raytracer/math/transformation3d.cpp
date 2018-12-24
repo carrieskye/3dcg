@@ -35,3 +35,11 @@ Transformation3D transformations::rotate_around_z(const Angle a)
 
 	return Transformation3D(tm, itm);
 }
+
+Transformation3D transformations::scale(const double sx, const double sy, const double sz)
+{
+	const auto tm = transformation_matrices::scaling(sx, sy, sz);
+	const auto itm = transformation_matrices::scaling(-sx, -sy, -sz);
+
+	return Transformation3D(tm, itm);
+}

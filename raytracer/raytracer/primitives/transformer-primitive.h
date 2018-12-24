@@ -16,5 +16,6 @@ namespace raytracer
 		Primitive rotate_around_x(Angle, Primitive);
 		Primitive rotate_around_y(Angle, Primitive);
 		Primitive rotate_around_z(Angle, Primitive);
+		Primitive scale(double, double, double, Primitive);
 	}
 }
