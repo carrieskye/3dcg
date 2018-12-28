@@ -7,6 +7,7 @@
 #include "math/rectangle3d.h"
 #include <memory>
 
+using namespace math;
 
 namespace raytracer
 {
@@ -17,13 +18,14 @@ namespace raytracer
 			class FisheyeCamera : public DisplaceableCamera
 			{
 			public:
-				FisheyeCamera(const math::Matrix4x4 transformation, const math::Rectangle3D&);
+				FisheyeCamera(const math::Matrix4x4 transformation, Angle horizontal_angle, Angle vertical_angle);
 
 			protected:
 				void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;
 
 			private:
-				math::Rectangle3D m_view_window;
+				Angle horizontal_angle;
+				Angle vertical_angle;
 			};
 		}
 
@@ -34,11 +36,11 @@ namespace raytracer
 		/// <param name="look_at">The point the camera is directed at</param>
 		/// <param name="up">Specifies how the camera is tilted sideways. (0,1,0) is standard.</param>
 		Camera fisheye(
-			const math::Point3D& eye,
-			const math::Point3D& look_at,
-			const math::Vector3D& up,
-			const math::Angle& horizontal_angle,
-			const math::Angle& vertical_angle
+			const Point3D& eye,
+			const Point3D& look_at,
+			const Vector3D& up,
+			Angle horizontal_angle,
+			Angle vertical_angle
 			);
 	}
 }
