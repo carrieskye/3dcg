@@ -109,6 +109,7 @@
     <ClCompile Include="lights\spot-light.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\difference-primitive.cpp" />
+    <ClCompile Include="primitives\bounding-box-hierarchy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -304,5 +305,6 @@
     <ClInclude Include="lights\spot-light.h" />
     <ClInclude Include="primitives\cylinder-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
+    <ClInclude Include="primitives\bounding-box-hierarchy.h" />
   </ItemGroup>
 </Project>
