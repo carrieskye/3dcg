@@ -1,0 +1,6 @@
+### Python Patch ###
+venv/
+__pycache__/
+
+/samples/
+/results/
