@@ -54,9 +54,9 @@ namespace
 		{
 			return raytracer::materials::grid2d(thickness, m1, m2);
 		}
-		Material checkered2d(int size, Material m1, Material m2) const
+		Material checkered2d(Material m1, Material m2) const
         {
-			return raytracer::materials::checkered2d(size, m1, m2);
+			return raytracer::materials::checkered2d(m1, m2);
         }
     };
 }

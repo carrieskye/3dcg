@@ -113,5 +113,5 @@ Primitive primitives::rotate_around_z(const Angle a, const Primitive transformee
 
 Primitive primitives::scale(const double sx, const double sy, const double sz, Primitive transformee)
 {
-	return transform(transformations::scale(sy, sy, sz), transformee);
+	return transform(transformations::scale(sx, sy, sz), transformee);
 }

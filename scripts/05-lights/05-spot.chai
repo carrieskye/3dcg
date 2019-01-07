@@ -33,6 +33,16 @@ def scene_at(now)
   create_scene(camera, root, lights)
 }
 
-var res = 370
-var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.multijittered(3), "ray_tracer": Raytracers.v4() ] )
-pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )
+var raytracer = Raytracers.v6()
+
+var renderer = Renderers.standard( [ "width": 300,
+                                     "height": 300,
+                                     "sampler": Samplers.multijittered(2),
+                                     "ray_tracer": raytracer ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(15),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

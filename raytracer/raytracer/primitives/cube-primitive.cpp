@@ -22,23 +22,23 @@ namespace
 			std::vector<std::shared_ptr<Hit>> hits;
 
 			// xz_square
-			auto xz_hits = translate(Vector3D(0, 2, 0), xz_square())->find_all_hits(ray);
+			auto xz_hits = translate(Vector3D(0, 1, 0), xz_square())->find_all_hits(ray);
 			hits.insert(hits.end(), xz_hits.begin(), xz_hits.end());
-			auto xz2_hits = translate(Vector3D(0, -2, 0), xz_square())->find_all_hits(ray);
+			auto xz2_hits = translate(Vector3D(0, -1, 0), xz_square())->find_all_hits(ray);
 			hits.insert(hits.end(), xz2_hits.begin(), xz2_hits.end());
 
 			// xy_square
-			auto xy_hits = translate(Vector3D(0, 0, 2), xy_square())->find_all_hits(ray);
+			auto xy_hits = translate(Vector3D(0, 0, 1), xy_square())->find_all_hits(ray);
 			hits.insert(hits.end(), xy_hits.begin(), xy_hits.end());
 
-			auto xy2_hits = translate(Vector3D(0, 0, -2), xy_square())->find_all_hits(ray);
+			auto xy2_hits = translate(Vector3D(0, 0, -1), xy_square())->find_all_hits(ray);
 			hits.insert(hits.end(), xy2_hits.begin(), xy2_hits.end());
 
 			// yz_square
-			auto yz_hits = translate(Vector3D(2, 0, 0), yz_square())->find_all_hits(ray);
+			auto yz_hits = translate(Vector3D(1, 0, 0), yz_square())->find_all_hits(ray);
 			hits.insert(hits.end(), yz_hits.begin(), yz_hits.end());
 
-			auto yz2_hits = translate(Vector3D(-2, 0, 0), yz_square())->find_all_hits(ray);
+			auto yz2_hits = translate(Vector3D(-1, 0, 0), yz_square())->find_all_hits(ray);
 			hits.insert(hits.end(), yz2_hits.begin(), yz2_hits.end());
 			
 			std::sort(hits.begin(), hits.end(), [](const std::shared_ptr<Hit>& a, const std::shared_ptr<Hit>& b) { return a->t < b->t; });
@@ -49,7 +49,7 @@ namespace
 		Box bounding_box() const override
 		{
 			// Create a [-1, 1] x [-1, 1] x [-1, 1] box.
-			auto range = interval(-2.0, 2.0);
+			auto range = interval(-1.0, 1.0);
 
 			return Box(range, range, range);
 		}
