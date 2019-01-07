@@ -82,7 +82,8 @@ ModulePtr scripting::_private_::create_primitives_module()
 	BIND_HELPER_FUNCTION_AS(make_union, union);
 	BIND_HELPER_FUNCTION_AS(make_intersection, intersection);
 	BIND_HELPER_FUNCTION_AS(make_difference, difference);
-    BIND_DIRECTLY(decorate);
+	BIND_DIRECTLY(load_mesh);
+	BIND_DIRECTLY(decorate);
 	BIND_DIRECTLY(translate);
 	BIND_DIRECTLY(triangle);
 	BIND_DIRECTLY(rotate_around_x);

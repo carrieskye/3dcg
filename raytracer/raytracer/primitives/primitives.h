@@ -12,3 +12,4 @@
 #include "primitives/square-primitive.h"
 #include "primitives/triangle-primitive.h"
 #include "primitives/union-primitive.h"
+#include "primitives/bounding-box-hierarchy.h"

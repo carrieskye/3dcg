@@ -1,14 +1,16 @@
-team_member 'Larry' do
+team_member 'Larry   ' do
   extension BasicSample
   extension BasicScripting
-  
-  extension RayTracerV1
+
   extension RayTracerV3
+  extension RayTracerV4
   extension RayTracerV5
+
+  extension FisheyeCamera
 
   extension MaterialVerticalLines
   extension MaterialGrid2d
-  
+
   extension PlaneYZ
   extension PlaneYZOptimized
   #extension PlaneXZOptimized
@@ -17,36 +19,59 @@ team_member 'Larry' do
   #extension SquareXZ
 
   extension Cube
-  
+
+  extension CylinderAlongY
+  extension ConeAlongY
+
+  extension Triangle
+  extension BoundingBox
+
+  extension Difference
+
+  extension PrimitiveScaling
+  extension PrimitiveRotationX
+  #extension PrimitiveRotationY
+
   extension ParallelScheduler
+
+  extension Mesh
 end
 
 team_member 'Carolyne' do
-  extension BasicSample
-  extension BasicScripting
-  
   extension RayTracerV1
+
   extension RayTracerV2
-  extension RayTracerV4
   extension RayTracerV6
-  
+
   extension RandomSampler
   extension StratifiedSampler
   extension JitteredSampler
   extension HalfJitteredSampler
   extension NRooksSampler
   extension MultijitteredSampler
-  
-  extension MaterialCheckered2D
-  
-  extension PlaneXZ
 
+  extension SpotLight
+
+  extension MaterialCheckered2D
+
+  extension PlaneXZ
   extension SquareYZ
   extension SquareYZOptimized
   #extension SquareXYOptimized
   #extension SquareXZOptimized
 
+  extension CylinderAlongX
+  extension ConeAlongX
+
+  extension TriangleOptimized
+
+  extension Intersection
+
+  extension PrimitiveRotationZ
+
   extension EasingLibrary
+
+  extension Mesh
 end
 
 =begin
