@@ -1,6 +1,3 @@
-// resolution
-var res = 370
-
 def scene_at(now)
 {
   var camera = Cameras.perspective( [ "eye": pos(0,5,10),
@@ -36,5 +33,6 @@ def scene_at(now)
   create_scene(camera, root, lights)
 }
 
+var res = 370
 var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.multijittered(3), "ray_tracer": Raytracers.v4() ] )
 pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )

@@ -13,7 +13,7 @@ def scene_at(now)
   // Create material
   var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 0.8, "specular": Colors.white(), "specular_exponent": 20 ] )
   var black = Materials.uniform( [ "ambient": Colors.black(), "diffuse": Colors.white() * 0.1, "specular": Colors.white(), "specular_exponent": 20 ] )
-  var xz_plane_material = Materials.checkered2d(1, white, black)
+  var xz_plane_material = Materials.checkered2d(white, black)
  
 
   // Create primitives

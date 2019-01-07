@@ -14,7 +14,7 @@ var black_material = Materials.uniform( [ "ambient": Colors.black(),
                                           "specular": Colors.black(),
                                           "specular_exponent": 0 ] )
 
-var checkered_material = Materials.checkered2d(1, white_material, black_material)
+var checkered_material = Materials.checkered2d(white_material, black_material)
 
 var root        = decorate(checkered_material, xz_plane())
 
@@ -26,7 +26,11 @@ var scene = create_scene(camera, root, lights)
 var raytracer   = Raytracers.v6()
 var renderer    = Renderers.standard( [ "width": 500,
                                         "height": 500,
-                                        "sampler": Samplers.jittered(4, 4),
+                                        "sampler": Samplers.stratified(4, 4),
                                         "ray_tracer": raytracer ] )
 
-pipeline(scene, [Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout()])
+pipeline( scene,
+          [ Pipeline.renderer(renderer),
+            Pipeline.wif(), 
+            Pipeline.base64(), 
+            Pipeline.stdout() ] )

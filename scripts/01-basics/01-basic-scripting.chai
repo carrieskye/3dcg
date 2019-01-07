@@ -1,6 +1,3 @@
-// resolution
-var res = 370
-
 def scene_at(now)
 {
   // Create animation: x goes from -10 to +10 in 5 seconds
@@ -29,5 +26,6 @@ def scene_at(now)
   create_scene(camera, root, lights)
 }
 
+var res = 300
 var renderer = Renderers.standard( [ "width": res, "height": res, "sampler": Samplers.single(), "ray_tracer": Raytracers.v0() ] )
-pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(15), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )
+pipeline( scene_animation(scene_at, seconds(5)), [ Pipeline.animation(30), Pipeline.renderer(renderer), Pipeline.wif(), Pipeline.base64(), Pipeline.stdout() ] )
