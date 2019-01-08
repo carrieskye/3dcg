@@ -73,7 +73,7 @@ namespace
 			OPTIONAL_ARGUMENT(Point3D, position, Point3D(0, 0, 1));
 			OPTIONAL_ARGUMENT(Point3D, around, Point3D(0, 0, 0));
 			OPTIONAL_ARGUMENT(Vector3D, axis, Vector3D(0, 1, 0));
-			OPTIONAL_ARGUMENT(Interval<Angle>, angle_interval, math::interval(Angle::degrees(0), Angle::degrees(-360)));
+			OPTIONAL_ARGUMENT(Interval<Angle>, angle_interval, math::interval(Angle::degrees(0), Angle::degrees(360)));
 			OPTIONAL_ARGUMENT(Duration, duration, Duration::from_seconds(1));
 			END_ARGUMENTS();
 

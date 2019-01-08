@@ -52,8 +52,8 @@ def scene_at(now)
 }
 
 var raytracer   = Raytracers.v3()
-var renderer    = Renderers.standard( [ "width": 500,
-                                        "height": 500,
+var renderer    = Renderers.standard( [ "width": 300,
+                                        "height": 300,
                                         "sampler": Samplers.multijittered(2),
                                         "ray_tracer": raytracer ] )
 

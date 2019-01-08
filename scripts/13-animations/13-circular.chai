@@ -56,7 +56,7 @@ var renderer    = Renderers.standard( [ "width": 300,
                                         "ray_tracer": raytracer ] )
 
 pipeline( scene_animation(scene_at, seconds(5)),
-          [ Pipeline.animation(150),
+          [ Pipeline.animation(50),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
             Pipeline.base64(),
