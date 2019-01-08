@@ -35,6 +35,10 @@ team_member 'Larry   ' do
   extension ParallelScheduler
 
   extension Mesh
+  
+  extension Cubic
+  extension AngleAnimation
+  extension Lissajous
 end
 
 team_member 'Carolyne' do
@@ -72,6 +76,9 @@ team_member 'Carolyne' do
   extension EasingLibrary
 
   extension Mesh
+
+  extension Quintic
+  extension CircularAnimation
 end
 
 =begin
