@@ -17,7 +17,7 @@ def scene_at(now)
                                               translate(vec(-1.75,0,0), sphere())
                                             ] ) ))
 
-  var angle = Animations.animate(degrees(0), degrees(-360), seconds(5))
+  var angle = Animations.animate( degrees(0), degrees(360), seconds(5) )
   var root = rotate_around_y(angle[now], primitive)
 
   var lights = [ Lights.omnidirectional( pos(5,5,5), Colors.white() ), Lights.omnidirectional( pos(-5,0,-5), Colors.white() ) ]
@@ -37,4 +37,4 @@ pipeline( scene_animation(scene_at, seconds(5)),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
             Pipeline.base64(),
-            Pipeline.stdout() ] ) 
+            Pipeline.stdout() ] )
