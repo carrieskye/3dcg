@@ -83,6 +83,7 @@ ModulePtr scripting::_private_::create_primitives_module()
 	BIND_HELPER_FUNCTION_AS(make_intersection, intersection);
 	BIND_HELPER_FUNCTION_AS(make_difference, difference);
 	BIND_DIRECTLY(load_mesh);
+	BIND_DIRECTLY(bounding_box_hierarchy2);
 	BIND_DIRECTLY(decorate);
 	BIND_DIRECTLY(translate);
 	BIND_DIRECTLY(triangle);
