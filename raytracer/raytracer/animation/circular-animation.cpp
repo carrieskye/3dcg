@@ -11,7 +11,7 @@ Animation<Point3D> animation::circular(const math::Point3D& point, const math::P
 	std::function<math::Point3D(TimeStamp)> lambda = [point, center, rotation_axis, angle_interval, double_animation](TimeStamp now) -> math::Point3D {
 		const auto angle = angle_interval.from_relative(double_animation(now));
 
-		const auto r = sqrt(pow(2, center.x() - point.x()) + pow(2, center.y() - point.y()) + pow(2, center.z() - point.z()));
+		const auto r = sqrt(pow(center.x() - point.x(), 2) + pow(center.y() - point.y(), 2) + pow(center.z() - point.z(), 2));
 
 		const auto x = r * sin(angle);
 		const auto y = r * cos(angle);
