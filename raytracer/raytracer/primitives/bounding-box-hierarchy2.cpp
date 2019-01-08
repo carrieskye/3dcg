@@ -71,11 +71,8 @@ Primitive primitives::bounding_box_hierarchy2(const string path)
 		case ReadingBoxes:
 			line_split = split(line, ' ');
 			read_boxes[line_split[0]] = ReadingBox(
-				Box::from_corners(
-					parseOwnPoint3D(line_split[1]),
-					parseOwnPoint3D(line_split[2])
-				),
-				split(line_split[3], ';')
+				Box::empty(),
+				split(line_split[1], ';')
 			);
 			if (root_box_id.size() == 0)
 			{
@@ -97,7 +94,7 @@ Primitive primitives::bounding_box_hierarchy2(const string path)
 
 		for(auto r : a.refs)
 		{
-			if (stoi(r) > stoi(root_box_id)) p.push_back(f(r));
+			if (read_triangles.find(r) == read_triangles.end()) p.push_back(f(r));
 			else p.push_back(read_triangles.find(r)->second);
 		}
 		if (p.size() == 1) return p.at(0);
