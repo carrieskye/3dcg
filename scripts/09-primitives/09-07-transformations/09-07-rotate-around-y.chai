@@ -11,9 +11,9 @@ def scene_at(now)
   var camera = Cameras.perspective( [ "eye": pos(0,0,10),
                                       "look_at": pos(0,0,0) ] )
 
-  var angle = Animations.animate(0, 360, seconds(3))
+  var angle = Animations.animate(degrees(0), degrees(360), seconds(3))
 
-  var root = decorate( colored_material(Colors.green()), rotate_around_y(degrees(angle[now]), rotate_around_x(degrees(90), cube())) )
+  var root = decorate( colored_material(Colors.green()), rotate_around_y(angle[now], cube()) )
 
   var lights = [ Lights.omnidirectional( pos(0,5,5), Colors.white() ) ]
 

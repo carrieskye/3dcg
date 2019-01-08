@@ -13,13 +13,13 @@ def scene_at(now)
                                       "specular": Colors.white() * 0.5,
                                       "specular_exponent": 7 ] )
 
+  var angle = Animations.animate(degrees(180), degrees(0), seconds(2))
   var back_wall = decorate(wall_material, translate( vec(0,0,-5), xy_plane()))
   var wall = decorate(wall_material, translate( vec(-5,0,0), yz_plane()))
   var floor = decorate(wall_material, translate( vec(0,-5,0), xz_plane()))
-  var cylinder = decorate(material, cylinder_along_z())
+  var cylinder = rotate_around_x(angle[now], decorate(material, cylinder_along_z()))
 
-  var x = Animations.animate(180, 0, seconds(2))
-  var root = union( [ back_wall, floor, wall, rotate_around_x(degrees(x[now]), cylinder ) ] )
+  var root = union( [ back_wall, floor, wall, cylinder ] )
 
   var lights = [ Lights.omnidirectional( pos(4,4,0), Colors.white() * 0.5 ),
                  Lights.omnidirectional( pos(-4,4,-4), Colors.white() * 0.5 )

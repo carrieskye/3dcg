@@ -18,19 +18,21 @@ def scene_at(now)
   var p2 = Pos.spherical(1, degrees(60), degrees(-30))
   var p3 = Pos.spherical(1, degrees(180), degrees(-30))
   var p4 = Pos.spherical(1, degrees(-60), degrees(-30))
+  
+  var x = Animations.animate(degrees(0), degrees(360), seconds(6))
+  var y = Animations.animate(degrees(0), degrees(360), seconds(2))
+  var z = Animations.animate(degrees(0), degrees(360), seconds(3))
 
   var root = union( [ decorate( material(Colors.red()), triangle(p1, p2, p3) ),
                      decorate( material(Colors.green()), triangle(p1, p3, p4) ),
                      decorate( material(Colors.blue()), triangle(p1, p4, p2) ),
                      decorate( material(Colors.yellow()), triangle(p2, p4, p3) ) ] )
+                     
+  var rotating_root = rotate_around_x(x[now], rotate_around_y(y[now], rotate_around_z(z[now], root)))
 
   var lights = [ Lights.omnidirectional( pos(0, 4, 2), Colors.white() ), Lights.omnidirectional( pos(0, -4, 2), Colors.white() ) ]
   
-  var x = Animations.animate(0, 360, seconds(6))
-  var y = Animations.animate(0, 360, seconds(2))
-  var z = Animations.animate(0, 360, seconds(3))
-   
-  create_scene(camera, rotate_around_x(degrees(x[now]), rotate_around_y(degrees(y[now]), rotate_around_z(degrees(z[now]), root))), lights)
+  create_scene(camera, rotating_root, lights)
 }
 
 var raytracer   = Raytracers.v6()

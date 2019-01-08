@@ -16,10 +16,10 @@ def scene_at(now)
 
   var plane_material = Materials.checkered2d( white, black )
 
-  var x = Animations.animate(0, -360, seconds(3))
-  var y = Animations.animate(0, -360, seconds(2))
-  var z = Animations.animate(0, -360, seconds(1))
-  var root = union( [ decorate(cube_material, rotate_around_z(degrees(z[now]) / 2, rotate_around_y(degrees(y[now]), rotate_around_x(degrees(x[now]), cube())))),
+  var x = Animations.animate(degrees(0), degrees(-360), seconds(3))
+  var y = Animations.animate(degrees(0), degrees(-360), seconds(2))
+  var z = Animations.animate(degrees(0), degrees(-360), seconds(1))
+  var root = union( [ decorate(cube_material, rotate_around_z(z[now] / 2, rotate_around_y(y[now], rotate_around_x(x[now], cube())))),
                       decorate(plane_material, translate(vec(0,-2,0), xz_plane())) ] )
 
   var lights = [ Lights.omnidirectional( pos(5,5,5), Colors.white() ) ]
