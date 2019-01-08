@@ -188,6 +188,18 @@ namespace
 		{
 			return math::functions::easing::quadratic_inout();
 		}
+		EasingFunction cubic_in() const
+		{
+			return math::functions::easing::cubic_in();
+		}
+		EasingFunction cubic_out() const
+		{
+			return math::functions::easing::cubic_out();
+		}
+		EasingFunction cubic_inout() const
+		{
+			return math::functions::easing::cubic_inout();
+		}
 		EasingFunction quintic_in() const
 		{
 			return math::functions::easing::quintic_in();
@@ -210,6 +222,9 @@ namespace
 		BIND(quadratic_in);
 		BIND(quadratic_out);
 		BIND(quadratic_inout);
+		BIND(cubic_in);
+		BIND(cubic_out);
+		BIND(cubic_inout);
 		BIND(quintic_in);
 		BIND(quintic_out);
 		BIND(quintic_inout);

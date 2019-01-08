@@ -3,4 +3,5 @@
 #include "math/functions/easing/linear-easing-function.h"
 #include "math/functions/easing/stretch-easing-function.h"
 #include "math/functions/easing/quadratic-function.h"
+#include "math/functions/easing/cubic-function.h"
 #include "math/functions/easing/quintic-function.h"

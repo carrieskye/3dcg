@@ -113,6 +113,7 @@
     <ClCompile Include="primitives\bounding-box-hierarchy2.cpp" />
     <ClCompile Include="math\functions\easing\quintic-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
+    <ClCompile Include="math\functions\easing\cubic-function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -312,5 +313,6 @@
     <ClInclude Include="primitives\bounding-box-hierarchy2.h" />
     <ClInclude Include="math\functions\easing\quintic-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-function.h" />
+    <ClInclude Include="math\functions\easing\cubic-function.h" />
   </ItemGroup>
 </Project>

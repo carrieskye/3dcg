@@ -12,7 +12,6 @@ namespace math
 			math::functions::EasingFunction quintic_in();
 			math::functions::EasingFunction quintic_out();
 			math::functions::EasingFunction quintic_inout();
-
 		}
 	}
 }

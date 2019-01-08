@@ -366,6 +366,7 @@
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="math\functions\checkered2d.cpp" />
+    <ClCompile Include="math\functions\easing\cubic-function.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
     <ClCompile Include="math\functions\easing\quintic-function.cpp" />
@@ -522,6 +523,7 @@
     <ClInclude Include="math\functions\checkered2d.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />
+    <ClInclude Include="math\functions\easing\cubic-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-function.h" />
     <ClInclude Include="math\functions\easing\quintic-function.h" />

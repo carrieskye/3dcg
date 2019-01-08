@@ -1,6 +1,6 @@
 def scene_at(now)
 {
-  var eye_position = Animations.animate( pos(0, 1, 1), pos(20, 20, 20), seconds(5))
+  var eye_position = Animations.ease(Animations.animate( pos(0, 1, 1), pos(20, 20, 20), seconds(5)), Easing.quintic_inout)
   var camera = Cameras.perspective( [ "eye": eye_position[now],
                                       "look_at": pos(0,0,0) ] )
 
@@ -34,4 +34,4 @@ pipeline( scene_animation(scene_at, seconds(5)),
             Pipeline.renderer(renderer),
             Pipeline.wif(),
             Pipeline.base64(),
-            Pipeline.stdout() ] )
+            Pipeline.stdout() ] ) 
