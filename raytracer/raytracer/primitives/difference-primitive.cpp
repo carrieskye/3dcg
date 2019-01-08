@@ -131,28 +131,7 @@ namespace
 	};
 }
 
-Primitive primitives::make_difference(std::vector<Primitive>& children)
+Primitive primitives::difference(Primitive child1, Primitive child2)
 {
-	if (children.size() == 0)
-	{
-		LOG(ERROR) << "Union needs at least one child";
-		abort();
-	}
-	else
-	{
-		// TODO: This creates a linked list of children, would a balanced tree be more efficient
-		auto i = children.begin();
-
-		Primitive result = *i;
-
-		++i;
-		while (i != children.end())
-		{
-			result = Primitive(std::make_shared<DifferenceImplementation>(result, *i));
-
-			++i;
-		}
-
-		return result;
-	}
+	return Primitive(std::make_shared<DifferenceImplementation>(child1, child2));
 }
