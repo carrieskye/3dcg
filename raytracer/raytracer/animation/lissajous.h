@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "animation/animation.h"
-#include "math/interval.h"
 
 namespace animation
 {
