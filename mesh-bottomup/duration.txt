@@ -1,0 +1,27 @@
+buddha 10     used approximately 558.73 MB memory in 10.745 seconds
+			  rendered in 2.31677 minutes
+
+armadillo 10  used approximately 316.82 MB memory in  4.031 seconds
+              rendered in 23.78 seconds
+
+bunny 10      used approximately  60.78 MB memory in  0.984 seconds
+              rendered in 3.886 seconds
+			  
+dargon 10 - 3609600 vertices and 7219045 triangles.
+read-vertices:   9797.551ms used approximately  285.68 MB memory
+read-triangles: 31848.786ms used approximately  925.94 MB memory
+triangles-avg:  52571.063ms used approximately 1958.39 MB memory
+triangles-sort: 28109.860ms used approximately 1991.52 MB memory
+build-tree:     31666.314ms used approximately 1671.39 MB memory
+write-tree:    231698.140ms used approximately 2996.41 MB memory (to hd, not ssd)
+real    6m34.561s
+user    0m0.000s
+sys     0m0.031s
+rendered in 6.5282 minutes
+
+
+
+boxesPerBranch
+5	3.815 seconds
+3	3.908 seconds
+2	4.047 seconds

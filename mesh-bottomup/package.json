@@ -1,0 +1,15 @@
+{
+  "name": "mesh-optimizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --expose-gc --max_old_space_size=4096 --optimize_for_size --stack_size=4096 ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "event-stream": "^4.0.1"
+  }
+}
