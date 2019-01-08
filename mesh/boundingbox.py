@@ -35,7 +35,7 @@ class BoundingBox:
         return string
 
     def serialize(self, separator=" "):
-        string = str(self.index) + separator + self.min.serialize() + separator + self.max.serialize() + separator
+        string = str(self.index) + separator
         if len(self.sub_boxes) > 0:
             for bb in self.sub_boxes:
                 string += str(bb.index) + ";"
