@@ -24,7 +24,7 @@ vector<string> split(const string& s, char delimiter)
 }
 
 // 1.0;1.0;0.0 -> Point3D(1.0, 1.0, 0.0)
-Point3D parsePoint3D(const string point)
+Point3D parseOwnPoint3D(const string point)
 {
 	auto coords = split(point, ';');
 	return Point3D(
@@ -34,18 +34,10 @@ Point3D parsePoint3D(const string point)
 	);
 }
 
-class ReadingBox
-{
-public:
-	Box box;
-	vector<string> refs;
-	ReadingBox(Box box, vector<string> refs) : box(box), refs(refs) {}
-	ReadingBox() : box(Box::empty()) {}
-};
+
 //int got_in_all_hits = 0;
 namespace
 {
-	enum ReadingMeshState { ReadingVertices, ReadingTriangles, ReadingBoxes };
 
 	class BoundingBoxHierarchy : public primitives::_private_::PrimitiveImplementation
 	{
@@ -101,7 +93,7 @@ namespace
 				{
 				case ReadingVertices:
 					line_split = split(line, ' ');
-					read_vertices[line_split[0]] = parsePoint3D(line_split[1]);
+					read_vertices[line_split[0]] = parseOwnPoint3D(line_split[1]);
 					break;
 				case ReadingTriangles:
 					line_split = split(line, ' ');
@@ -117,8 +109,8 @@ namespace
 					line_split = split(line, ' ');
 					read_boxes[line_split[0]] = ReadingBox(
 						Box::from_corners(
-							parsePoint3D(line_split[1]),
-							parsePoint3D(line_split[2])
+							parseOwnPoint3D(line_split[1]),
+							parseOwnPoint3D(line_split[2])
 						),
 						split(line_split[3], ';')
 					);
@@ -182,7 +174,7 @@ namespace
 
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
-			if (!box.is_hit_by(ray)) return false;
+			if (!box.is_hit_positively_by(ray)) return false;
 			bool o = false;
 			if (!sub_boxes.empty())
 			{
@@ -194,8 +186,13 @@ namespace
 			{
 				bool o = false;
 				for (auto primitive : primitives)
-					if (primitive->find_first_positive_hit(ray, output_hit))
-						o = true;
+				{
+					if (primitive->bounding_box().is_hit_positively_by(ray))
+					{
+						if (primitive->find_first_positive_hit(ray, output_hit))
+							o = true;
+					}
+				}
 				return o;
 			}
 			else LOG(INFO) << "SHOULD NOT HAPPEN";
