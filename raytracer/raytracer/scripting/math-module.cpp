@@ -176,6 +176,18 @@ namespace
 
 	struct EasingLibrary
 	{
+		EasingFunction quadratic_in() const
+		{
+			return math::functions::easing::quadratic_in();
+		}
+		EasingFunction quadratic_out() const
+		{
+			return math::functions::easing::quadratic_out();
+		}
+		EasingFunction quadratic_inout() const
+		{
+			return math::functions::easing::quadratic_inout();
+		}
 		EasingFunction quintic_in() const
 		{
 			return math::functions::easing::quintic_in();
@@ -195,6 +207,9 @@ namespace
 		auto easing_library = std::make_shared<EasingLibrary>();
 		module.add_global_const(const_var(easing_library), "Easing");
 		#   define BIND(NAME)  module.add(fun(&EasingLibrary::NAME), #NAME)
+		BIND(quadratic_in);
+		BIND(quadratic_out);
+		BIND(quadratic_inout);
 		BIND(quintic_in);
 		BIND(quintic_out);
 		BIND(quintic_inout);

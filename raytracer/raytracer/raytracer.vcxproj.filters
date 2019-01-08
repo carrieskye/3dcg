@@ -111,6 +111,8 @@
     <ClCompile Include="primitives\difference-primitive.cpp" />
     <ClCompile Include="primitives\bounding-box-hierarchy.cpp" />
     <ClCompile Include="primitives\bounding-box-hierarchy2.cpp" />
+    <ClCompile Include="math\functions\easing\quintic-function.cpp" />
+    <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -308,5 +310,7 @@
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\bounding-box-hierarchy.h" />
     <ClInclude Include="primitives\bounding-box-hierarchy2.h" />
+    <ClInclude Include="math\functions\easing\quintic-function.h" />
+    <ClInclude Include="math\functions\easing\quadratic-function.h" />
   </ItemGroup>
 </Project>
