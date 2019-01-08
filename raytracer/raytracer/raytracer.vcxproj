@@ -347,6 +347,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="demos\basic-sample.cpp" />
     <ClCompile Include="demos\basic-sample2.cpp" />
@@ -366,7 +367,10 @@
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="math\functions\checkered2d.cpp" />
+    <ClCompile Include="math\functions\easing\cubic-function.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
+    <ClCompile Include="math\functions\easing\quintic-function.cpp" />
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\grid2d.cpp" />
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
@@ -382,6 +386,8 @@
     <ClCompile Include="pipeline\wif-consumer.cpp" />
     <ClCompile Include="pipeline\wif-processor.cpp" />
     <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
+    <ClCompile Include="primitives\bounding-box-hierarchy.cpp" />
+    <ClCompile Include="primitives\bounding-box-hierarchy2.cpp" />
     <ClCompile Include="primitives\cone-primitive.cpp" />
     <ClCompile Include="primitives\cube-primitive.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
@@ -459,6 +465,7 @@
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
+    <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="animation\time-stamp.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
@@ -518,7 +525,10 @@
     <ClInclude Include="math\functions\checkered2d.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />
+    <ClInclude Include="math\functions\easing\cubic-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
+    <ClInclude Include="math\functions\easing\quadratic-function.h" />
+    <ClInclude Include="math\functions\easing\quintic-function.h" />
     <ClInclude Include="math\functions\easing\stretch-easing-function.h" />
     <ClInclude Include="math\functions\grid2d.h" />
     <ClInclude Include="math\functions\horizontal-lines-pattern.h" />
@@ -544,6 +554,8 @@
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="pipeline\wif-processor.h" />
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
+    <ClInclude Include="primitives\bounding-box-hierarchy.h" />
+    <ClInclude Include="primitives\bounding-box-hierarchy2.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
     <ClInclude Include="primitives\cube-primitive.h" />
     <ClInclude Include="primitives\cylinder-primitive.h" />

@@ -1,0 +1,36 @@
+var camera = Cameras.perspective( [ "eye": pos(5, 0.5, 5),
+                                    "look_at": pos(0, 0.5, 0),
+                                    "up": vec(0, 1, 0),
+                                    "distance": 1,
+                                    "aspect_ratio": 1 ] )
+
+var white_material = Materials.uniform( [ "ambient": Colors.white(),
+                                          "diffuse": Colors.black(),
+                                          "specular": Colors.black(),
+                                          "specular_exponent": 0 ] )
+
+var black_material = Materials.uniform( [ "ambient": Colors.black(),
+                                          "diffuse": Colors.black(),
+                                          "specular": Colors.black(),
+                                          "specular_exponent": 0 ] )
+
+var checkered_material = Materials.checkered2d(white_material, black_material)
+
+var root        = decorate(checkered_material, xz_plane())
+
+var lights      = [ Lights.omnidirectional( pos(0, 10, 0), Colors.white() ) ]
+
+var scene = create_scene(camera, root, lights)
+
+
+var raytracer   = Raytracers.v6()
+var renderer    = Renderers.standard( [ "width": 500,
+                                        "height": 500,
+                                        "sampler": Samplers.jittered(4, 4),
+                                        "ray_tracer": raytracer ] )
+
+pipeline( scene,
+          [ Pipeline.renderer(renderer),
+            Pipeline.wif(), 
+            Pipeline.base64(), 
+            Pipeline.stdout() ] )

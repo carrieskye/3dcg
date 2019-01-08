@@ -1,0 +1,45 @@
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,5,10),
+                                      "look_at": pos(0,0,0) ] )
+
+  var material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                      "diffuse": Colors.white() * 0.8,
+                                      "specular": Colors.white() * 0.5,
+                                      "specular_exponent": 10,
+                                      "reflectivity": 0.0,
+                                      "transparency": 0,
+                                      "refractive_index": 0 ] )
+
+  var cylinder = cube()
+
+  var primitives = []
+
+  [1..5].for_each( bind( fun (i, primitives, cylinder, now) {
+    var size = 0.2 * i
+    var s = Animations.animate(1.0, size, seconds(5))[now]
+
+    primitives.push_back( scale( 2 * size, 1/s, 2 * size, cylinder ) )
+  }, _, primitives, cylinder, now ) )
+
+  var root = decorate(material, union( primitives ))
+                                            
+  var lights = [ Lights.omnidirectional( pos(5,5,5), Colors.white() ) ]
+
+  create_scene(camera, root, lights)
+}
+
+
+var raytracer   = Raytracers.v6()
+ 
+var renderer    = Renderers.standard( [ "width": 300,
+                                       "height": 300,
+                                       "sampler": Samplers.single(),
+                                       "ray_tracer": raytracer ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(15),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] ) 

@@ -1,0 +1,71 @@
+def material(color)
+{
+  Materials.uniform( [ "ambient": color * 0.1,
+                       "diffuse": color * 0.8,
+                       "specular": Colors.white() * 0.8,
+                       "specular_exponent": 100,
+                       "reflectivity": 0.1 ] )
+}
+
+def scene_at(now)
+{
+  var camera = Cameras.perspective( [ "eye": pos(0,5,15),
+                                      "look_at": pos(0,0,0) ] )
+
+  var pos1 = Animations.lissajous( [ "x_amplitude": 1,
+                                     "y_amplitude": 1,
+                                     "x_frequency": 1,
+                                     "y_frequency": 1,
+                                     "x_phase": degrees(90),
+                                     "duration": seconds(5) ] )
+
+  var pos2 = Animations.lissajous( [ "x_amplitude": 1,
+                                     "y_amplitude": 1,
+                                     "z_amplitude": 0,
+                                     "x_frequency": 2,
+                                     "y_frequency": 3,
+                                     "x_phase": degrees(180),
+                                     "duration": seconds(5) ] )
+
+  var pos3 = Animations.lissajous( [ "x_amplitude": 1,
+                                     "y_amplitude": 1,
+                                     "z_amplitude": 3,
+                                     "x_frequency": 7,
+                                     "y_frequency": 5,
+                                     "z_frequency": 3,
+                                     "duration": seconds(5) ] )
+
+  var wall_material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                           "diffuse": Colors.white() * 0.5,
+                                           "reflectivity": 0.1 ] )
+
+  var back_wall = translate(vec(0,0,-5), decorate(wall_material, xy_plane()))
+
+  var floor = translate(vec(0,-5,0), decorate(wall_material, xz_plane()))
+
+
+  var root = union([ translate(vec(-5,0,0) + pos1[now] - pos(0,0,0), decorate( material(Colors.red()), sphere())),
+                     translate(pos2[now] - pos(0,0,0), decorate( material(Colors.red()), sphere())),
+                     translate(vec(5,0,0) + pos3[now] - pos(0,0,0), decorate( material(Colors.red()), sphere())),
+                     back_wall,
+                     floor])
+
+  var lights = [ Lights.omnidirectional( pos(0,5,5), Colors.white() ) ]
+
+
+  create_scene(camera, root, lights)
+}
+
+
+var raytracer = Raytracers.v6()
+var renderer = Renderers.standard( [ "width": 500,
+                                     "height": 500,
+                                     "sampler": Samplers.multijittered(2),
+                                     "ray_tracer": raytracer ] )
+
+pipeline( scene_animation(scene_at, seconds(5)),
+          [ Pipeline.animation(30),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

@@ -1,0 +1,91 @@
+// resolution
+var res = 500
+/*
+results for bounding_box_hierarchy
+bunny0
+40  -> [1.283 seconds]
+140 -> [9.103 seconds]
+bunny5
+40 -> [4.025 seconds]
+70  -> [10.397 seconds]
+90  -> [8.356 seconds]
+170 -> [28.493 seconds]
+
+bunny20
+40  -> [23.059 seconds]
+90  -> [41.259 seconds] [43.585 seconds]
+
+
+35947 vertices and 69451 triangles and 1 boxes.
+35947 vertices and 69451 triangles and 98 boxes.
+35947 vertices and 69451 triangles and 79744 boxes.
+                                       69451
+*/
+var frames = 1
+//
+//global mesh = load_mesh("D:\\bunny20.mesh");
+global mesh = bounding_box_hierarchy2("D:\\bunny100.mesh");
+
+def scene_at(now)
+{
+  var af = 0.2
+  var x = Animations.animate(0, 360, seconds(1))
+  var camera = Cameras.perspective( [ "eye": pos(0,0,2), "look_at": pos(0,0,0) ] )
+
+  var white = Materials.uniform( [ "ambient": Colors.white() * af, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var black = Materials.uniform( [ "ambient": Colors.white() * af, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var checkered = Materials.checkered2d(black, white )
+  
+  var floor_material = checkered
+ var material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
+                                      "diffuse": Colors.white() * 0.8,
+                                      "specular": Colors.white(),
+                                      "specular_exponent": 100,
+                                      "reflectivity": 0,
+                                      "transparency": 0,
+                                      "refractive_index": 0 ] )
+  var primitives = []
+
+  var shape = rotate_around_y(degrees(x[now]), decorate(material, mesh))
+
+  primitives.push_back( shape )
+
+  primitives.push_back( translate(vec(0,-0.8,0), decorate(floor_material, xz_plane())) )
+
+  var root = union(primitives)
+  var animation = Animations.animate(-4, 4, seconds(5))
+  
+  var pos_red = pos(0, -1, (animation[now] * animation[now]) - 5)
+  var lights_red = Lights.spot(pos(-5,5,1), pos_red , degrees(30), Colors.red())
+  
+  var pos_green = pos((animation[now] * animation[now]) - 5, -1, -1)
+  var lights_green = Lights.spot( pos(5,5,1), pos_green, degrees(40), Colors.green() )
+  
+  var pos_yellow = pos((animation[now] * animation[now]) + 2, -1, animation[now])
+  var lights_yellow = Lights.spot( pos(5,5,1), pos_yellow, degrees(80), Colors.yellow() )
+  
+  var animation2 = Animations.animate(-8, 0, seconds(5))
+  var pos_blue = pos(0, -1, (animation2[now]*animation2[now]))
+  var lights_blue = Lights.spot( pos(-2,5,1), pos_blue, degrees(30), Colors.blue() )
+  
+  var lights = [ lights_red, lights_green, lights_yellow, lights_blue ]
+
+
+
+  //lights.push_back(Lights.omnidirectional( pos(5,5,0), Colors.white() ))
+  lights.push_back(Lights.omnidirectional( pos(0,0,5), Colors.white() ))
+  create_scene(camera, root, lights)
+}
+
+            
+            var renderer = Renderers.standard( [ "width": res,
+                                     "height": res,
+                                     "sampler": Samplers.multijittered(4),
+                                     "ray_tracer": Raytracers.v6() ] )
+
+pipeline( scene_animation(scene_at, seconds(1)),
+          [ Pipeline.animation(frames),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )

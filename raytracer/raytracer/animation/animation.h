@@ -10,6 +10,8 @@
 #include "easylogging++.h"
 #include <assert.h>
 
+using namespace math;
+
 
 namespace animation
 {
@@ -88,4 +90,5 @@ namespace animation
     }
 
     Animation<double> basic(double, double, const Duration&);
+	Animation<Angle> angle(Angle, Angle, const Duration&);
 }

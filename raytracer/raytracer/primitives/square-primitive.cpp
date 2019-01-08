@@ -40,7 +40,7 @@ namespace
 			double denom = ray.direction.dot(m_normal);
 
 			// If denominator == 0, there is no intersection (ray runs parallel to square)
-			if (denom != approx(0.0))
+			if (denom != approx(0.0) && bounding_box().is_hit_by(ray))
 			{
 				// Compute numerator
 				double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
@@ -62,14 +62,14 @@ namespace
 
 			return hits;
 		}
-
+		
 		bool find_first_positive_hit(const Ray& ray, Hit* output_hit) const override
 		{
 			// Compute denominator
 			double denom = ray.direction.dot(m_normal);
 
 			// If denominator == 0, there is no intersection (ray runs parallel to square)
-			if (denom != approx(0.0))
+			if (denom != approx(0.0) && bounding_box().is_hit_by(ray))
 			{
 				// Compute numerator
 				double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
@@ -101,7 +101,7 @@ namespace
 
 		Box bounding_box() const override
 		{
-			return Box(interval(-2.0, 2.0), interval(-2.0, 2.0), interval(-0.01, 0.01));
+			return Box(interval(-1.0, 1.0), interval(-1.0, 1.0), interval(-0.01, 0.01));
 		}
 
 	protected:
@@ -126,7 +126,7 @@ namespace
 
 		Box bounding_box() const override
 		{
-			return Box(interval(-0.01, 0.01), interval(-2.0, 2.0), interval(-2.0, 2.0));
+			return Box(interval(-0.01, 0.01), interval(-1.0, 1.0), interval(-1.0, 1.0));
 		}
 
 	protected:
@@ -151,7 +151,7 @@ namespace
 
 		Box bounding_box() const override
 		{
-			return Box(interval(-2.0, 2.0), interval(-0.01, 0.01), interval(-2.0, 2.0));
+			return Box(interval(-1.0, 1.0), interval(-0.01, 0.01), interval(-1.0, 1.0));
 		}
 
 	protected:

@@ -1,0 +1,43 @@
+// resolution
+var res = 70
+
+global mesh = load_mesh("D:\\test.mesh");
+
+def scene_at(now)
+{
+  var ambient_factor = 0.1
+  var camera = Cameras.perspective( [ "eye": pos(0,0,3), "look_at": pos(0,0,0) ] )
+
+  var white = Materials.uniform( [ "ambient": Colors.white() * 0.1, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var black = Materials.uniform( [ "ambient": Colors.white() * 0.2, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
+  var checkered = Materials.checkered2d( 1, black, white )
+  
+  var floor_material = checkered
+
+  var primitives = []
+
+  var shape = decorate(white, mesh)
+  primitives.push_back( shape )
+
+  primitives.push_back( translate(vec(0,-2,0), decorate(floor_material, xz_plane())) )
+
+  var root = union(primitives)
+
+
+  var lights = [ Lights.omnidirectional( pos(0,0,5), Colors.white() ) ]
+
+  create_scene(camera, root, lights)
+}
+
+            
+            var renderer = Renderers.standard( [ "width": res,
+                                     "height": res,
+                                     "sampler": Samplers.single(),
+                                     "ray_tracer": Raytracers.v2() ] )
+
+pipeline( scene_animation(scene_at, seconds(1)),
+          [ Pipeline.animation(1),
+            Pipeline.renderer(renderer),
+            Pipeline.wif(),
+            Pipeline.base64(),
+            Pipeline.stdout() ] )
