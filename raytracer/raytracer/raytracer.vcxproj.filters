@@ -114,6 +114,7 @@
     <ClCompile Include="math\functions\easing\quintic-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-function.cpp" />
     <ClCompile Include="math\functions\easing\cubic-function.cpp" />
+    <ClCompile Include="animation\lissajous.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -314,5 +315,6 @@
     <ClInclude Include="math\functions\easing\quintic-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-function.h" />
     <ClInclude Include="math\functions\easing\cubic-function.h" />
+    <ClInclude Include="animation\lissajous.h" />
   </ItemGroup>
 </Project>
