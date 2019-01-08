@@ -16,9 +16,8 @@ def scene_at(now)
 
   var plane_material = Materials.checkered2d( white, black )
 
-  var y = Animations.animate(degrees(0), degrees(-360), seconds(2))
-  var z = Animations.animate(degrees(0), degrees(-360), seconds(5))
-  var root = union( [ decorate(square_material, rotate_around_y(y[now], rotate_around_z(z[now], rotate_around_x(degrees(90), yz_square())))),
+  var angle = Animations.ease( Animations.animate( degrees(0), degrees(360 * 2), seconds(5) ), Easing.quadratic_inout() )
+  var root = union( [ decorate(square_material, rotate_around_y(angle[now], rotate_around_z(angle[now], rotate_around_x(degrees(90), yz_square())))),
                       decorate(plane_material, translate(vec(0,-2,0), xz_plane())) ] )
 
   var lights = [ Lights.omnidirectional( pos(5,5,5), Colors.white() ) ]
