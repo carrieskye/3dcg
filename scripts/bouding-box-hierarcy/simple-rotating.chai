@@ -21,7 +21,7 @@ bunny20
 35947 vertices and 69451 triangles and 79744 boxes.
                                        69451
 */
-var frames = 30
+var frames = 1
 //
 //global mesh = load_mesh("D:\\bunny20.mesh");
 global mesh = bounding_box_hierarchy2("D:\\bunny100.mesh");
@@ -34,7 +34,7 @@ def scene_at(now)
 
   var white = Materials.uniform( [ "ambient": Colors.white() * af, "diffuse": Colors.white() * 1, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
   var black = Materials.uniform( [ "ambient": Colors.white() * af, "diffuse": Colors.white() * 0.2, "specular": Colors.white() * 0.8, "specular_exponent": 2] )
-  var checkered = Materials.checkered2d( 1, black, white )
+  var checkered = Materials.checkered2d(black, white )
   
   var floor_material = checkered
  var material = Materials.uniform( [ "ambient": Colors.white() * 0.1,
