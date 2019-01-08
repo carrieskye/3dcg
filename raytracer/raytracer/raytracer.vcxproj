@@ -383,6 +383,7 @@
     <ClCompile Include="pipeline\wif-processor.cpp" />
     <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
     <ClCompile Include="primitives\bounding-box-hierarchy.cpp" />
+    <ClCompile Include="primitives\bounding-box-hierarchy2.cpp" />
     <ClCompile Include="primitives\cone-primitive.cpp" />
     <ClCompile Include="primitives\cube-primitive.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
@@ -546,6 +547,7 @@
     <ClInclude Include="pipeline\wif-processor.h" />
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
     <ClInclude Include="primitives\bounding-box-hierarchy.h" />
+    <ClInclude Include="primitives\bounding-box-hierarchy2.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
     <ClInclude Include="primitives\cube-primitive.h" />
     <ClInclude Include="primitives\cylinder-primitive.h" />

@@ -110,6 +110,7 @@
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\difference-primitive.cpp" />
     <ClCompile Include="primitives\bounding-box-hierarchy.cpp" />
+    <ClCompile Include="primitives\bounding-box-hierarchy2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -306,5 +307,6 @@
     <ClInclude Include="primitives\cylinder-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\bounding-box-hierarchy.h" />
+    <ClInclude Include="primitives\bounding-box-hierarchy2.h" />
   </ItemGroup>
 </Project>
