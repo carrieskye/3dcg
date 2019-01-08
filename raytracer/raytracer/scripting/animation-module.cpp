@@ -111,7 +111,7 @@ ModulePtr scripting::_private_::create_animation_module()
 	BIND_AS(ease_animation<double>, ease);
 	BIND_AS(ease_animation<Angle>, ease);
 	BIND_AS(ease_animation<Point3D>, ease);
-	BIND_AS(lissajous_animation, animate);
+	BIND_AS(lissajous_animation, lissajous);
 	BIND_AS(lissajous_animation_map, lissajous);
 	BIND_AS(circular_animation, circular);
 	BIND_AS(circular_animation_map, circular);
