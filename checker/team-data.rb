@@ -1,4 +1,4 @@
-team_member 'Larry   ' do
+team_member 'Larry' do
   extension BasicSample
   extension BasicScripting
 

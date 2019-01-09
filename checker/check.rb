@@ -139,10 +139,13 @@ def check_mesh
 end
 
 def print_statistics
+  max = $team.map do |id, extensions|
+    id.length
+  end.max
+
   $team.each do |id, extensions|
     counts = count_extensions_by_difficulty(extensions)
-
-    puts "#{id} #{counts.inspect}"
+    puts "#{id.rjust(max + 1)} #{counts.inspect}"
   end
 end
 
