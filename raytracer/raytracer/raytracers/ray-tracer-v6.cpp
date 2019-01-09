@@ -24,14 +24,14 @@ raytracer::TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(cons
 	return TraceResult::no_hit(ray);
 }
 
-Color raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const Ray& ray, const double weight) const
+Color raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene, const MaterialProperties& enter_properties, const Hit& hit, const Ray& ray, const double weight) const
 {
 	const auto result = colors::black();
 
-	if (properties.transparency > 0)
+	if (enter_properties.transparency > 0)
 	{
 		const double n1 = 1;
-		const auto n2 = properties.refractive_index;
+		const auto n2 = enter_properties.refractive_index;
 
 		auto i = (hit.position - ray.origin).normalized();
 		const auto n = hit.normal;
@@ -45,14 +45,32 @@ Color raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene,
 			return result;
 		}
 
-		const auto p1_moved_slightly = hit.position + o * 0.0000001;
-		const auto p1_ray = Ray(p1_moved_slightly, o);
+		const auto enter_vector_moved_slightly = hit.position + o * 0.0000001;
+		const auto enter_ray = Ray(enter_vector_moved_slightly, o);
 
 		Hit exit_hit;
 
-		if(scene.root->find_first_positive_hit(p1_ray, &exit_hit))
+		if(scene.root->find_first_positive_hit(enter_ray, &exit_hit))
 		{
-			return trace(scene, p1_ray, weight * properties.transparency).color;
+			auto exit_properties = exit_hit.material->at(exit_hit.local_position);
+			if (!(exit_properties.transparency > 0)) {
+				return trace(scene, enter_ray, weight * enter_properties.transparency).color * enter_properties.transparency;
+			}
+			auto exit_i = enter_ray.direction.normalized();
+			auto exit_n = exit_hit.normal;
+			auto exit_ox = (n2 / n1) * (exit_i - exit_i.dot(exit_n)* exit_n);
+			
+			const auto exit_oy = (-1 * sqrt(1 - exit_ox.dot(exit_ox))) * exit_n;
+			const auto exit_o = exit_ox + exit_oy;
+
+			if (1 - exit_ox.dot(exit_ox) < 0)
+			{
+				return result;
+			}
+
+			const auto exit_vector_moved_slightly = exit_hit.position + exit_o * 0.0000001;
+			const auto exit_ray = Ray(exit_vector_moved_slightly, exit_o);
+			return trace(scene, exit_ray, weight * exit_properties.transparency).color * exit_properties.transparency;
 		}
 	}
 
