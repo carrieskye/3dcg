@@ -4,21 +4,15 @@
 
 using namespace math;
 
-Function<bool(const Point2D&)> functions::checkered2d(int squareSize)
+Function<bool(const Point2D&)> functions::checkered2d(double squareSize)
 {
 	std::function<bool(const Point2D&)> function = [squareSize](const Point2D& p)
 	{
-		auto x = p.x();
-		auto y = p.y();
+		auto x = std::floor(double(p.x()) / squareSize);
+		auto y = std::floor(double(p.y()) / squareSize);
 
-		auto xN = x / squareSize;
-		auto yN = y / squareSize;
-
-		xN = std::floor(xN * 2);
-		yN = std::floor(yN * 2);
-
-		auto xI = (int)xN;
-		auto yI = (int)yN;
+		auto xI = (int)x;
+		auto yI = (int)y;
 
 		return std::abs(xI % 2) != std::abs(yI % 2);
 	};

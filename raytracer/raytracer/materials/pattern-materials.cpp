@@ -38,5 +38,5 @@ Material materials::grid2d(double thickness, Material m1, Material m2)
 
 Material materials::checkered2d(Material m1, Material m2)
 {
-	return pattern2d(functions::checkered2d(1), m1, m2);
+	return pattern2d(functions::checkered2d(0.5), m1, m2);
 }
